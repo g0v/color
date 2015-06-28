@@ -85,7 +85,20 @@
                 <span class="label label-default">檢傷編號: {{row['檢傷編號']}}</span><br />
                 <span class="label label-default">轉診要求: {{row['轉診要求']}}</span><br />
                 <span class="label label-default">刪除註記: {{row['刪除註記']}}</span><br />
-                <h4><span class="label label-primary">即時動向: {{row['即時動向']}}</span></h4>
+                <h4>
+                  <span ng-switch="row['即時動向']">
+                    <span ng-switch-when="出院" class="label label-success">
+                      即時動向: {{row['即時動向']}}
+                    </span>
+                    <span ng-switch-when="自動出院
+(AAD)" class="label label-success">
+                      即時動向: {{row['即時動向']}}
+                    </span>
+                    <span ng-switch-default class="label label-primary">
+                      即時動向: {{row['即時動向']}}
+                    </span>
+                  </span>
+                </h4>
               </td>
             </tr>
           </tbody>
