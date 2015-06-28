@@ -81,6 +81,9 @@
           於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
           <a href="tel:0227206528" target="_blank">02-27206528</a>
         </div>
+        <br />
+        <span class="label label-success">已出院: {{total['已出院']}}</span>
+        <span class="label label-warning">未出院: {{total['未出院']}}</span>
       </div>
     </div>
     <div class="row" ng-show="type=='blood'">
@@ -216,12 +219,12 @@ angular
   function ($log, $http, $scope) {
     var self = this;
     self.Data = [];
-    $scope.warning = 0;
-    $scope.success = 0;
 
     $scope.type = 'people';
 
     $scope.total = {
+      '已出院': 0,
+      '未出院': 0,
       '重傷': 0,
       '中傷': 0,
       '輕傷': 0,
@@ -236,7 +239,7 @@ angular
           $scope.total['已出院'] += 1;
         } else {
           $scope.total['未出院'] += 1;
-          
+
           if (!$scope.total['醫院'][item['收治單位']]) {
             $scope.total['醫院'][item['收治單位']] = {
               '重傷': 0,
