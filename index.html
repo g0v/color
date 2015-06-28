@@ -33,10 +33,14 @@
   <h2>八仙塵爆傷者開放資料查詢</h2>
     <div class="row">
       <div class="col-lg-12">
-        <span class="label label-info">
-          最後更新時間：{{ MainCtrl.Data.lastmodify  }}，資料來源：北市府資訊局
-        </span>
-        <br />
+        <div>
+          <span class="label label-info">
+            最後更新時間：{{ MainCtrl.Data.lastmodify  }}，資料來源：北市府資訊局
+          </span>
+          <br />
+          <span class="label label-success">已出院：{{success}}人</span>
+          <span class="label label-warning">未出院：{{warning}}人</span>
+        </div>
         <br />
         <div class="alert alert-warning" role="alert">
           於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
@@ -118,8 +122,18 @@ angular
   function ($log, $http, $scope) {
     var self = this;
     self.Data = [];
+    $scope.warning = 0;
+    $scope.success = 0;
+
     $http.get('https://gist.githubusercontent.com/tony1223/098e45623c73274f7ae3/raw').success(function (data) {
         self.Data = data;
+        self.Data.data.forEach(function(item) {
+          if (/出院/gi.test(item['即時動向'])) {
+            $scope.success += 1;
+          } else {
+            $scope.warning += 1;
+          }
+        });
     });
 
     $scope.phones = {
