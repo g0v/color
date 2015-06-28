@@ -25,50 +25,57 @@
 
   <body>
   <div class="container" ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">八仙塵爆傷者開放資料查詢</a>
-      </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">八仙塵爆傷者開放資料查詢</a>
+        </div>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="http://www.gov.taipei/ct.asp?xItem=108880666&ctNode=38161&mp=100001" target="_blank">資料來源: 臺北市府資訊局</a>
-          </li>
-          <li>
-            <a href="http://creativecommons.tw/cc0" target="_blank">License: CC0</a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">其他平台 <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="http://er.mohw.g0v.tw/#/dashboard/file/default.json" target="_blank">全國重度級急救責任醫院急診即時訊息</a></li>
-            </ul>
-          </li>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="http://www.gov.taipei/ct.asp?xItem=108880666&ctNode=38161&mp=100001" target="_blank">資料來源: 臺北市府資訊局</a>
+            </li>
+            <li>
+              <a href="http://creativecommons.tw/cc0" target="_blank">License: CC0</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">其他平台 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://er.mohw.g0v.tw/#/dashboard/file/default.json" target="_blank">全國重度級急救責任醫院急診即時訊息</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="form-group">
+          <input type="text" ng-show="type=='people'" class="form-control" ng-model="MainCtrl.query" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" />
+          <input type="text" ng-show="type=='blood'" class="form-control" ng-model="MainCtrl.blood" placeholder="請輸入搜尋的捐血車/站" />
+        </div>
+      </div>
+    </nav>
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="nav nav-pills nav-justified">
+          <li role="presentation" ng-class="{active: type=='people'}"><a href="#" ng-click="type='people'">家屬尋人</a></li>
+          <li role="presentation" ng-class="{active: type=='hospital'}"><a href="#" ng-click="type='hospital'">醫院概況</a></li>
+          <li role="presentation" ng-class="{active: type=='blood'}"><a href="#" ng-click="type='blood'">捐血車/站</a></li>
         </ul>
       </div>
     </div>
-    <div class="container-fluid">
-      <div class="form-group">
-        <input type="text" class="form-control" ng-model="MainCtrl.query" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" />
-      </div>
-    </div>
-  </nav>
-    <div class="row">
+    <div class="row" ng-show="type=='people' || type=='hospital'">
       <div class="col-lg-12">
         <div>
           <span class="label label-info">最後更新: {{ MainCtrl.Data.lastmodify  }}</span>
-<!--           <br />
-          <span class="label label-success">已出院：{{success}}人</span>
-          <span class="label label-warning">未出院：{{warning}}人</span>
- -->        </div>
+        </div>
         <br />
         <div class="alert alert-warning" role="alert">
           於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
@@ -76,7 +83,17 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" ng-show="type=='blood'">
+      <div class="col-lg-12">
+        <div class="alert alert-warning" role="alert">
+          - 捐血車/站 資料可能過舊，出發前建議電話確認</br>
+          - 捐血前不宜空腹，並建議注意身體健康</br>
+          - 血有保存期限問題，建議分散捐血時間</br>
+          <a href="http://www.blood.org.tw/Internet/main/blood_before/index.html" target="_blank">更多捐血須知，點此連結</a>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-show="type=='people'">
       <div class="col-lg-12">
         <table st-table="MainCtrl.Data.data" class="table table-striped">
           <thead>
@@ -115,7 +132,7 @@
                       即時動向: {{row['即時動向']}}
                     </span>
                     <span ng-switch-when="自動出院
-(AAD)" class="label label-success">
+  (AAD)" class="label label-success">
                       即時動向: {{row['即時動向']}}
                     </span>
                     <span ng-switch-default class="label label-primary">
@@ -123,6 +140,64 @@
                     </span>
                   </span>
                 </h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row" ng-show="type=='hospital'">
+      <div class="col-lg-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>醫院</th>
+              <th>統計</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="(key, row) in total['醫院']">
+              <td>{{key}}</td>
+              <td>
+                <div>
+                  <span class="label label-danger">重傷: {{row['重傷']}}</span>
+                  <span class="label label-warning">中傷: {{row['中傷']}}</span>
+                  <span class="label label-info">輕傷: {{row['輕傷']}}</span>
+                </div>
+                <br />
+                <div class="progress">
+                  <div class="progress-bar progress-bar-danger" style="width: {{ row['重傷'] / total.max * 100 }}%">
+                  </div>
+                  <div class="progress-bar progress-bar-warning" style="width: {{ row['中傷'] / total.max * 100 }}%">
+                  </div>
+                  <div class="progress-bar progress-bar-info" style="width: {{ row['輕傷'] / total.max * 100 }}%">
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row" ng-show="type=='blood'">
+      <div class="col-lg-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>捐血車/站</th>
+              <th>聯絡方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in blood | filter:MainCtrl.blood ">
+              <td>
+                {{row[0]}}<br />
+                {{row[1]}}
+              </td>
+              <td>
+                <a href="tel:{{row[2]}}">{{row[2]}}</a><br />
+                <a href="https://www.google.com/maps?q={{row[3]}}" target="_blank">{{row[3]}}</a><br />
+                <span class="label label-info">{{row[4]}}</span>
               </td>
             </tr>
           </tbody>
@@ -145,15 +220,51 @@ angular
     $scope.warning = 0;
     $scope.success = 0;
 
+    $scope.type = 'people';
+
+    $scope.total = {
+      '重傷': 0,
+      '中傷': 0,
+      '輕傷': 0,
+      '醫院': {},
+      'max': 0
+    };
+
     $http.get('http://tonyq.org/kptaipei/api-20150628.php').success(function (data) {
-        self.Data = data;
-        self.Data.data.forEach(function(item) {
-          if (/出院/gi.test(item['即時動向'])) {
-            $scope.success += 1;
-          } else {
-            $scope.warning += 1;
-          }
-        });
+      self.Data = data;
+      self.Data.data.forEach(function(item) {
+        if (/出院/gi.test(item['即時動向'])) {
+           $scope.total['已出院'] += 1;
+        } else {
+           $scope.total['未出院'] += 1;
+        }
+
+        if (!$scope.total['醫院'][item['收治單位']]) {
+          $scope.total['醫院'][item['收治單位']] = {
+            '重傷': 0,
+            '中傷': 0,
+            '輕傷': 0
+          };
+        }
+
+        var hosp = $scope.total['醫院'][item['收治單位']];
+
+        if (item['救護檢傷'].trim() == '重傷') {
+          $scope.total['重傷'] += 1;
+          hosp['重傷'] += 1;
+        } else if (item['救護檢傷'].trim() == '中傷') {
+          $scope.total['中傷'] += 1;
+          hosp['中傷'] += 1;
+        } else if (item['救護檢傷'].trim() == '輕傷') {
+          $scope.total['輕傷'] += 1;
+          hosp['輕傷'] += 1;
+        }
+
+        var tmp = hosp['重傷'] + hosp['中傷'] + hosp['輕傷'];
+        if ($scope.total.max < tmp) {
+          $scope.total.max = tmp;
+        }
+      });
     });
 
     $scope.map = {
@@ -415,6 +526,156 @@ angular
           "主任手機": "0972187503"
       }
     };
+
+    $scope.blood = [
+      [
+        '台北捐血中心',
+        '每日08:00-17:00',
+        '02-28971600',
+        '台北市北投區立德路123號',
+        '捷運忠義站、和信醫院旁'
+      ],
+      [
+        '基隆捐血站',
+        '每日08:00-18:00(週一延長至19:00)',
+        '02-24278500',
+        '基隆市信一路14號1樓'
+      ],
+      [
+        '板橋捐血站',
+        '每日08:00-18:00(週一延長至19:00)',
+        '02-29524117',
+        '新北市板橋市中山路一段50巷36號2樓之4',
+        '府中站2號出口往中路方向步行約10分鐘'
+      ],
+      [
+        '關渡捐血室',
+        '每日08:00-17:00',
+        '02-28971600#6141',
+        '台北市立德路123號',
+        '捷運忠義站和信醫院旁'
+      ],
+      [
+        '南海捐血室',
+        '每日08:00-17:30',
+        '02-23511601',
+        '台北市南海路1號3樓',
+        '捷運中正紀念堂站1號出口南門市場對面'
+      ],
+      [
+        '市府捐血室',
+        '每日09:00-17:00(週日不作業)',
+        '02-27208889#3383',
+        '台北市政府西大門內左側',
+        '捷運市政府站2號出口'
+      ],
+      [
+        '長春捐血室',
+        '每日09:00-18:00(週日不作業)',
+        '02-27314801',
+        '台北市復興北路69號5樓',
+        '捷運南京東路站'
+      ],
+      [
+        '汐止捐血室',
+        '每日09:00-17:00(週二、六不作業)',
+        '02-26428013',
+        '新北市汐止市新台五路一段234號6樓之1'
+      ],
+      [
+        '新店捐血室',
+        '每日09:00-17:00(週一延長至19:00,週日不作業)',
+        '02-29128499',
+        '新北市新店區民族路167號',
+        '捷運七張站下車，轉乘耕莘醫院接駁車至捐血室或捷運大坪林站1號出口耕莘醫院停車場斜對面'
+      ],
+      [
+        '三重捐血室',
+        '每日09:00-17:00(週一不作業)',
+        '02-29862780',
+        '新北市三重市重新路三段81號3樓'
+      ],
+      [
+        '捷運捐血室',
+        '每日10:00-18:00(週一不作業)',
+        '02-23706880',
+        '捷運台北車站B1七號出口誠品書店旁'
+      ],
+      [
+        '台北車站捐血點',
+        '每日09:30-17:30',
+        '02-23143221',
+        '台北火車站大廳西北角'
+      ],
+      [
+        '台大號捐血車',
+        '每日09:00-17:00',
+        '02-23644952',
+        '台北市新生南路台灣大學側門口',
+        '捷運公館站3號出口'
+      ],
+      [
+        '公園號捐血車',
+        '每日09:00-18:00',
+        '02-23811268',
+        '二二八和平公園襄陽路假山旁',
+        '捷運臺大醫院站4號出口'
+      ],
+      [
+        '忠孝號捐血車',
+        '每日11:00-19:00(週一不作業)',
+        '02-27512351',
+        '台北市大安路一段瑠公公園旁',
+        '捷運忠孝復興站4號出口往東區地下街14號出口瑠公公園旁'
+      ],
+      [
+        '峨嵋號捐血車',
+        '每日13:00-21:00',
+        '02-23751189',
+        '台北市峨嵋街立體停車場旁',
+        '捷運西門站6號出口'
+      ],
+      [
+        '新莊號捐血車',
+        '每日10:00-18:00(週五不作業)',
+        '02-89941488',
+        '新北市新莊市中華路一段+復興路一段交叉口',
+        '新莊運動公園旁、新莊站1號出口'
+      ],
+      [
+        '捷運捐血室',
+        '每日10:00-18:00(週三休息)',
+        '02-23706880',
+        '台北車站',
+        '台北車站B1M7出口,誠品書店旁步行5分鐘'
+      ],
+      [
+        '新光站前號捐血庫',
+        '每日11:00-19:00',
+        '0961-236683',
+        '台北市忠孝西路一段66號新光摩天大樓廣場前'
+      ],
+      [
+        '新店捐血室',
+        '每日09:00-17:00',
+        '02-22188867',
+        '新北市民權路95號6樓之2'
+      ],
+      [
+        '中和號捐血庫',
+        '每日09:00-17:00(週六、日休息)',
+        '02-29299437',
+        '新北市中安街圖書館旁823公園內',
+        '永安市場站步行約5分鐘'
+      ],
+      [
+        '土城號捐血車',
+        '每日09:00-17:00(週六、日休息)',
+        '02-82625140',
+        '新北市裕民路171巷裕民廣場內',
+        '海山站3號出口往裕民路方向步行約10分鐘'
+      ]
+    ];
 });
       //@ sourceURL=pen.js
 </script>
