@@ -29,7 +29,6 @@
 
   <body>
   <div class="container" ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
-  <h2>八仙塵爆傷者開放資料查詢</h2>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,17 +44,31 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="http://www.gov.taipei/ct.asp?xItem=108880666&ctNode=38161&mp=100001" target="_blank">資料來源: 臺北市府資訊局</a>
+          </li>
+          <li>
+            <a href="http://creativecommons.tw/cc0" target="_blank">License: CC0</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">其他平台 <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="http://er.mohw.g0v.tw/#/dashboard/file/default.json" target="_blank">全國重度級急救責任醫院急診即時訊息</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="MainCtrl.query" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" />
+      </div>
+    </div>
+  </nav>
     <div class="row">
       <div class="col-lg-12">
         <div>
           <span class="label label-info">最後更新: {{ MainCtrl.Data.lastmodify  }}</span>
-          <span class="label label-info">
-            資料來源:
-            <a href="http://www.gov.taipei/ct.asp?xItem=108880666&ctNode=38161&mp=100001" target="_blank">臺北市府資訊局</a>
-          </span>
-          <span class="label label-info">
-            License: <a href="http://creativecommons.tw/cc0" target="_blank">CC0</a>
-          </span>
 <!--           <br />
           <span class="label label-success">已出院：{{success}}人</span>
           <span class="label label-warning">未出院：{{warning}}人</span>
@@ -64,14 +77,6 @@
         <div class="alert alert-warning" role="alert">
           於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
           <a href="tel:0227206528" target="_blank">02-27206528</a>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="form-group">
-          <label for="exampleInputFile">查詢條件：</label>
-          <input type="text" class="form-control" ng-model="MainCtrl.query" placeholder="請輸入需要過濾的條件（ex. 姓名、檢傷、收治單位）" />
         </div>
       </div>
     </div>
@@ -129,10 +134,10 @@
       </div>
     </div>
   </div>
-      <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-6c99970ade81e43be51fa877be0f7600.js"></script>
-
-    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
-    <script src='https://cdn.rawgit.com/lorenzofox3/Smart-Table/master/dist/smart-table.js'></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+  <script src="https://cdn.rawgit.com/lorenzofox3/Smart-Table/master/dist/smart-table.js"></script>
 
 <script>
 angular
