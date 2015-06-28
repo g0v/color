@@ -64,7 +64,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="row in MainCtrl.Data.data | filter:MainCtrl.query ">
-              <td width="100">
+              <td width="110">
                 {{ row['編號'] }}<br />
                 <a href="https://www.google.com/maps?q={{ row['收治單位'] }}" target="_blank">{{ row['縣市別']}}<br />{{row['收治單位']}}</a><br />
                 <span ng-if="phones[row['收治單位']]" class="animate-if">
