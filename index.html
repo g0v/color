@@ -29,8 +29,8 @@
 
   <body>
 
-    <div class="container" ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
-  <h1>八仙塵爆傷者開放資料查詢</h1>
+  <div class="container" ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
+  <h2>八仙塵爆傷者開放資料查詢</h2>
     <div class="row">
       <div class="col-lg-12">
         <span class="label label-info">
@@ -64,11 +64,11 @@
           </thead>
           <tbody>
             <tr ng-repeat="row in MainCtrl.Data.data | filter:MainCtrl.query ">
-              <td>
+              <td width="100">
                 {{ row['編號'] }}<br />
                 <a href="https://www.google.com/maps?q={{ row['收治單位'] }}" target="_blank">{{ row['縣市別']}}<br />{{row['收治單位']}}</a><br />
                 <span ng-if="phones[row['收治單位']]" class="animate-if">
-                  <a href="tel:{{phones[row['收治單位']]}}" target="_blank" style="word-wrap: break-word;">{{phones[row['收治單位']]}}</a><br />
+                  <a href="tel:{{phones[row['收治單位']]}}" target="_blank">{{phones[row['收治單位']]}}</a><br />
                 </span>
                 <span ng-if="hospital[row['收治單位']]" class="animate-if">
                   <button type="button" class="btn btn-info btn-xs" ng-click="getHospital(row['收治單位'])">社福中心</button>
