@@ -60,7 +60,6 @@
               <th>收治單位</th>
               <th>個人資料</th>
               <th>檢傷</th>
-              <th>即時動向</th>
               <th>轉診要求</th>
               <th>刪除註記</th>
             </tr>
@@ -85,9 +84,9 @@
               <td>
                 <span class="label label-default">醫療檢傷: {{row['醫療檢傷']}}</span><br />
                 <span class="label label-default">救護檢傷: {{row['救護檢傷']}}</span><br />
-                <span class="label label-default">檢傷編號: {{row['檢傷編號']}}</span>
+                <span class="label label-default">檢傷編號: {{row['檢傷編號']}}</span><br />
+                <h4><span class="label label-primary">即時動向: {{row['即時動向']}}</span></h4>
               </td>
-              <td>{{ row['即時動向']}}</td>
               <td>{{ row['轉診要求']}}</td>
               <td>{{ row['刪除註記']}}</td>
             </tr>
@@ -121,7 +120,9 @@ angular
       '松山三總': '0227642151',
       '內湖三總': '0287923311',
       '臺北榮總': '0228712121',
-      '臺北馬偕': '0225433535'
+      '臺北馬偕': '0225433535',
+      '新光醫院': '0228332211',
+      '臺北國泰': '0227082121'
     };
 
     $scope.getHospital = function(name) {
