@@ -232,7 +232,7 @@ angular
       'max': 0
     };
 
-    $http.get('http://tonyq.org/kptaipei/api-20150628.php').success(function (data) {
+    $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
       self.Data = data;
       self.Data.data.forEach(function(item) {
         if (/出院/gi.test(item['即時動向'])) {
