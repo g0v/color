@@ -233,36 +233,37 @@ angular
       self.Data = data;
       self.Data.data.forEach(function(item) {
         if (/出院/gi.test(item['即時動向'])) {
-           $scope.total['已出院'] += 1;
+          $scope.total['已出院'] += 1;
         } else {
-           $scope.total['未出院'] += 1;
+          $scope.total['未出院'] += 1;
+          
+          if (!$scope.total['醫院'][item['收治單位']]) {
+            $scope.total['醫院'][item['收治單位']] = {
+              '重傷': 0,
+              '中傷': 0,
+              '輕傷': 0
+            };
+          }
+
+          var hosp = $scope.total['醫院'][item['收治單位']];
+
+          if (item['救護檢傷'].trim() == '重傷') {
+            $scope.total['重傷'] += 1;
+            hosp['重傷'] += 1;
+          } else if (item['救護檢傷'].trim() == '中傷') {
+            $scope.total['中傷'] += 1;
+            hosp['中傷'] += 1;
+          } else if (item['救護檢傷'].trim() == '輕傷') {
+            $scope.total['輕傷'] += 1;
+            hosp['輕傷'] += 1;
+          }
+
+          var tmp = hosp['重傷'] + hosp['中傷'] + hosp['輕傷'];
+          if ($scope.total.max < tmp) {
+            $scope.total.max = tmp;
+          }
         }
 
-        if (!$scope.total['醫院'][item['收治單位']]) {
-          $scope.total['醫院'][item['收治單位']] = {
-            '重傷': 0,
-            '中傷': 0,
-            '輕傷': 0
-          };
-        }
-
-        var hosp = $scope.total['醫院'][item['收治單位']];
-
-        if (item['救護檢傷'].trim() == '重傷') {
-          $scope.total['重傷'] += 1;
-          hosp['重傷'] += 1;
-        } else if (item['救護檢傷'].trim() == '中傷') {
-          $scope.total['中傷'] += 1;
-          hosp['中傷'] += 1;
-        } else if (item['救護檢傷'].trim() == '輕傷') {
-          $scope.total['輕傷'] += 1;
-          hosp['輕傷'] += 1;
-        }
-
-        var tmp = hosp['重傷'] + hosp['中傷'] + hosp['輕傷'];
-        if ($scope.total.max < tmp) {
-          $scope.total.max = tmp;
-        }
       });
     });
 
