@@ -64,7 +64,7 @@
             <tr ng-repeat="row in MainCtrl.Data.data | filter:MainCtrl.query ">
               <td>
                 {{ row['編號'] }}<br />
-                <a href="https://www.google.com/maps?q={{ row['收治單位'] }}" target="_blank">{{ row['縣市別']}}-{{row['收治單位']}}</a><br />
+                <a href="https://www.google.com/maps?q={{ row['收治單位'] }}" target="_blank">{{ row['縣市別']}}<br />{{row['收治單位']}}</a><br />
                 <a href="tel:{{phones[row['收治單位']]}}" target="_blank">{{phones[row['收治單位']]}}</a>
                 <br />
                 <span ng-if="hospital[row['收治單位']]" class="animate-if">
@@ -73,7 +73,8 @@
               </td>
               <td>
                 {{ row['姓名']}}<br />
-                <span class="label label-default">{{ row['性別']}} {{ row['年齡']}}</span>-<span class="label label-default">{{ row['國籍']}}</span>
+                <span class="label label-default">{{ row['性別']}} {{ row['年齡']}}</span><br />
+                <span class="label label-default">{{ row['國籍']}}</span>
               </td>
               <td>
                 <span class="label label-default">醫療檢傷: {{row['醫療檢傷']}}</span><br />
