@@ -34,7 +34,8 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="alert alert-info" role="alert">
-          於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話 02-27206528
+          於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
+          <a href="tel:0227206528" target="_blank">02-27206528</a>
         </div>
       </div>
     </div>
@@ -65,8 +66,9 @@
               <td>
                 {{ row['編號'] }}<br />
                 <a href="https://www.google.com/maps?q={{ row['收治單位'] }}" target="_blank">{{ row['縣市別']}}<br />{{row['收治單位']}}</a><br />
-                <a href="tel:{{phones[row['收治單位']]}}" target="_blank">{{phones[row['收治單位']]}}</a>
-                <br />
+                <span ng-if="phones[row['收治單位']]" class="animate-if">
+                  <a href="tel:{{phones[row['收治單位']]}}" target="_blank">{{phones[row['收治單位']]}}</a><br />
+                </span>
                 <span ng-if="hospital[row['收治單位']]" class="animate-if">
                   <button type="button" class="btn btn-info btn-xs" ng-click="getHospital(row['收治單位'])">社福中心</button>
                 </span>
