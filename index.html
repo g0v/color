@@ -42,11 +42,10 @@
           <span class="label label-info">
             License: <a href="http://creativecommons.tw/cc0" target="_blank">CC0</a>
           </span>
-          
-          <br />
+<!--           <br />
           <span class="label label-success">已出院：{{success}}人</span>
           <span class="label label-warning">未出院：{{warning}}人</span>
-        </div>
+ -->        </div>
         <br />
         <div class="alert alert-warning" role="alert">
           於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
@@ -131,7 +130,7 @@ angular
     $scope.warning = 0;
     $scope.success = 0;
 
-    $http.get('https://gist.githubusercontent.com/tony1223/098e45623c73274f7ae3/raw').success(function (data) {
+    $http.get('http://tonyq.org/kptaipei/api-20150628.php').success(function (data) {
         self.Data = data;
         self.Data.data.forEach(function(item) {
           if (/出院/gi.test(item['即時動向'])) {
