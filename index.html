@@ -44,8 +44,6 @@
         <table st-table="MainCtrl.Data.data" class="table table-striped">
           <thead>
             <tr>
-              <th>編號</th>
-              <th>縣市別</th>
               <th>收治單位</th>
               <th>姓名</th>
               <th>檢傷編號</th>
@@ -61,9 +59,11 @@
           </thead>
           <tbody>
             <tr ng-repeat="row in MainCtrl.Data.data | filter:MainCtrl.query ">
-              <td>{{ row['編號'] }}</td>
-              <td>{{ row['縣市別']}}</td>
-              <td><a href="https://www.google.com/maps?q={{ row['收治單位'] }}" target="_blank">{{row['收治單位']}}</a></td>
+              <td>
+                {{ row['編號'] }}<br />
+                <a href="https://www.google.com/maps?q={{ row['收治單位'] }}" target="_blank">{{ row['縣市別']}}-{{row['收治單位']}}</a><br />
+                <a href="tel:{{phones[row['收治單位']]}}" target="_blank">{{phones[row['收治單位']]}}</a>
+              </td>
               <td>{{ row['姓名']}}</td>
               <td>{{ row['檢傷編號']}}</td>
               <td>{{ row['性別']}}</td>
@@ -86,12 +86,22 @@
     <script src='https://rawgit.com/lorenzofox3/Smart-Table/master/dist/smart-table.js'></script>
 
 <script>
-angular.module('app', ['smart-table']).controller('MainController', function ($log, $http) {
+angular
+.module('app', ['smart-table'])
+.controller('MainController',
+  function ($log, $http, $scope) {
     var self = this;
     self.Data = [];
     $http.get('https://gist.githubusercontent.com/tony1223/098e45623c73274f7ae3/raw').success(function (data) {
         self.Data = data;
     });
+
+    $scope.phones = {
+      '聯醫仁愛': '0227093600',
+      '聯醫中興': '0225523234',
+      '聯醫忠孝': '0227861288',
+      '聯醫陽明': '0228353456'
+    };
 });
       //@ sourceURL=pen.js
 </script>
