@@ -1,0 +1,110 @@
+
+
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <meta name="google" value="notranslate">
+
+
+    <title>八仙火災傷者開放資料檔</title>
+    
+    
+    
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<style>
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+    </style>
+
+<script>
+  window.console = window.console || function(t) {};
+  window.open = function(){ console.log("window.open is disabled."); };
+  window.print   = function(){ console.log("window.print is disabled."); };
+</script>
+
+    
+    
+  </head>
+
+  <body>
+
+    <div class="container" ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
+  <h1>八仙氣爆案傷者送醫資料查詢</h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="exampleInputFile">查詢條件：</label>
+        <input type="text" class="form-control" ng-model="MainCtrl.query" placeholder="請輸入需要過濾的條件（ex. 姓名、性別）" />
+        <p class="help-text">最後更新時間：{{ MainCtrl.Data.lastmodify  }}，資料來源：北市府資訊局</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <table st-table="MainCtrl.Data.data" class="table table-striped">
+          <thead>
+            <tr>
+              <th>編號</th>
+              <th>縣市別</th>
+              <th>收治單位</th>
+              <th>姓名</th>
+              <th>檢傷編號</th>
+              <th>性別</th>
+              <th>國籍</th>
+              <th>年齡</th>
+              <th>醫療檢傷</th>
+              <th>救護檢傷</th>
+              <th>即時動向</th>
+              <th>轉診要求</th>
+              <th>刪除註記</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in MainCtrl.Data.data | filter:MainCtrl.query ">
+              <td>{{ row['編號'] }}</td>
+              <td>{{ row['縣市別']}}</td>
+              <td><a href="https://www.google.com/maps?q={{ row['收治單位'] }}" target="_blank">{{row['收治單位']}}</a></td>
+              <td>{{ row['姓名']}}</td>
+              <td>{{ row['檢傷編號']}}</td>
+              <td>{{ row['性別']}}</td>
+              <td>{{ row['國籍']}}</td>
+              <td>{{ row['年齡']}}</td>
+              <td>{{ row['醫療檢傷']}}</td>
+              <td>{{ row['救護檢傷']}}</td>
+              <td>{{ row['即時動向']}}</td>
+              <td>{{ row['轉診要求']}}</td>
+              <td>{{ row['刪除註記']}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+      <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-6c99970ade81e43be51fa877be0f7600.js"></script>
+
+    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
+    <script src='https://rawgit.com/lorenzofox3/Smart-Table/master/dist/smart-table.js'></script>
+
+<script>
+angular.module('app', ['smart-table']).controller('MainController', function ($log, $http) {
+    var self = this;
+    self.Data = [];
+    $http.get('https://gist.githubusercontent.com/tony1223/098e45623c73274f7ae3/raw').success(function (data) {
+        self.Data = data;
+    });
+});
+      //@ sourceURL=pen.js
+</script>
+
+    
+    <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+    
+  </body>
+</html>
+ 
