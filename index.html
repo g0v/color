@@ -60,8 +60,6 @@
               <th>收治單位</th>
               <th>個人資料</th>
               <th>檢傷</th>
-              <th>轉診要求</th>
-              <th>刪除註記</th>
             </tr>
           </thead>
           <tbody>
@@ -85,10 +83,10 @@
                 <span class="label label-default">醫療檢傷: {{row['醫療檢傷']}}</span><br />
                 <span class="label label-default">救護檢傷: {{row['救護檢傷']}}</span><br />
                 <span class="label label-default">檢傷編號: {{row['檢傷編號']}}</span><br />
+                <span class="label label-default">轉診要求: {{row['轉診要求']}}</span><br />
+                <span class="label label-default">刪除註記: {{row['刪除註記']}}</span><br />
                 <h4><span class="label label-primary">即時動向: {{row['即時動向']}}</span></h4>
               </td>
-              <td>{{ row['轉診要求']}}</td>
-              <td>{{ row['刪除註記']}}</td>
             </tr>
           </tbody>
         </table>
