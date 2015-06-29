@@ -173,8 +173,7 @@
                     <span ng-switch-when="出院" class="label label-success">
                       即時動向: {{row['即時動向']}}
                     </span>
-                    <span ng-switch-when="自動出院
-  (AAD)" class="label label-success">
+                    <span ng-switch-when="自動出院(AAD)" class="label label-success">
                       即時動向: {{row['即時動向']}}
                     </span>
                     <span ng-switch-default class="label label-primary">
@@ -259,14 +258,20 @@ angular
   '$filter',
   function($filter) {
     return function(data, text) {
-      var textArr = (text || "").split('');
+      var textArr;
+      if (/^\w+$/.test(text)) {
+        textArr = [text];
+      } else {
+        textArr = (text || "").split('');
+      }
+
       if (text && text.length > 2) {
         textArr.splice(1,1);
       }
       angular.forEach(textArr, function(test){
           if (test) {
             data = data.filter(function(item) {
-              return item.keyword.indexOf(test) > -1;
+              return item.keyword.search(test) > -1;
             });
           }
       });
