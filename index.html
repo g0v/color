@@ -88,7 +88,7 @@
       </div>
       <div class="container-fluid">
         <div class="form-group">
-          <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="ga('send', 'input', 'search', 'typing', 'text', query)" />
+          <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="ga('send', 'input', 'search', 'typing', 'text', query)" />
           <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
         </div>
       </div>
@@ -739,6 +739,8 @@ angular
         '海山站3號出口往裕民路方向步行約10分鐘'
       ]
     ];
+
+    $('#search').focus();
 });
       //@ sourceURL=pen.js
 </script>
