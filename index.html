@@ -93,10 +93,55 @@
         </div>
       </div>
     </nav>
+
+    <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood'">
+      <div class="col-lg-12">
+        <h4>
+          <span ng-switch="people['即時動向']">
+            <span ng-switch-when="出院" class="label label-success">
+              即時動向: {{people['即時動向']}}
+            </span>
+            <span ng-switch-when="自動出院(AAD)" class="label label-success">
+              即時動向: {{people['即時動向']}}
+            </span>
+            <span ng-switch-default class="label label-primary">
+              即時動向: {{people['即時動向']}}
+            </span>
+          </span>
+        </h4>
+        編號: {{ people['編號'] }}<br />
+        個資: {{ people['姓名']}}
+        <span class="label label-default">{{ people['性別']}} {{ people['年齡']}}</span>
+        <span class="label label-default">{{ people['國籍']}}</span><br />
+        <br />
+        收治單位: <a class="btn btn-info btn-xs" href="https://www.google.com/maps?q={{ map[people['收治單位']].address || people['收治單位'] }}" target="_blank">{{people['縣市別']}} {{people['收治單位']}}<i class="glyphicon glyphicon-map-marker"></i></a><br />
+        <span ng-if="map[people['收治單位']].address">地址: {{map[people['收治單位']].address}}</span><br />
+        <span ng-if="map[people['收治單位']].phone" class="animate-if">
+          電話：<a href="tel:{{map[people['收治單位']].phone}}" style="white-space: nowrap;">{{map[people['收治單位']].phone}}</a><br />
+        </span>
+        <br />
+        <span ng-if="hospital[people['收治單位']]" class="animate-if">
+          社福中心: {{hospital[people['收治單位']]['社福中心']}} {{hospital[people['收治單位']]['主任']}}<br />
+          電話: <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;">{{hospital[people['收治單位']]['辦公室電話']}}</a>
+          <span ng-if="sun[people['縣市別']]" class="animate-if">
+            <br />
+            陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;">{{sun[people['縣市別']]}}</a>
+          </span>
+        </span>
+        <br />
+        <br />
+        <span class="label label-default">醫療檢傷: {{people['醫療檢傷']}}</span><br />
+        <span class="label label-default">救護檢傷: {{people['救護檢傷']}}</span><br />
+        <span class="label label-default">檢傷編號: {{people['檢傷編號']}}</span><br />
+        <span class="label label-default">轉診要求: {{people['轉診要求']}}</span><br />
+        <span class="label label-default">刪除註記: {{people['刪除註記']}}</span><br />
+      </div>
+    </div>
+
     <div class="row" ng-show="type=='people' || type=='hospital'">
       <div class="col-lg-12">
         <div>
-          <span class="label label-info">最後更新: {{ MainCtrl.Data.lastmodify  }}</span>
+          <span class="label label-info">最後更新: {{ data.lastmodify  }}</span>
         </div>
         <br />
         <div class="alert alert-warning" role="alert">
@@ -146,9 +191,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="row in MainCtrl.Data.data | advancefilter: query">
+            <tr ng-repeat="row in data.data | advancefilter: query">
               <td>
-                {{ row['編號'] }}<br />
+                <a href="#{{row['編號']}}" ng-click="setType(row['編號'], row)">{{ row['編號'] }}</a><br />
                 <a href="https://www.google.com/maps?q={{ map[row['收治單位']].address || row['收治單位'] }}" target="_blank">{{ row['縣市別']}}<br />{{row['收治單位']}}</a><br />
                 <span ng-if="map[row['收治單位']].phone" class="animate-if">
                   <a href="tel:{{map[row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;">{{map[row['收治單位']].phone}}</a><br />
@@ -281,12 +326,21 @@ angular
 ])
 .controller('MainController',
   function ($http, $scope) {
+
+    $scope.people = {};
+
     $scope.sent = function(query) {
       ga('send', 'event', 'input', 'search', 'text', query);
     };
 
-    var self = this;
-    self.Data = [];
+    $scope.setType = function(id, people) {
+      $scope.type = id;
+      $scope.people = people;
+    };
+
+    $scope.data = {
+      data: []
+    };
 
     $scope.type = 'people';
 
@@ -300,9 +354,13 @@ angular
       'max': 0
     };
 
+    if (location.hash) {
+      $scope.type = location.hash.slice(1);
+    }
+
     $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
-      self.Data = data;
-      self.Data.data.forEach(function(item) {
+      $scope.data = data;
+      $scope.data.data.forEach(function(item) {
         item.keyword = [
           item['編號'],
           item['縣市別'],
@@ -318,6 +376,10 @@ angular
           item['刪除註記'],
           item['即時動向']
         ].join(';');
+
+        if ($scope.type == item['編號']) {
+          $scope.people = item;
+        }
 
         if (/出院/gi.test(item['即時動向'])) {
           $scope.total['已出院'] += 1;
@@ -748,6 +810,32 @@ angular
         '海山站3號出口往裕民路方向步行約10分鐘'
       ]
     ];
+
+    $scope.sun = {
+      '新北市': '02-25078006',
+      '台北市': '02-25078006',
+      '臺北市': '02-25078006',
+      '桃園市': '02-25078006',
+      '台中市': '04-23582336',
+      '臺中市': '04-23582336',
+      '台南市': '07-5587166',
+      '臺南市': '07-5587166',
+      '高雄市': '07-5587166',
+      '基隆市': '02-25078006',
+      '新竹市': '02-25078006',
+      '嘉義市': '05-2280300',
+      '新竹縣': '02-25078006',
+      '苗栗縣': '04-23582336',
+      '彰化縣': '04-23582336',
+      '南投縣': '04-23582336',
+      '雲林縣': '05-2280300',
+      '嘉義縣': '05-2280300',
+      '屏東縣': '07-5587166',
+      '宜蘭縣': '03-8563213',
+      '花蓮縣': '03-8563213',
+      '台東縣': '03-8563213',
+      '臺東縣': '03-8563213'
+    };
 
     $('#search').focus();
 });
