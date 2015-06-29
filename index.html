@@ -45,6 +45,16 @@
 
   <body>
   <div class="container" ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="nav nav-pills nav-justified">
+          <li role="presentation" ng-class="{active: type=='people'}"><a href="#" ng-click="type='people'">家屬尋人</a></li>
+          <li role="presentation" ng-class="{active: type=='hospital'}"><a href="#" ng-click="type='hospital'">醫院概況</a></li>
+          <li role="presentation" ng-class="{active: type=='blood'}"><a href="#" ng-click="type='blood'">捐款/捐血</a></li>
+        </ul>
+      </div>
+    </div>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -83,15 +93,6 @@
         </div>
       </div>
     </nav>
-    <div class="row">
-      <div class="col-lg-12">
-        <ul class="nav nav-pills nav-justified">
-          <li role="presentation" ng-class="{active: type=='people'}"><a href="#" ng-click="type='people'">家屬尋人</a></li>
-          <li role="presentation" ng-class="{active: type=='hospital'}"><a href="#" ng-click="type='hospital'">醫院概況</a></li>
-          <li role="presentation" ng-class="{active: type=='blood'}"><a href="#" ng-click="type='blood'">捐血車/站</a></li>
-        </ul>
-      </div>
-    </div>
     <div class="row" ng-show="type=='people' || type=='hospital'">
       <div class="col-lg-12">
         <div>
@@ -99,8 +100,19 @@
         </div>
         <br />
         <div class="alert alert-warning" role="alert">
-          於臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
+          - 臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
           <a href="tel:0227206528" target="_blank">02-27206528</a>
+          <br />
+          - 應變中心24小時服務專線
+          <a href="tel:0229646715" target="_blank">02-29646715</a>、
+          <a href="tel:0289535599" target="_blank">02-89535599</a>
+          <br />
+          - 陽光基金會
+          北區<a href="tel:0225078006" target="_blank">02-25078006</a>、
+          中區<a href="tel:0423582336" target="_blank">04-23582336</a>、
+          雲嘉<a href="tel:052280300" target="_blank">05-2280300</a>、
+          南區<a href="tel:075587166" target="_blank">07-5587166</a>、
+          東區<a href="tel:038563213" target="_blank">03-8563213</a>、
         </div>
         <br />
         <span class="label label-success">已出院: {{total['已出院']}}</span>
@@ -109,6 +121,13 @@
     </div>
     <div class="row" ng-show="type=='blood'">
       <div class="col-lg-12">
+        <div class="alert alert-info" role="alert">
+          - 新北市政府捐款帳戶：</br>
+          &nbsp;&nbsp;匯款單加註「指定八仙粉塵氣爆救助專案」</br>
+          &nbsp;&nbsp;戶名：新北市社會救濟會報專戶</br>
+          &nbsp;&nbsp;帳號：027038002803（台灣銀行板橋分行）</br>
+          - <a href="http://www.sunshine.org.tw/donation/money2009.asp" target="_blank">陽光基金會（郵政劃撥帳號：05583335 ）</a>
+        </div>
         <div class="alert alert-warning" role="alert">
           - 捐血車/站 資料可能過舊，出發前建議電話確認</br>
           - 血有保存期限問題，建議分散捐血時間</br>
@@ -212,7 +231,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="row in bloods | advancefilter: blood ">
+            <tr ng-repeat="row in bloods | filter: blood ">
               <td>
                 {{row[0]}}<br />
                 {{row[1]}}
@@ -246,7 +265,9 @@ angular
       }
       angular.forEach(textArr, function(test){
           if (test) {
-            data = $filter('filter')(data, test);
+            data = data.filter(function(item) {
+              return item.keyword.indexOf(test) > -1;
+            });
           }
       });
       return data;
@@ -273,6 +294,22 @@ angular
     $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
       self.Data = data;
       self.Data.data.forEach(function(item) {
+        item.keyword = [
+          item['編號'],
+          item['縣市別'],
+          item['收治單位'],
+          item['姓名'],
+          item['性別'],
+          item['年齡'],
+          item['國籍'],
+          item['醫療檢傷'],
+          item['救護檢傷'],
+          item['檢傷編號'],
+          item['轉診要求'],
+          item['刪除註記'],
+          item['即時動向']
+        ].join(';');
+
         if (/出院/gi.test(item['即時動向'])) {
           $scope.total['已出院'] += 1;
         } else {
