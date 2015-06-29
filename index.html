@@ -78,8 +78,8 @@
       </div>
       <div class="container-fluid">
         <div class="form-group">
-          <input type="text" ng-show="type=='people'" class="form-control" ng-model="MainCtrl.query" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="ga('send', 'input', 'search', 'typing', 'text', MainCtrl.query)" />
-          <input type="text" ng-show="type=='blood'" class="form-control" ng-model="MainCtrl.blood" placeholder="請輸入搜尋的捐血車/站" />
+          <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="ga('send', 'input', 'search', 'typing', 'text', query)" />
+          <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
         </div>
       </div>
     </nav>
@@ -118,7 +118,7 @@
     </div>
     <div class="row" ng-show="type=='people'">
       <div class="col-lg-12">
-        <table st-table="MainCtrl.Data.data" class="table table-striped">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>收治單位</th>
@@ -127,7 +127,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="row in MainCtrl.Data.data | filter:MainCtrl.query ">
+            <tr ng-repeat="row in MainCtrl.Data.data | advancefilter: query">
               <td>
                 {{ row['編號'] }}<br />
                 <a href="https://www.google.com/maps?q={{ map[row['收治單位']].address || row['收治單位'] }}" target="_blank">{{ row['縣市別']}}<br />{{row['收治單位']}}</a><br />
@@ -212,7 +212,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="row in blood | filter:MainCtrl.blood ">
+            <tr ng-repeat="row in bloods | advancefilter: blood ">
               <td>
                 {{row[0]}}<br />
                 {{row[1]}}
@@ -235,9 +235,23 @@
 
 <script>
 angular
-.module('app', ['smart-table'])
+.module('app', [])
+.filter('advancefilter', [
+  '$filter',
+  function($filter) {
+    return function(data, text) {
+      var textArr = (text || "").split('');
+      angular.forEach(textArr, function(test){
+          if (test) {
+            data = $filter('filter')(data, test);
+          }
+      });
+      return data;
+    };
+  }
+])
 .controller('MainController',
-  function ($log, $http, $scope) {
+  function ($http, $scope) {
     var self = this;
     self.Data = [];
 
@@ -536,7 +550,7 @@ angular
       }
     };
 
-    $scope.blood = [
+    $scope.bloods = [
       [
         '台北捐血中心',
         '每日08:00-17:00',
@@ -687,13 +701,6 @@ angular
     ];
 });
       //@ sourceURL=pen.js
-</script>
-
-    
-    <script>
-  if (document.location.search.match(/type=embed/gi)) {
-    window.parent.postMessage("resize", "*");
-  }
 </script>
   </body>
 </html>
