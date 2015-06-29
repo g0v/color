@@ -241,6 +241,9 @@ angular
   function($filter) {
     return function(data, text) {
       var textArr = (text || "").split('');
+      if (text && text.length > 2) {
+        textArr.splice(1,1);
+      }
       angular.forEach(textArr, function(test){
           if (test) {
             data = $filter('filter')(data, test);
