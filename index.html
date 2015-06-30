@@ -14,12 +14,6 @@
     </style>
 
     <script>
-      window.console = window.console || function(t) {};
-      window.open = function(){ console.log("window.open is disabled."); };
-      window.print   = function(){ console.log("window.print is disabled."); };
-    </script>
-
-    <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -226,8 +220,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="(key, row) in total['醫院']">
-              <td>{{key}}</td>
+            <tr ng-repeat="row in total['醫院']">
+              <td>{{row['name']}}</td>
               <td>
                 <div>
                   <span class="label label-danger">重傷: {{row['重傷']}}</span>&nbsp;
@@ -406,7 +400,6 @@ angular
           $scope.bloodStatus.data.push(data[key]);
         }
       }
-      console.log($scope.bloodStatus.data);
     });
 
     $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
@@ -439,6 +432,7 @@ angular
 
           if (!$scope.total['醫院'][item['收治單位']]) {
             $scope.total['醫院'][item['收治單位']] = {
+              'name': item['收治單位'],
               '重傷': 0,
               '中傷': 0,
               '輕傷': 0,
@@ -459,7 +453,6 @@ angular
             $scope.total['輕傷'] += 1;
             hosp['輕傷'] += 1;
           }
-
           
           if (item['即時動向'].trim() == '加護病房') {
             $scope.total['加護病房'] += 1;
@@ -477,8 +470,27 @@ angular
             $scope.total.max = tmp;
           }
         }
-
       });
+
+      var temp = [];
+      var sortKey = ['重傷', '中傷', '輕傷'];
+
+      for (var key in $scope.total['醫院']) {
+        temp.push($scope.total['醫院'][key]);
+      }
+      temp = temp.sort(function(a, b) {
+        for (var i = 0; i < sortKey.length; i++) {
+          if (a[sortKey[i]] > b[sortKey[i]]) {
+            return -1;
+          } else if (a[sortKey[i]] < b[sortKey[i]]) {
+            return 1;
+          }
+        }
+        
+        return 0;
+      });
+      
+      $scope.total['醫院'] = temp;
     });
 
     $scope.map = {
