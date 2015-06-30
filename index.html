@@ -42,11 +42,17 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <ul class="nav nav-pills nav-justified">
-          <li role="presentation" ng-class="{active: type=='people'}"><a href="#people" ng-click="type='people'">家屬尋人</a></li>
-          <li role="presentation" ng-class="{active: type=='hospital'}"><a href="#hospital" ng-click="type='hospital'">醫院概況</a></li>
-          <li role="presentation" ng-class="{active: type=='blood'}"><a href="#blood" ng-click="type='blood'">捐款/捐血</a></li>
-        </ul>
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <a class="btn btn-default" ng-class="{'btn-primary': type=='people'}" href="#people" ng-click="type='people'">家屬尋人</a>
+          </div>
+          <div class="btn-group" role="group">
+            <a class="btn btn-default" ng-class="{'btn-primary': type=='hospital'}" href="#hospital" ng-click="type='hospital'">醫院概況</a>
+          </div>
+          <div class="btn-group" role="group">
+            <a class="btn btn-default" ng-class="{'btn-primary': type=='blood'}" href="#blood" ng-click="type='blood'">捐款/捐血</a>
+          </div>
+        </div>
       </div>
     </div>
     <nav class="navbar navbar-default">
