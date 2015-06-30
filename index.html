@@ -443,7 +443,7 @@ angular
       data: []
     };
 
-    $http.get('//raw.githubusercontent.com/g0v/blood/gh-pages/blood.json').success(function (data) {
+    $http.get('//g0v.github.io/blood/blood.json').success(function (data) {
       var _d = new Date(data.time);
       $scope.bloodStatus.time = moment(_d).fromNow();
       for(var key in data) {
