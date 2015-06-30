@@ -86,11 +86,12 @@
         <div class="form-group">
           <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
           <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
+          <input type="text" ng-show="type=='hotel'" class="form-control" ng-model="hotelQuery" placeholder="請輸入病患醫院，尋找住宿地點" />
         </div>
       </div>
     </nav>
 
-    <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood'">
+    <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood' || type=='hotel'">
       <div class="col-lg-12">
         <h4>
           <span ng-switch="people['即時動向']">
@@ -212,7 +213,7 @@
         </table>
       </div>
     </div>
-    <div class="row" ng-show="type=='hotel'">
+    <div class="row" ng-show="type=='hotel'" ng-controller="HotelController">
       <div class="col-lg-12">
         <table class="table table-striped">
           <thead>
@@ -222,16 +223,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="row in hotels">
+            <tr ng-repeat="row in hotels | filter: hotelQuery">
               <td>
                 {{row['旅館名稱']}}<br />
-                <a href="tel:{{row['連絡電話'}}">{{row['連絡電話']}}</a><br />
+                <a href="tel:{{row['連絡電話']}}" target="_blank">{{row['連絡電話']}}</a><br />
                 <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a></>
               </td>
               <td>
-                <a ng-href="{{row['網址']}}" target="_blank">{{row['網址']}}</a><br />
-                靠近醫院：{{row['靠近醫院']}}<br />
-                說明：{{row['說明']}}
+                <p ng-if="row['網址']"><a ng-href="{{row['網址']}}" target="_blank">{{row['網址']}}</a></p>
+                <p>靠近醫院：{{row['靠近醫院']}}</p>
+                <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
               </td>
             </tr>
           </tbody>
@@ -332,7 +333,7 @@
   <script src="//cdn.rawgit.com/lorenzofox3/Smart-Table/master/dist/smart-table.js"></script>
 <script>
 angular
-.module('app', [''])
+.module('app', [])
 .filter('advancefilter', [
   '$filter',
   function($filter) {
@@ -956,8 +957,12 @@ angular
     $http.get('//raw.githubusercontent.com/harry2690/psof/gh-pages/hotels.json')
     .success(function (result) {
       $scope.lastmodify = result.lastmodify;
-      $scope.hotels = result.hotels;
+      $scope.hotels = result.data;
     });
+
+    $scope.showInfo = function(info) {
+      alert('說明：' + info);
+    };
 });
       //@ sourceURL=pen.js
 </script>
