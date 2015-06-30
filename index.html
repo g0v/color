@@ -49,9 +49,9 @@
     <div class="row">
       <div class="col-lg-12">
         <ul class="nav nav-pills nav-justified">
-          <li role="presentation" ng-class="{active: type=='people'}"><a href="#" ng-click="type='people'">家屬尋人</a></li>
-          <li role="presentation" ng-class="{active: type=='hospital'}"><a href="#" ng-click="type='hospital'">醫院概況</a></li>
-          <li role="presentation" ng-class="{active: type=='blood'}"><a href="#" ng-click="type='blood'">捐款/捐血</a></li>
+          <li role="presentation" ng-class="{active: type=='people'}"><a href="#people" ng-click="type='people'">家屬尋人</a></li>
+          <li role="presentation" ng-class="{active: type=='hospital'}"><a href="#hospital" ng-click="type='hospital'">醫院概況</a></li>
+          <li role="presentation" ng-class="{active: type=='blood'}"><a href="#blood" ng-click="type='blood'">捐款/捐血</a></li>
         </ul>
       </div>
     </div>
@@ -164,22 +164,6 @@
         <span class="label label-warning">未出院: {{total['未出院']}}</span>
       </div>
     </div>
-    <div class="row" ng-show="type=='blood'">
-      <div class="col-lg-12">
-        <div class="alert alert-info" role="alert">
-          - 新北市政府捐款帳戶：</br>
-          &nbsp;&nbsp;匯款單加註「指定八仙粉塵氣爆救助專案」</br>
-          &nbsp;&nbsp;戶名：新北市社會救濟會報專戶</br>
-          &nbsp;&nbsp;帳號：027038002803（台灣銀行板橋分行）</br>
-          - <a href="http://www.sunshine.org.tw/donation/money2009.asp" target="_blank">陽光基金會（郵政劃撥帳號：05583335 ）</a>
-        </div>
-        <div class="alert alert-warning" role="alert">
-          - 捐血車/站 資料可能過舊，出發前建議電話確認</br>
-          - 血有保存期限問題，建議分散捐血時間</br>
-          <a href="http://www.blood.org.tw/Internet/main/blood_before/index.html" target="_blank">更多捐血須知，點此連結</a>
-        </div>
-      </div>
-    </div>
     <div class="row" ng-show="type=='people'">
       <div class="col-lg-12">
         <table class="table table-striped">
@@ -269,6 +253,32 @@
     </div>
     <div class="row" ng-show="type=='blood'">
       <div class="col-lg-12">
+        <div class="alert alert-info" role="alert">
+          - 新北市政府捐款帳戶：</br>
+          &nbsp;&nbsp;匯款單加註「指定八仙粉塵氣爆救助專案」</br>
+          &nbsp;&nbsp;戶名：新北市社會救濟會報專戶</br>
+          &nbsp;&nbsp;帳號：027038002803（台灣銀行板橋分行）</br>
+          - <a href="http://www.sunshine.org.tw/donation/money2009.asp" target="_blank">陽光基金會（郵政劃撥帳號：05583335 ）</a>
+        </div>
+        <div class="alert alert-warning" role="alert">
+          - 捐血車/站 資料可能過舊，出發前建議電話確認</br>
+          - 血有保存期限問題，建議分散捐血時間</br>
+          <a href="http://www.blood.org.tw/Internet/main/blood_before/index.html" target="_blank">更多捐血須知，點此連結</a>
+        </div>
+        <div class="alert alert-warning" role="alert">
+          <div ng-repeat="row in bloodStatus.data">
+            {{row['name']}}: &nbsp;
+            <span class="label" ng-class="{'label-success': row['StorageA']=='full', 'label-warning': row['StorageA']=='medium', 'label-danger': row['StorageA']=='empty'}">A型: {{row['StorageA'] | blood}}</span>&nbsp;
+            <span class="label" ng-class="{'label-success': row['StorageB']=='full', 'label-warning': row['StorageB']=='medium', 'label-danger': row['StorageB']=='empty'}">B型: {{row['StorageB'] | blood}}</span>&nbsp;
+            <span class="label" ng-class="{'label-success': row['StorageO']=='full', 'label-warning': row['StorageO']=='medium', 'label-danger': row['StorageO']=='empty'}">O型: {{row['StorageO'] | blood}}</span>&nbsp;
+            <span class="label" ng-class="{'label-success': row['StorageAB']=='full', 'label-warning': row['StorageAB']=='medium', 'label-danger': row['StorageAB']=='empty'}">AB型: {{row['StorageAB'] | blood}}</span>&nbsp;
+          </div>
+          <span class="label label-default">資料來源: 各地區捐血中心 {{bloodStatus.time}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-show="type=='blood'">
+      <div class="col-lg-12">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -326,6 +336,22 @@ angular
     };
   }
 ])
+.filter('blood', [
+  '$filter',
+  function($filter) {
+    return function(data, text) {
+      if (data == 'full') {
+        return '正常';
+      } else if (data == 'medium') {
+        return '偏低';
+      } else if (data == 'empty') {
+        return '急缺';
+      } else {
+        return '異常';
+      }
+    };
+  }
+])
 .controller('MainController',
   function ($http, $scope) {
 
@@ -361,6 +387,21 @@ angular
     if (location.hash) {
       $scope.type = location.hash.slice(1);
     }
+
+    $scope.bloodStatus = {
+      time: 0,
+      data: []
+    };
+
+    $http.get('//raw.githubusercontent.com/g0v/blood/gh-pages/blood.json').success(function (data) {
+      $scope.bloodStatus.time = data.time;
+      for(var key in data) {
+        if (key.search('捐血中心') > -1) {
+          $scope.bloodStatus.data.push(data[key]);
+        }
+      }
+      console.log($scope.bloodStatus.data);
+    });
 
     $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
       $scope.data = data;
