@@ -230,7 +230,7 @@
                 <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a></>
               </td>
               <td>
-                <p ng-if="row['網址']"><a ng-href="{{row['網址']}}" target="_blank">{{row['網址']}}</a></p>
+                <p ng-if="row['網址']"><a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a></p>
                 <p>靠近醫院：{{row['靠近醫院']}}</p>
                 <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
               </td>
