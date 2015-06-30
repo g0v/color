@@ -267,7 +267,7 @@
         </div>
         <div class="alert alert-warning" role="alert">
           <div ng-repeat="row in bloodStatus.data">
-            {{row['name']}}: &nbsp;
+            {{row['name']}}:<br />
             <span class="label" ng-class="{'label-success': row['StorageA']=='full', 'label-warning': row['StorageA']=='medium', 'label-danger': row['StorageA']=='empty'}">A型: {{row['StorageA'] | blood}}</span>&nbsp;
             <span class="label" ng-class="{'label-success': row['StorageB']=='full', 'label-warning': row['StorageB']=='medium', 'label-danger': row['StorageB']=='empty'}">B型: {{row['StorageB'] | blood}}</span>&nbsp;
             <span class="label" ng-class="{'label-success': row['StorageO']=='full', 'label-warning': row['StorageO']=='medium', 'label-danger': row['StorageO']=='empty'}">O型: {{row['StorageO'] | blood}}</span>&nbsp;
