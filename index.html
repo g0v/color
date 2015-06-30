@@ -34,7 +34,7 @@
     </script>
 
     <!-- fork 陳小風 -->
-    
+
   </head>
 
   <body>
@@ -42,9 +42,12 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group btn-group-justified" role="group">
           <div class="btn-group" role="group">
             <a class="btn btn-default" ng-class="{'btn-primary': type=='people'}" href="#people" ng-click="type='people'">家屬尋人</a>
+          </div>
+          <div class="btn-group" role="group">
+            <a class="btn btn-default" ng-class="{'btn-primary': type=='hotel'}" href="#hotel" ng-click="type='hotel'">家屬住宿</a>
           </div>
           <div class="btn-group" role="group">
             <a class="btn btn-default" ng-class="{'btn-primary': type=='hospital'}" href="#hospital" ng-click="type='hospital'">醫院概況</a>
@@ -67,6 +70,7 @@
           </button>
           <a class="navbar-brand" href="#">
             <span ng-show="type=='people' || type=='hospital'">八仙粉塵爆炸傷者查詢</span>
+            <span ng-show="type=='hotel'">傷者家屬住宿查詢</span>
             <span ng-show="type=='blood'">捐血車/站查詢</span>
           </a>
         </div>
@@ -74,7 +78,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="http://www.gov.taipei/ct.asp?xItem=108880666&ctNode=38161&mp=100001" target="_blank">資料來源: 臺北市府資訊局</a>
+              <a ng-show="type=='people' || type=='hospital'" href="http://www.gov.taipei/ct.asp?xItem=108880666&ctNode=38161&mp=100001" target="_blank">資料來源: 臺北市府資訊局</a>
+              <a ng-show="type=='blood'" href="http://www.blood.org.tw" target="_blank">資料來源: 血液基金會</a>
             </li>
             <li>
               <a href="http://creativecommons.tw/cc0" target="_blank">License: CC0</a>
@@ -94,11 +99,12 @@
         <div class="form-group">
           <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
           <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
+          <input type="text" ng-show="type=='hotel'" class="form-control" ng-model="hotelQuery" placeholder="請輸入病患醫院，尋找住宿地點" />
         </div>
       </div>
     </nav>
 
-    <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood'">
+    <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood' || type=='hotel'">
       <div class="col-lg-12">
         <h4>
           <span ng-switch="people['即時動向']">
@@ -220,6 +226,32 @@
         </table>
       </div>
     </div>
+    <div class="row" ng-show="type=='hotel'" ng-controller="HotelController">
+      <div class="col-lg-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>旅館</th>
+              <th>其他資訊</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in hotels | filter: hotelQuery">
+              <td>
+                {{row['旅館名稱']}}<br />
+                <a href="tel:{{row['連絡電話']}}" target="_blank">{{row['連絡電話']}}</a><br />
+                <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a></>
+              </td>
+              <td>
+                <p ng-if="row['網址']"><a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a></p>
+                <p>靠近醫院：{{row['靠近醫院']}}</p>
+                <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="row" ng-show="type=='hospital'">
       <div class="col-lg-12">
         <table class="table table-striped">
@@ -277,7 +309,7 @@
             <span class="label" ng-class="{'label-success': row['StorageO']=='full', 'label-warning': row['StorageO']=='medium', 'label-danger': row['StorageO']=='empty'}">O型: {{row['StorageO'] | blood}}</span>&nbsp;
             <span class="label" ng-class="{'label-success': row['StorageAB']=='full', 'label-warning': row['StorageAB']=='medium', 'label-danger': row['StorageAB']=='empty'}">AB型: {{row['StorageAB'] | blood}}</span>&nbsp;
           </div>
-          <span class="label label-default">資料來源: 各地區捐血中心 {{bloodStatus.time}}</span>
+          <span class="label label-default">最後更新: {{bloodStatus.time}}</span>
         </div>
       </div>
     </div>
@@ -307,11 +339,11 @@
       </div>
     </div>
   </div>
+
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
   <script src="//cdn.rawgit.com/lorenzofox3/Smart-Table/master/dist/smart-table.js"></script>
-
 <script>
 angular
 .module('app', [])
@@ -470,7 +502,7 @@ angular
             $scope.total['輕傷'] += 1;
             hosp['輕傷'] += 1;
           }
-          
+
           if (item['即時動向'].trim() == '加護病房') {
             $scope.total['加護病房'] += 1;
             hosp['加護病房'] += 1;
@@ -506,170 +538,170 @@ angular
 
         return 0;
       });
-      
+
       $scope.total['醫院'] = temp;
     });
 
     $scope.map = {
       '聯醫仁愛': {
         'phone': '02-27093600',
-        'address': '台北市大安區仁愛路四段10號'        
+        'address': '台北市大安區仁愛路四段10號'
       },
       '聯醫中興': {
         'phone': '02-25523234',
-        'address': '台北市鄭州路145號'        
+        'address': '台北市鄭州路145號'
       },
       '聯醫忠孝': {
         'phone': '02-27861288',
-        'address': '台北市南港區同德路87號'        
+        'address': '台北市南港區同德路87號'
       },
       '聯醫陽明': {
         'phone': '02-28353456',
-        'address': '台北市雨聲街105號'        
+        'address': '台北市雨聲街105號'
       },
       '臺大醫院': {
         'phone': '02-23123456',
-        'address': '台北市中正區中山南路7號'        
+        'address': '台北市中正區中山南路7號'
       },
       '松山三總': {
         'phone': '02-27642151',
-        'address': '台北市松山區健康路131號'        
+        'address': '台北市松山區健康路131號'
       },
       '內湖三總': {
         'phone': '02-87923311',
-        'address': '台北市內湖區成功路二段325號'        
+        'address': '台北市內湖區成功路二段325號'
       },
       '臺北榮總': {
         'phone': '02-28712121',
-        'address': '台北市北投區石牌路二段201號'        
+        'address': '台北市北投區石牌路二段201號'
       },
       '臺北國泰': {
         'phone': '02-27082121',
-        'address': '台北市仁愛路四段280號'        
+        'address': '台北市仁愛路四段280號'
       },
       '臺北馬偕': {
         'phone': '02-25433535',
-        'address': '台北市中山區中山北路二段92號'        
+        'address': '台北市中山區中山北路二段92號'
       },
       '新光醫院': {
         'phone': '02-28332211',
-        'address': '台北市士林區文昌路95號'        
+        'address': '台北市士林區文昌路95號'
       },
       '振興醫院': {
         'phone': '02-28264400',
-        'address': '台北市北投區振興街45號'        
+        'address': '台北市北投區振興街45號'
       },
       '淡水馬偕': {
         'phone': '02-25433535',
-        'address': '新北市淡水區民生路45號'        
+        'address': '新北市淡水區民生路45號'
       },
       '聖保祿醫': {
         'phone': '03-3773300',
-        'address': '桃園市桃園區建新街123號'        
+        'address': '桃園市桃園區建新街123號'
       },
       '中國附醫': {
         'phone': '02-27919696',
-        'address': '台北市內湖區內湖路二段360號'        
+        'address': '台北市內湖區內湖路二段360號'
       },
       '中國': {
         'phone': '02-27919696',
-        'address': '台北市內湖區內湖路二段360號'        
+        'address': '台北市內湖區內湖路二段360號'
       },
       '北醫附醫': {
         'phone': '02-27372181',
-        'address': '台北市信義區吳興街252號'        
+        'address': '台北市信義區吳興街252號'
       },
       '萬芳醫院': {
         'phone': '02-29307930',
-        'address': '台北市文山區興隆路三段111號'        
+        'address': '台北市文山區興隆路三段111號'
       },
       '中山醫院': {
         'phone': '02-27081166',
-        'address': '台北市大安區仁愛路四段112巷11號'        
+        'address': '台北市大安區仁愛路四段112巷11號'
       },
       '義大醫院': {
         'phone': '07-6150011',
-        'address': '雄市燕巢區義大路1號'        
+        'address': '雄市燕巢區義大路1號'
       },
       '基隆長庚': {
         'phone': '02-24313131',
-        'address': '基隆市安樂區麥金路222號'        
+        'address': '基隆市安樂區麥金路222號'
       },
       '新竹馬偕': {
         'phone': '03-6119595',
-        'address': '新竹市東區光復路二段690號'        
+        'address': '新竹市東區光復路二段690號'
       },
       '衛部台北': {
         'phone': '02-22765566',
-        'address': '新北巿新莊區思源路127號'        
+        'address': '新北巿新莊區思源路127號'
       },
       '板橋市醫': {
         'phone': '02-22575151',
-        'address': '新北市板橋區英士路198號'        
+        'address': '新北市板橋區英士路198號'
       },
       '三重市醫': {
         'phone': '02-29829111',
-        'address': '新北市三重區新北大道一段3號'        
+        'address': '新北市三重區新北大道一段3號'
       },
       '亞東醫院': {
         'phone': '02-89667000',
-        'address': '新北市板橋區南雅南路二段21號'        
+        'address': '新北市板橋區南雅南路二段21號'
       },
       '慈濟台北': {
         'phone': '02-66289779',
-        'address': '新北市新店區建國路289號'        
+        'address': '新北市新店區建國路289號'
       },
       '恩主': {
         'phone': '02-26723456',
-        'address': '新北市三峽區復興路399號'        
+        'address': '新北市三峽區復興路399號'
       },
       '國泰汐止': {
         'phone': '02-26482121',
-        'address': '新北市汐止區建成路59巷2號'        
+        'address': '新北市汐止區建成路59巷2號'
       },
       '耕莘醫院': {
         'phone': '02-22193391',
-        'address': '新北市新店區中正路362號'        
+        'address': '新北市新店區中正路362號'
       },
       '雙和醫院': {
         'phone': '02-22490088',
-        'address': ' 新北市中和區中正路291號'        
+        'address': ' 新北市中和區中正路291號'
       },
       '板橋中興': {
         'phone': '02-29590707',
-        'address': '新北市板橋區忠孝路15號'        
+        'address': '新北市板橋區忠孝路15號'
       },
       '新泰': {
         'phone': '02-29962121',
-        'address': '新北市新莊區新泰路157號'        
+        'address': '新北市新莊區新泰路157號'
       },
       '桃園醫院': {
         'phone': '03-3699721',
-        'address': '園市桃園區中山路1492號'        
+        'address': '園市桃園區中山路1492號'
       },
       '桃園總醫': {
         'phone': '03-4799595',
-        'address': '桃園縣龍潭鄉中興路168號'        
+        'address': '桃園縣龍潭鄉中興路168號'
       },
       '林口長庚': {
         'phone': '03-3281200',
-        'address': '桃園市龜山區復興街5號'        
+        'address': '桃園市龜山區復興街5號'
       },
       '敏盛': {
         'phone': '03-3179599',
-        'address': '桃園市桃園區經國路168號'        
+        'address': '桃園市桃園區經國路168號'
       },
       '壢新': {
         'phone': '03-4941234',
-        'address': '桃園市平鎮區廣泰路77號'        
+        'address': '桃園市平鎮區廣泰路77號'
       },
       '台北長庚': {
         'phone': '02-27135211',
-        'address': '台北市敦化北路199號'        
+        'address': '台北市敦化北路199號'
       },
       '聖保祿醫院': {
         'phone': '03-3613141',
-        'address': ' 桃園市桃園區建新街123號'        
+        'address': ' 桃園市桃園區建新街123號'
       }
     };
 
@@ -932,6 +964,21 @@ angular
     };
 
     $('#search').focus();
+})
+.controller('HotelController',
+  function ($http, $scope) {
+    $scope.hotels = [];
+    $scope.lastmodify = [];
+
+    $http.get('//raw.githubusercontent.com/harry2690/psof/gh-pages/hotels.json')
+    .success(function (result) {
+      $scope.lastmodify = result.lastmodify;
+      $scope.hotels = result.data;
+    });
+
+    $scope.showInfo = function(info) {
+      alert('說明：' + info);
+    };
 });
       //@ sourceURL=pen.js
 </script>
