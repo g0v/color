@@ -11,6 +11,58 @@
       [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
         display: none !important;
       }
+
+      .navbar {
+        background: #656D78;
+        border-radius: 0;
+        margin-bottom: 0;
+        border: none;
+      }
+      .navbar-default .navbar-brand,
+      .navbar-default .navbar-nav>li>a {
+        color: #FFFFFF;
+      }
+      #tab a {
+        padding: 23px 0px 23px 0px;
+        box-shadow: none;
+        background: #E6E9EE;
+        border: none;
+        cursor: pointer;
+        line-height: 21px;
+        font-size: 20px;
+        color: #656D78;
+        border-left: 3px solid #FFF;
+      }
+      #tab a.btn-first {
+        border: none;
+      }
+      #tab a.active {
+        background: #2EBD9B;
+        color: #FFFFFF;
+      }
+      #input-box {
+        background: #2EBD9B;
+        padding-top: 49px;
+        padding-bottom: 39px;
+      }
+      #input-box input{
+        padding: 22px 24px 23px 24px;
+      }
+      #input-box .form-group {
+        margin-bottom: 0px;
+      }
+      #input-box .label {
+        display: inline;
+        padding: 0;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25em;
+      }
     </style>
 
     <script>
@@ -36,28 +88,7 @@
     <!-- fork 陳小風 -->
 
   </head>
-
-  <body>
-  <div class="container" ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
-
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="btn-group btn-group-justified" role="group">
-          <div class="btn-group" role="group">
-            <a class="btn btn-default" ng-class="{'btn-primary': type=='people'}" href="#people" ng-click="type='people'">家屬尋人</a>
-          </div>
-          <div class="btn-group" role="group">
-            <a class="btn btn-default" ng-class="{'btn-primary': type=='hotel'}" href="#hotel" ng-click="type='hotel'">家屬住宿</a>
-          </div>
-          <div class="btn-group" role="group">
-            <a class="btn btn-default" ng-class="{'btn-primary': type=='hospital'}" href="#hospital" ng-click="type='hospital'">醫院概況</a>
-          </div>
-          <div class="btn-group" role="group">
-            <a class="btn btn-default" ng-class="{'btn-primary': type=='blood'}" href="#blood" ng-click="type='blood'">捐款/捐血</a>
-          </div>
-        </div>
-      </div>
-    </div>
+  <body ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -75,7 +106,7 @@
           </a>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a href="https://github.com/g0v/color/issues" target="_blank">
@@ -100,15 +131,37 @@
           </ul>
         </div>
       </div>
-      <div class="container-fluid">
+    </nav>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="btn-group btn-group-justified" role="group" id="tab">
+          <div class="btn-group" role="group">
+            <a class="btn btn-default btn-first" ng-class="{'active': type=='people'}" href="#people" ng-click="type='people'">家屬尋人</a>
+          </div>
+          <div class="btn-group" role="group">
+            <a class="btn btn-default" ng-class="{'active': type=='hotel'}" href="#hotel" ng-click="type='hotel'">家屬住宿</a>
+          </div>
+          <div class="btn-group" role="group">
+            <a class="btn btn-default" ng-class="{'active': type=='hospital'}" href="#hospital" ng-click="type='hospital'">醫院概況</a>
+          </div>
+          <div class="btn-group" role="group">
+            <a class="btn btn-default" ng-class="{'active': type=='blood'}" href="#blood" ng-click="type='blood'">捐款/捐血</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="input-box" ng-hide="type=='hospital'">
+      <div class="container">
         <div class="form-group">
           <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
           <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
           <input type="text" ng-show="type=='hotel'" class="form-control" ng-model="hotelQuery" placeholder="請輸入病患醫院，尋找住宿地點" />
         </div>
+        <span class="label" ng-show="type=='people'">最後更新: {{ data.lastmodify  }}</span>
       </div>
-    </nav>
-
+    </div>
+    <br />
+  <div class="container">
     <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood' || type=='hotel'">
       <div class="col-lg-12">
         <h4>
@@ -155,10 +208,6 @@
 
     <div class="row" ng-show="type=='people' || type=='hospital'">
       <div class="col-lg-12">
-        <div>
-          <span class="label label-info">最後更新: {{ data.lastmodify  }}</span>
-        </div>
-        <br />
         <div class="alert alert-warning" role="alert">
           - 臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
           <a href="tel:0227206528" target="_blank" ng-click="open('提醒','社會局社工科')">02-27206528</a>
