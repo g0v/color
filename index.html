@@ -258,7 +258,8 @@
                 </span>
               </td>
               <td>
-                {{ row['姓名']}}<br />
+                {{ row['姓名']}}
+                <hr />
                 <span class="label label-default">{{ row['性別']}} {{ row['年齡']}}</span><br />
                 <span class="label label-default">{{ row['國籍']}}</span>
               </td>
@@ -270,6 +271,8 @@
                 <span class="label label-default">刪除註記: {{row['刪除註記']}}</span><br />
                 <h4>
                   <span class="label label-default">即時動向:</span>
+                </h4>
+                <h4>
                   <span ng-switch="row['即時動向']">
                     <span ng-switch-when="出院" class="label label-success">
                       {{row['即時動向']}}
