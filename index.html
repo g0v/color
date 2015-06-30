@@ -972,7 +972,7 @@ angular
     $scope.hotels = [];
     $scope.lastmodify = [];
 
-    $http.get('//raw.githubusercontent.com/harry2690/psof/gh-pages/hotels.json')
+    $http.get('//harry2690.github.io/psof/hotels.json')
     .success(function (result) {
       $scope.lastmodify = result.lastmodify;
       $scope.hotels = result.data;
