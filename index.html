@@ -75,6 +75,7 @@
               <ul class="dropdown-menu">
                 <li><a href="http://er.mohw.g0v.tw/#/dashboard/file/default.json" target="_blank">全國重度級急救責任醫院急診即時訊息</a></li>
                 <li><a href="https://www.google.com/maps/d/u/0/viewer?mid=zGq2VJ5NdtUs.kDYAcwSlWkN8" target="_blank">台灣捐血站/車地圖</a></li>
+                <li><a href="http://beta.hackfoldr.org/627pray" target="_blank">HackFoldr</a></li>
               </ul>
             </li>
           </ul>
@@ -108,18 +109,18 @@
         <span class="label label-default">{{ people['性別']}} {{ people['年齡']}}</span>
         <span class="label label-default">{{ people['國籍']}}</span><br />
         <br />
-        收治單位: <a class="btn btn-info btn-xs" href="https://www.google.com/maps?q={{ map[people['收治單位']].address || people['收治單位'] }}" target="_blank">{{people['縣市別']}} {{people['收治單位']}}<i class="glyphicon glyphicon-map-marker"></i></a><br />
+        收治單位: <a class="btn btn-info btn-xs" href="https://www.google.com/maps?q={{ map[people['收治單位']].address || people['收治單位'] }}" target="_blank" ng-click="open('people','地圖')">{{people['縣市別']}} {{people['收治單位']}}<i class="glyphicon glyphicon-map-marker"></i></a><br />
         <span ng-if="map[people['收治單位']].address">地址: {{map[people['收治單位']].address}}</span><br />
         <span ng-if="map[people['收治單位']].phone" class="animate-if">
-          電話：<a href="tel:{{map[people['收治單位']].phone}}" style="white-space: nowrap;">{{map[people['收治單位']].phone}}</a><br />
+          電話：<a href="tel:{{map[people['收治單位']].phone}}" style="white-space: nowrap;" ng-click="open('people','醫院電話')">{{map[people['收治單位']].phone}}</a><br />
         </span>
         <br />
         <span ng-if="hospital[people['收治單位']]" class="animate-if">
           社福中心: {{hospital[people['收治單位']]['社福中心']}} {{hospital[people['收治單位']]['主任']}}<br />
-          電話: <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;">{{hospital[people['收治單位']]['辦公室電話']}}</a>
+          電話: <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;" ng-click="open('people','社福電話')">{{hospital[people['收治單位']]['辦公室電話']}}</a>
           <span ng-if="sun[people['縣市別']]" class="animate-if">
             <br />
-            陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;">{{sun[people['縣市別']]}}</a>
+            陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">{{sun[people['縣市別']]}}</a>
           </span>
         </span>
         <br />
@@ -140,18 +141,18 @@
         <br />
         <div class="alert alert-warning" role="alert">
           - 臺北市醫院就醫之傷者家屬,若有相關問題,於晚上八點前可撥打社會局社工科電話
-          <a href="tel:0227206528" target="_blank">02-27206528</a>
+          <a href="tel:0227206528" target="_blank" ng-click="open('提醒','社會局社工科')">02-27206528</a>
           <br />
           - 應變中心24小時服務專線
-          <a href="tel:0229646715" target="_blank">02-29646715</a>、
-          <a href="tel:0289535599" target="_blank">02-89535599</a>
+          <a href="tel:0229646715" target="_blank" ng-click="open('提醒','應變中心電話A')">02-29646715</a>、
+          <a href="tel:0289535599" target="_blank" ng-click="open('提醒','應變中心電話B')">02-89535599</a>
           <br />
           - 陽光基金會
-          北區<a href="tel:0225078006" target="_blank">02-25078006</a>、
-          中區<a href="tel:0423582336" target="_blank">04-23582336</a>、
-          雲嘉<a href="tel:052280300" target="_blank">05-2280300</a>、
-          南區<a href="tel:075587166" target="_blank">07-5587166</a>、
-          東區<a href="tel:038563213" target="_blank">03-8563213</a>、
+          北區<a href="tel:0225078006" target="_blank" ng-click="open('提醒','陽光基金會北區')">02-25078006</a>、
+          中區<a href="tel:0423582336" target="_blank" ng-click="open('提醒','陽光基金會中區')">04-23582336</a>、
+          雲嘉<a href="tel:052280300" target="_blank" ng-click="open('提醒','陽光基金會雲嘉')">05-2280300</a>、
+          南區<a href="tel:075587166" target="_blank" ng-click="open('提醒','陽光基金會南區')">07-5587166</a>、
+          東區<a href="tel:038563213" target="_blank" ng-click="open('提醒','陽光基金會東區')">03-8563213</a>、
         </div>
         <br />
         <span class="label label-success">已出院: {{total['已出院']}}</span>
@@ -171,13 +172,13 @@
           <tbody>
             <tr ng-repeat="row in data.data | advancefilter: query">
               <td>
-                <a href="#{{row['編號']}}" ng-click="setType(row['編號'], row)">{{ row['編號'] }}</a><br />
-                <a href="https://www.google.com/maps?q={{ map[row['收治單位']].address || row['收治單位'] }}" target="_blank">{{ row['縣市別']}}<br />{{row['收治單位']}}</a><br />
+                <a href="#{{row['編號']}}" ng-click="setType(row['編號'], row)" ng-click="open('list','編號')">{{ row['編號'] }}</a><br />
+                <a href="https://www.google.com/maps?q={{ map[row['收治單位']].address || row['收治單位'] }}" target="_blank" ng-click="open('list','地圖')">{{ row['縣市別']}}<br />{{row['收治單位']}}</a><br />
                 <span ng-if="map[row['收治單位']].phone" class="animate-if">
-                  <a href="tel:{{map[row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;">{{map[row['收治單位']].phone}}</a><br />
+                  <a href="tel:{{map[row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['收治單位']].phone}}</a><br />
                 </span>
                 <span ng-if="hospital[row['收治單位']]" class="animate-if">
-                  <button type="button" class="btn btn-info btn-xs" ng-click="getHospital(row['收治單位'])">社福中心</button>
+                  <button type="button" class="btn btn-info btn-xs" ng-click="getHospital(row['收治單位']); open('list','社福中心')">社福中心</button>
                 </span>
               </td>
               <td>
@@ -361,6 +362,10 @@ angular
       }
     };
 
+    $scope.open = function(group, name) {
+      ga('send', 'event', 'open', group, name);
+    };
+
     $scope.setType = function(id, people) {
       $scope.type = id;
       $scope.people = people;
@@ -486,7 +491,7 @@ angular
             return 1;
           }
         }
-        
+
         return 0;
       });
       
