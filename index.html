@@ -344,6 +344,7 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
   <script src="//cdn.rawgit.com/lorenzofox3/Smart-Table/master/dist/smart-table.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.js"></script>
 <script>
 angular
 .module('app', [])
@@ -443,7 +444,7 @@ angular
 
     $http.get('//raw.githubusercontent.com/g0v/blood/gh-pages/blood.json').success(function (data) {
       var _d = new Date(data.time);
-      $scope.bloodStatus.time = _d.toLocaleDateString() +' '+ _d.toLocaleTimeString();
+      $scope.bloodStatus.time = moment(_d).fromNow();
       for(var key in data) {
         if (key.search('捐血中心') > -1) {
           $scope.bloodStatus.data.push(data[key]);
