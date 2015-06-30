@@ -65,7 +65,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">八仙粉塵爆炸傷者查詢</a>
+          <a class="navbar-brand" href="#">
+            <span ng-show="type=='people' || type=='hospital'">八仙粉塵爆炸傷者查詢</span>
+            <span ng-show="type=='blood'">捐血車/站查詢</span>
+          </a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
