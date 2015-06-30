@@ -407,6 +407,15 @@ angular
       data: []
     };
 
+    $http.get('//raw.githubusercontent.com/g0v/blood/gh-pages/blood.json').success(function (data) {
+      $scope.bloodStatus.time = data.time;
+      for(var key in data) {
+        if (key.search('捐血中心') > -1) {
+          $scope.bloodStatus.data.push(data[key]);
+        }
+      }
+    });
+
     $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
       $scope.data = data;
       $scope.data.data.forEach(function(item) {
@@ -496,15 +505,6 @@ angular
       });
       
       $scope.total['醫院'] = temp;
-
-      $http.get('//raw.githubusercontent.com/g0v/blood/gh-pages/blood.json').success(function (data) {
-        $scope.bloodStatus.time = data.time;
-        for(var key in data) {
-          if (key.search('捐血中心') > -1) {
-            $scope.bloodStatus.data.push(data[key]);
-          }
-        }
-      });
     });
 
     $scope.map = {
