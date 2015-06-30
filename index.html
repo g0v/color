@@ -322,13 +322,16 @@ angular
       var textArr;
       if (/^\w+$/.test(text)) {
         textArr = [text];
+      } else if ((text || "").indexOf(" ") > -1) {
+        textArr = (text || "").split(' ');
       } else {
         textArr = (text || "").split('');
+        if (text && text.length > 1) {
+          textArr.splice(1,1);
+        }
       }
 
-      if (text && text.length > 2) {
-        textArr.splice(1,1);
-      }
+      console.log(textArr);
       angular.forEach(textArr, function(test){
           if (test) {
             data = data.filter(function(item) {
