@@ -243,12 +243,18 @@
             <tr ng-repeat="row in data.data | advancefilter: query">
               <td>
                 <a href="#{{row['編號']}}" ng-click="setType(row['編號'], row)" ng-click="open('list','編號')">{{ row['編號'] }}</a><br />
-                <a href="https://www.google.com/maps?q={{ map[row['收治單位']].address || row['收治單位'] }}" target="_blank" ng-click="open('list','地圖')">{{ row['縣市別']}}<br />{{row['收治單位']}}</a><br />
-                <span ng-if="map[row['收治單位']].phone" class="animate-if">
-                  <a href="tel:{{map[row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['收治單位']].phone}}</a><br />
+                <span class="label label-default">{{row['縣市別']}}</span><br />
+                <a href="https://www.google.com/maps?q={{ map[row['縣市別']+row['收治單位']].address || row['收治單位'] }}" target="_blank" ng-click="open('list','地圖')">{{row['收治單位']}} <i class="glyphicon glyphicon-map-marker"></i></a>
+                <span ng-if="map[row['縣市別']+row['收治單位']].phone" class="animate-if">
+                  <a href="tel:{{map[row['縣市別']+row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['縣市別']+row['收治單位']].phone}}</a><br />
                 </span>
                 <span ng-if="hospital[row['收治單位']]" class="animate-if">
-                  <button type="button" class="btn btn-info btn-xs" ng-click="getHospital(row['收治單位']); open('list','社福中心')">社福中心</button>
+                  <span class="label label-info">{{hospital[row['收治單位']]['社福中心']}} 社福中心:</span>
+                  <a href="tel:{{hospital[row['收治單位']]['辦公室電話']}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','社福中心')">{{hospital[row['收治單位']]['辦公室電話']}}</a><br />
+                </span>
+                <span>
+                  <span class="label label-info">陽光基金會:</span>
+                  <a href="tel:{{sun[row['縣市別']]}}" style="white-space: nowrap;" ng-click="open('list','陽光基金會電話')">{{sun[row['縣市別']]}}</a>
                 </span>
               </td>
               <td>
@@ -519,6 +525,11 @@ angular
 
     $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
       $scope.data = data;
+
+      $scope.data.data = $scope.data.data.filter(function(item) {
+        return !!item['編號'];
+      });
+
       $scope.data.data.forEach(function(item) {
         item.keyword = [
           item['編號'],
@@ -540,7 +551,7 @@ angular
           $scope.people = item;
         }
 
-        if (/(出院)/gi.test(item['即時動向'])) { //(出院|死亡)
+        if (/(出院|死亡)/gi.test(item['即時動向'])) {
           $scope.total['已出院'] += 1;
         } else {
           $scope.total['未出院'] += 1;
@@ -610,165 +621,165 @@ angular
     });
 
     $scope.map = {
-      '聯醫仁愛': {
+      '台北市聯醫仁愛': {
         'phone': '02-27093600',
         'address': '台北市大安區仁愛路四段10號'
       },
-      '聯醫中興': {
+      '台北市聯醫中興': {
         'phone': '02-25523234',
         'address': '台北市鄭州路145號'
       },
-      '聯醫忠孝': {
+      '台北市聯醫忠孝': {
         'phone': '02-27861288',
         'address': '台北市南港區同德路87號'
       },
-      '聯醫陽明': {
+      '台北市聯醫陽明': {
         'phone': '02-28353456',
         'address': '台北市雨聲街105號'
       },
-      '臺大醫院': {
+      '台北市臺大醫院': {
         'phone': '02-23123456',
         'address': '台北市中正區中山南路7號'
       },
-      '松山三總': {
+      '台北市松山三總': {
         'phone': '02-27642151',
         'address': '台北市松山區健康路131號'
       },
-      '內湖三總': {
+      '台北市內湖三總': {
         'phone': '02-87923311',
         'address': '台北市內湖區成功路二段325號'
       },
-      '臺北榮總': {
+      '台北市臺北榮總': {
         'phone': '02-28712121',
         'address': '台北市北投區石牌路二段201號'
       },
-      '臺北國泰': {
+      '台北市臺北國泰': {
         'phone': '02-27082121',
         'address': '台北市仁愛路四段280號'
       },
-      '臺北馬偕': {
+      '台北市臺北馬偕': {
         'phone': '02-25433535',
         'address': '台北市中山區中山北路二段92號'
       },
-      '新光醫院': {
+      '台北市新光醫院': {
         'phone': '02-28332211',
         'address': '台北市士林區文昌路95號'
       },
-      '振興醫院': {
+      '台北市振興醫院': {
         'phone': '02-28264400',
         'address': '台北市北投區振興街45號'
       },
-      '淡水馬偕': {
+      '新北市淡水馬偕': {
         'phone': '02-25433535',
         'address': '新北市淡水區民生路45號'
       },
-      '聖保祿醫': {
+      '桃園市聖保祿醫': {
         'phone': '03-3773300',
         'address': '桃園市桃園區建新街123號'
       },
-      '中國附醫': {
+      '台北市中國附醫': {
         'phone': '02-27919696',
         'address': '台北市內湖區內湖路二段360號'
       },
-      '中國': {
+      '台北市中國': {
         'phone': '02-27919696',
         'address': '台北市內湖區內湖路二段360號'
       },
-      '北醫附醫': {
+      '台北市北醫附醫': {
         'phone': '02-27372181',
         'address': '台北市信義區吳興街252號'
       },
-      '萬芳醫院': {
+      '台北市萬芳醫院': {
         'phone': '02-29307930',
         'address': '台北市文山區興隆路三段111號'
       },
-      '中山醫院': {
+      '台北市中山醫院': {
         'phone': '02-27081166',
         'address': '台北市大安區仁愛路四段112巷11號'
       },
-      '義大醫院': {
+      '雄市燕義大醫院': {
         'phone': '07-6150011',
         'address': '雄市燕巢區義大路1號'
       },
-      '基隆長庚': {
+      '基隆市基隆長庚': {
         'phone': '02-24313131',
         'address': '基隆市安樂區麥金路222號'
       },
-      '新竹馬偕': {
+      '新竹市新竹馬偕': {
         'phone': '03-6119595',
         'address': '新竹市東區光復路二段690號'
       },
-      '衛部台北': {
+      '新北巿衛部台北': {
         'phone': '02-22765566',
         'address': '新北巿新莊區思源路127號'
       },
-      '板橋市醫': {
+      '新北市板橋市醫': {
         'phone': '02-22575151',
         'address': '新北市板橋區英士路198號'
       },
-      '三重市醫': {
+      '新北市三重市醫': {
         'phone': '02-29829111',
         'address': '新北市三重區新北大道一段3號'
       },
-      '亞東醫院': {
+      '新北市亞東醫院': {
         'phone': '02-89667000',
         'address': '新北市板橋區南雅南路二段21號'
       },
-      '慈濟台北': {
+      '新北市慈濟台北': {
         'phone': '02-66289779',
         'address': '新北市新店區建國路289號'
       },
-      '恩主': {
+      '新北市恩主': {
         'phone': '02-26723456',
         'address': '新北市三峽區復興路399號'
       },
-      '國泰汐止': {
+      '新北市國泰汐止': {
         'phone': '02-26482121',
         'address': '新北市汐止區建成路59巷2號'
       },
-      '耕莘醫院': {
+      '新北市耕莘醫院': {
         'phone': '02-22193391',
         'address': '新北市新店區中正路362號'
       },
-      '雙和醫院': {
+      '新北市雙和醫院': {
         'phone': '02-22490088',
-        'address': ' 新北市中和區中正路291號'
+        'address': '新北市中和區中正路291號'
       },
-      '板橋中興': {
+      '新北市板橋中興': {
         'phone': '02-29590707',
         'address': '新北市板橋區忠孝路15號'
       },
-      '新泰': {
+      '新北市新泰': {
         'phone': '02-29962121',
         'address': '新北市新莊區新泰路157號'
       },
-      '桃園醫院': {
+      '桃園市桃園醫院': {
         'phone': '03-3699721',
-        'address': '園市桃園區中山路1492號'
+        'address': '桃園市園區中山路1492號'
       },
-      '桃園總醫': {
+      '桃園縣桃園總醫': {
         'phone': '03-4799595',
         'address': '桃園縣龍潭鄉中興路168號'
       },
-      '林口長庚': {
+      '桃園市林口長庚': {
         'phone': '03-3281200',
         'address': '桃園市龜山區復興街5號'
       },
-      '敏盛': {
+      '桃園市敏盛': {
         'phone': '03-3179599',
         'address': '桃園市桃園區經國路168號'
       },
-      '壢新': {
+      '桃園市壢新': {
         'phone': '03-4941234',
         'address': '桃園市平鎮區廣泰路77號'
       },
-      '台北長庚': {
+      '台北市台北長庚': {
         'phone': '02-27135211',
         'address': '台北市敦化北路199號'
       },
-      '聖保祿醫院': {
+      '桃園市聖保祿醫院': {
         'phone': '03-3613141',
-        'address': ' 桃園市桃園區建新街123號'
+        'address': '桃園市桃園區建新街123號'
       }
     };
 
