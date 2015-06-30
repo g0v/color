@@ -403,12 +403,13 @@ angular
     }
 
     $scope.bloodStatus = {
-      time: 0,
+      time: ' ',
       data: []
     };
 
     $http.get('//raw.githubusercontent.com/g0v/blood/gh-pages/blood.json').success(function (data) {
-      $scope.bloodStatus.time = data.time;
+      var _d = new Date(data.time);
+      $scope.bloodStatus.time = _d.toLocaleDateString() +' '+ _d.toLocaleTimeString();
       for(var key in data) {
         if (key.search('捐血中心') > -1) {
           $scope.bloodStatus.data.push(data[key]);
