@@ -88,7 +88,7 @@
       </div>
       <div class="container-fluid">
         <div class="form-group">
-          <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" />
+          <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
           <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
         </div>
       </div>
@@ -359,6 +359,12 @@ angular
 
     $scope.sent = function(query) {
       ga('send', 'event', 'input', 'search', query);
+    };
+
+    $scope.enter = function(e, query) {
+      if (e.which == 13) {
+        ga('send', 'event', 'input', 'enter', query);
+      }
     };
 
     $scope.setType = function(id, people) {
