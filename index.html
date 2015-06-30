@@ -49,6 +49,10 @@
       #input-box input{
         padding: 22px 24px 23px 24px;
       }
+      #input-box .btn{
+        padding-top: 12px;
+        padding-bottom: 13px;
+      }
       #input-box .form-group {
         margin-bottom: 0px;
       }
@@ -154,7 +158,12 @@
     <div id="input-box" ng-hide="type=='hospital'">
       <div class="container">
         <div class="form-group">
-          <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
+    <div class="input-group">
+        <input type="text" ng-show="type=='people'" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="query='其他國家'">Other Country</button>
+      </span>
+    </div>
           <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
           <input type="text" ng-show="type=='hotel'" class="form-control" ng-model="hotelQuery" placeholder="請輸入病患醫院，尋找住宿地點" />
         </div>
