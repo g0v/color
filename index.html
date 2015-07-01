@@ -358,10 +358,12 @@
       </table>
     </div>
   </div>
-  <div class="row" ng-show="type=='hospital'">
+  <div class="row" ng-show="type=='hospital'" ng-controller="HospitalController">
     <div class="col-lg-12">
-      <h1>傷者康復狀況統計</h1>
-      <canvas id="bar" class="chart chart-bar" data="statisticsdata" labels="statisticslabels" options="statisticsoptions"></canvas>
+      <h2>出入院狀況統計</h2>
+      <canvas id="bar" class="chart chart-bar" data="statisticsdata_status" labels="statisticslabels_status" options="statisticsoptions_status"></canvas>
+      <!--<h2>傷況統計</h2>-->
+      <!--<canvas id="doughnut" class="chart chart-doughnut" data="statisticsdata_injury" labels="statisticslabels_injury"></canvas>-->
       <table class="table table-striped">
         <thead>
         <tr>
@@ -571,6 +573,11 @@
           animateRotate : false
         };
 
+        $scope.statisticslabels_status = ['出院', '加護病房', '一般病房', '死亡', '其他'];
+        $scope.statisticsdata_status = [[0,0,0,0,0]];
+
+//        $scope.statisticsdata_injury = [10,10,10];
+//        $scope.statisticslabels_injury = ['輕傷', '中傷', '重傷'];
 
         $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
           $scope.data = data;
@@ -578,10 +585,6 @@
           $scope.data.data = $scope.data.data.filter(function(item) {
             return !!item['編號'];
           });
-
-          $scope.statisticslabels = ['出院', '加護病房', '一般病房', '死亡', '其他'];
-          $scope.statisticsdata = [[0,0,0,0,0]];
-
 
           $scope.data.data.forEach(function(item) {
             item.keyword = [
@@ -606,18 +609,18 @@
 
             if (/(出院)/gi.test(item['即時動向'])) {
               $scope.total['已出院'] += 1;
-              $scope.statisticsdata[0][0] += 1;
+              $scope.statisticsdata_status[0][0] += 1;
             } else if (/(死亡)/gi.test(item['即時動向'])) {
               $scope.total['已出院'] += 1;
-              $scope.statisticsdata[0][3] += 1;
+              $scope.statisticsdata_status[0][3] += 1;
             } else {
               $scope.total['未出院'] += 1;
               if (/(加護病房)/gi.test(item['即時動向'])) {
-                $scope.statisticsdata[0][1] += 1;
+                $scope.statisticsdata_status[0][1] += 1;
               } else if (/(一般病房)/gi.test(item['即時動向'])) {
-                $scope.statisticsdata[0][2] += 1;
+                $scope.statisticsdata_status[0][2] += 1;
               } else {
-                $scope.statisticsdata[0][4] += 1;
+                $scope.statisticsdata_status[0][4] += 1;
               }
 
               if (!$scope.total['醫院'][item['收治單位']]) {
@@ -1185,6 +1188,10 @@
         $scope.showInfo = function(info) {
           alert('說明：' + info);
         };
+      })
+      .controller('HospitalController',
+      function ($http, $scope) {
+//        window.location.reload();
       });
   //@ sourceURL=pen.js
 </script>
