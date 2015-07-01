@@ -103,13 +103,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#">
         <span ng-show="type=='people' || type=='hospital'">八仙粉塵爆炸傷者查詢</span>
         <span ng-show="type=='hotel'">傷者家屬住宿查詢</span>
         <span ng-show="type=='blood'">捐血車/站查詢</span>
-        <span ng-show="type=='statistics'">統計圖表</span>
       </a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -153,27 +151,24 @@
       <div class="btn-group" role="group">
         <a class="btn btn-default" ng-class="{'active': type=='blood'}" href="#blood" ng-click="type='blood'">捐款/捐血</a>
       </div>
-      <div class="btn-group" role="group">
-        <a class="btn btn-default" ng-class="{'active': type=='statistics'}" href="#statistics" ng-click="type='statistics'">統計圖表</a>
-      </div>
     </div>
   </div>
 </div>
-  <div id="input-box" ng-hide="type=='hospital'">
-    <div class="container">
-      <div class="form-group">
-        <div class="input-group" ng-show="type=='people'">
-          <input type="text" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
+<div id="input-box" ng-hide="type=='hospital'">
+  <div class="container">
+    <div class="form-group">
+      <div class="input-group" ng-show="type=='people'">
+        <input type="text" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="query='其他國家'" ng-hide="query">Other Country</button>
                 <button class="btn btn-default" type="button" ng-click="query=''" ng-show="query">Clean</button>
               </span>
-        </div>
-        <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
-        <input type="text" ng-show="type=='hotel'" class="form-control" ng-model="hotelQuery" placeholder="請輸入病患醫院，尋找住宿地點" />
       </div>
-      <span class="label" ng-show="type=='people'">最後更新: {{ data.lastmodify  }}</span>
+      <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
+      <input type="text" ng-show="type=='hotel'" class="form-control" ng-model="hotelQuery" placeholder="請輸入病患醫院，尋找住宿地點" />
     </div>
+    <span class="label" ng-show="type=='people'">最後更新: {{ data.lastmodify  }}</span>
+  </div>
 </div>
 <br />
 <div class="container">
@@ -338,6 +333,9 @@
   </div>
   <div class="row" ng-show="type=='hospital'">
     <div class="col-lg-12">
+      <h1>傷者康復狀況統計</h1>
+      <!--<canvas id="pie" class="chart chart-pie" data="statisticsdata" labels="statisticslabels" options="statisticsoptions"></canvas>-->
+      <canvas id="bar" class="chart chart-bar" data="statisticsdata" labels="statisticslabels" options="statisticsoptions"></canvas>
       <table class="table table-striped">
         <thead>
         <tr>
@@ -424,13 +422,6 @@
         </tr>
         </tbody>
       </table>
-    </div>
-  </div>
-
-  <div class="row" ng-show="type=='statistics'" ng-controller="StatisticsController">
-    <div class="col-lg-12">
-      <h1>傷者康復狀況統計</h1>
-      <canvas id="pie" class="chart chart-pie" data="statisticsdata" labels="statisticslabels" options="statisticsoptions"></canvas>
     </div>
   </div>
 </div>
@@ -548,6 +539,11 @@
           }
         });
 
+        $scope.statisticsoptions =  {
+          responsive: true,
+          animateRotate : false
+        };
+
         $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
           $scope.data = data;
 
@@ -556,8 +552,7 @@
           });
 
           $scope.statisticslabels = ['出院', '加護病房', '一般病房', '死亡', '其他'];
-          $scope.statisticsdata = [0,0,0,0,0];
-
+          $scope.statisticsdata = [[0,0,0,0,0]];
 
           $scope.data.data.forEach(function(item) {
             item.keyword = [
@@ -582,18 +577,18 @@
 
             if (/(出院)/gi.test(item['即時動向'])) {
               $scope.total['已出院'] += 1;
-              $scope.statisticsdata[0] += 1;
+              $scope.statisticsdata[0][0] += 1;
             } else if (/(死亡)/gi.test(item['即時動向'])) {
               $scope.total['已出院'] += 1;
-              $scope.statisticsdata[3] += 1;
+              $scope.statisticsdata[0][3] += 1;
             } else {
               $scope.total['未出院'] += 1;
               if (/(加護病房)/gi.test(item['即時動向'])) {
-                $scope.statisticsdata[1] += 1;
+                $scope.statisticsdata[0][1] += 1;
               } else if (/(一般病房)/gi.test(item['即時動向'])) {
-                $scope.statisticsdata[2] += 1;
+                $scope.statisticsdata[0][2] += 1;
               } else {
-                $scope.statisticsdata[4] += 1;
+                $scope.statisticsdata[0][4] += 1;
               }
 
               if (!$scope.total['醫院'][item['收治單位']]) {
@@ -1160,13 +1155,6 @@
 
         $scope.showInfo = function(info) {
           alert('說明：' + info);
-        };
-      })
-      .controller('StatisticsController',
-      function ($http, $scope) {
-        $scope.statisticsoptions =  {
-          responsive: true,
-          animateRotate : false
         };
       });
 
