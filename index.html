@@ -2,76 +2,86 @@
 
 <!DOCTYPE html>
 <html >
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
-  <title>八仙粉塵爆炸傷者開放資料查詢</title>
-  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-  <style>
-    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-      display: none !important;
-    }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <title>八仙粉塵爆炸傷者開放資料查詢</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'> 
+    <style>
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+      }
 
-    .navbar {
-      background: #656D78;
-      border-radius: 0;
-      margin-bottom: 0;
-      border: none;
-    }
-    .navbar-default .navbar-brand,
-    .navbar-default .navbar-nav>li>a {
-      color: #FFFFFF;
-    }
-    #tab a {
-      padding: 23px 0px 23px 0px;
-      box-shadow: none;
-      background: #E6E9EE;
-      border: none;
-      cursor: pointer;
-      line-height: 21px;
-      font-size: 20px;
-      color: #656D78;
-      border-left: 3px solid #FFF;
-      border-radius: 0;
-    }
-    #tab a.btn-first {
-      border: none;
-    }
-    #tab a.active {
-      background: #2EBD9B;
-      color: #FFFFFF;
-    }
-    #input-box {
-      background: #2EBD9B;
-      padding-top: 49px;
-      padding-bottom: 39px;
-    }
-    #input-box input{
-      padding: 22px 24px 23px 24px;
-    }
-    #input-box .btn{
-      padding-top: 12px;
-      padding-bottom: 13px;
-    }
-    #input-box .form-group {
-      margin-bottom: 0px;
-    }
-    #input-box .label {
-      display: inline;
-      padding: 0;
-      font-size: 75%;
-      font-weight: 700;
-      line-height: 1;
-      color: #fff;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: baseline;
-      border-radius: .25em;
-    }
-  </style>
+      .navbar {
+        background: #656D78;
+        border-radius: 0;
+        margin-bottom: 0;
+        border: none;
+      }
+      .navbar-default .navbar-brand,
+      .navbar-default .navbar-nav>li>a {
+        color: #FFFFFF;
+      }
+      #tab a {
+        padding: 23px 0px 23px 0px;
+        box-shadow: none;
+        background: #E6E9EE;
+        border: none;
+        cursor: pointer;
+        line-height: 21px;
+        font-size: 20px;
+        color: #656D78;
+        border-left: 3px solid #FFF;
+        border-radius: 0;
+      }
+      #tab a.btn-first {
+        border: none;
+      }
+      #tab a.active {
+        background: #2EBD9B;
+        color: #FFFFFF;
+      }
+      #input-box {
+        background: #2EBD9B;
+        padding-top: 49px;
+        padding-bottom: 39px;
+      }
+      #input-box input{
+        padding: 22px 24px 23px 24px;
+      }
+      #input-box .btn{
+        padding-top: 12px;
+        padding-bottom: 13px;
+      }
+      #input-box .form-group {
+        margin-bottom: 0px;
+      }
+      #input-box .label {
+        display: inline;
+        padding: 0;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25em;
+      }
 
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      p {
+          word-break: break-all;
+      }
+
+      .nearby {
+        display: inline-block;
+        white-space: normal;
+        text-align: left;
+      }
+    </style>
+    <link rel="stylesheet" href="css/all.css">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
@@ -160,8 +170,8 @@
       <div class="input-group" ng-show="type=='people'">
         <input type="text" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-click="query='其他國家'" ng-hide="query">Other Country</button>
-                <button class="btn btn-default" type="button" ng-click="query=''" ng-show="query">Clean</button>
+                <button class="btn btn-default" type="button" ng-click="query='其他國家'" ng-hide="query">Foreigners</button>
+                <button class="btn btn-default" type="button" ng-click="query=''" ng-show="query">Locals</button>
               </span>
       </div>
       <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
@@ -179,29 +189,49 @@
           <span ng-switch-when="出院" class="label label-success">
             即時動向: {{people['即時動向']}}
           </span>
-          <span ng-switch-when="自動出院(AAD)" class="label label-success">
-            即時動向: {{people['即時動向']}}
-          </span>
-          <span ng-switch-default class="label label-primary">
-            即時動向: {{people['即時動向']}}
-          </span>
+        </h4>
+        編號: {{ people['編號'] }}<br />
+        個資: {{ people['姓名']}}
+        <span class="label label-default">{{ people['性別']}} {{ people['年齡']}}</span>
+        <span class="label label-default">{{ people['國籍']}}</span><br />
+        <br />
+        收治單位: <a class="btn btn-info btn-xs" href="https://www.google.com/maps?q={{ map[people['收治單位']].address || people['收治單位'] }}" target="_blank" ng-click="open('people','地圖')">{{people['縣市別']}} {{people['收治單位']}}<i class="glyphicon glyphicon-map-marker"></i></a><br />
+        <span ng-if="map[people['收治單位']].address">地址: {{map[people['收治單位']].address}}</span><br />
+        <span ng-if="map[people['收治單位']].phone" class="animate-if">
+          電話：<a href="tel:{{map[people['收治單位']].phone}}" style="white-space: nowrap;" ng-click="open('people','醫院電話')">{{map[people['收治單位']].phone}}</a><br />
         </span>
-      </h4>
-      編號: {{ people['編號'] }}<br />
-      個資: {{ people['姓名']}}
-      <span class="label label-default">{{ people['性別']}} {{ people['年齡']}}</span>
-      <span class="label label-default">{{ people['國籍']}}</span><br />
-      <br />
-      收治單位: <a class="btn btn-info btn-xs" href="https://www.google.com/maps?q={{ map[people['收治單位']].address || people['收治單位'] }}" target="_blank" ng-click="open('people','地圖')">{{people['縣市別']}} {{people['收治單位']}}<i class="glyphicon glyphicon-map-marker"></i></a><br />
-      <span ng-if="map[people['收治單位']].address">地址: {{map[people['收治單位']].address}}</span><br />
-      <span ng-if="map[people['收治單位']].phone" class="animate-if">
-        電話：<a href="tel:{{map[people['收治單位']].phone}}" style="white-space: nowrap;" ng-click="open('people','醫院電話')">{{map[people['收治單位']].phone}}</a><br />
-      </span>
-      <br />
-      <span ng-if="hospital[people['收治單位']]" class="animate-if">
-        社福中心: {{hospital[people['收治單位']]['社福中心']}} {{hospital[people['收治單位']]['主任']}}<br />
-        電話: <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;" ng-click="open('people','社福電話')">{{hospital[people['收治單位']]['辦公室電話']}}</a>
+        <span ng-if="hospital[people['收治單位']]" class="animate-if">
+          <br />
+          社福中心: {{hospital[people['收治單位']]['社福中心']}} {{hospital[people['收治單位']]['主任']}}<br />
+          電話: <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;" ng-click="open('people','社福電話')">{{hospital[people['收治單位']]['辦公室電話']}}</a>
+        </span>
         <span ng-if="sun[people['縣市別']]" class="animate-if">
+          <br />
+          陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">{{sun[people['縣市別']]}}</a>
+        </span>
+        <span ng-if="people['國籍']=='其他國家' || people['國籍']=='大陸地區'" class="animate-if">
+          <br />
+          香港灼傷互助會: <a href="tel:+852-62087525" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">+852-62087525</a>
+        </span>
+        <br />
+        <br />
+        <span class="label label-default">醫療檢傷: {{people['醫療檢傷']}}</span><br />
+        <span class="label label-default">救護檢傷: {{people['救護檢傷']}}</span><br />
+        <span class="label label-default">檢傷編號: {{people['檢傷編號']}}</span><br />
+        <span class="label label-default">轉診要求: {{people['轉診要求']}}</span><br />
+        <span class="label label-default">刪除註記: {{people['刪除註記']}}</span><br />
+      </div>
+    </div>
+
+    <div class="row" ng-show="type=='people' || type=='hospital'">
+      <div class="col-lg-12">
+        <div class="alert alert-warning" role="alert">
+          - 應變中心24H服務專線<br />
+          &nbsp;&nbsp;<a href="tel:0229646715" target="_blank" ng-click="open('提醒','應變中心電話A')">02-29646715 <i class="glyphicon glyphicon-earphone"></i></a>
+          <a href="tel:0289535599" target="_blank" ng-click="open('提醒','應變中心電話B')">02-89535599 <i class="glyphicon glyphicon-earphone"></i></a>
+          <br />
+          - 臺北市醫院就醫之傷者家屬(社會局社工科)<br />
+          &nbsp;&nbsp;<a href="tel:0227206528" target="_blank" ng-click="open('提醒','社會局社工科')">02-27206528 <i class="glyphicon glyphicon-earphone"></i></a>
           <br />
           陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">{{sun[people['縣市別']]}}</a>
         </span>
@@ -304,72 +334,73 @@
         </tbody>
       </table>
     </div>
-  </div>
-  <div class="row" ng-show="type=='hotel'" ng-controller="HotelController">
-    <div class="col-lg-12">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>旅館</th>
-          <th>其他資訊</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="row in hotels | filter: hotelQuery">
-          <td>
-            {{row['旅館名稱']}}<br />
-            <a href="tel:{{row['連絡電話']}}" target="_blank">{{row['連絡電話']}}</a><br />
-            <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a></>
-          </td>
-          <td>
-            <p ng-if="row['網址']"><a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a></p>
-            <p>靠近醫院：{{row['靠近醫院']}}</p>
-            <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row" ng-show="type=='hotel'" ng-controller="HotelController">
+      <div class="col-xs-12 col-lg-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>旅館</th>
+              <th>其他資訊</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in hotels | filter: hotelQuery">
+              <td>
+                {{row['旅館名稱']}}<br />
+                <a href="tel:{{row['連絡電話']}}" target="_blank">{{row['連絡電話']}}</a><br />
+                <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a></>
+              </td>
+              <td>
+                <p ng-if="row['網址']">
+                    <a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a>
+                </p>
+                <p>
+                    靠近醫院：{{row['靠近醫院']}}
+                </p>
+                <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <div class="row" ng-show="type=='hospital'">
-    <div class="col-lg-12">
-      <h1>傷者康復狀況統計</h1>
-      <!--<canvas id="pie" class="chart chart-pie" data="statisticsdata" labels="statisticslabels" options="statisticsoptions"></canvas>-->
-      <canvas id="bar" class="chart chart-bar" data="statisticsdata" labels="statisticslabels" options="statisticsoptions"></canvas>
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>醫院</th>
-          <th>統計</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="row in total['醫院']">
-          <td>{{row['name']}}</td>
-          <td>
-            <div>
-              <span class="label label-danger">重傷: {{row['重傷']}}</span>&nbsp;
-              <span class="label label-warning">中傷: {{row['中傷']}}</span>&nbsp;
-              <span class="label label-info">輕傷: {{row['輕傷']}}</span>
-            </div>
-            <br />
-            <div class="progress">
-              <div class="progress-bar progress-bar-danger" style="width: {{ row['重傷'] / total.max * 100 }}%">
-              </div>
-              <div class="progress-bar progress-bar-warning" style="width: {{ row['中傷'] / total.max * 100 }}%">
-              </div>
-              <div class="progress-bar progress-bar-info" style="width: {{ row['輕傷'] / total.max * 100 }}%">
-              </div>
-            </div>
-            <div>
-              <span class="label label-default">加護病房: {{row['加護病房']}}</span>&nbsp;
-              <span class="label label-default">一般病房: {{row['一般病房']}}</span>&nbsp;
-              <span class="label label-default">其它: {{row['其它']}}</span>
-            </div>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row" ng-show="type=='hospital'">
+      <div class="col-lg-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>醫院</th>
+              <th>統計</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in total['醫院']">
+              <td>{{row['name']}}</td>
+              <td>
+                <div>
+                  <span class="label label-danger">重傷: {{row['重傷']}}</span>&nbsp;
+                  <span class="label label-warning">中傷: {{row['中傷']}}</span>&nbsp;
+                  <span class="label label-success">輕傷: {{row['輕傷']}}</span>
+                </div>
+                <br />
+                <div class="progress">
+                  <div class="progress-bar progress-bar-danger" style="width: {{ row['重傷'] / total.max * 100 }}%">
+                  </div>
+                  <div class="progress-bar progress-bar-warning" style="width: {{ row['中傷'] / total.max * 100 }}%">
+                  </div>
+                  <div class="progress-bar progress-bar-success" style="width: {{ row['輕傷'] / total.max * 100 }}%">
+                  </div>
+                </div>
+                <div>
+                  <span class="label label-default">加護病房: {{row['加護病房']}}</span>&nbsp;
+                  <span class="label label-default">一般病房: {{row['一般病房']}}</span>&nbsp;
+                  <span class="label label-default">其它: {{row['其它']}}</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <div class="row" ng-show="type=='blood'">
@@ -398,30 +429,30 @@
         <span class="label label-default">最後更新: {{bloodStatus.time}}</span>
       </div>
     </div>
-  </div>
-  <div class="row" ng-show="type=='blood'">
-    <div class="col-lg-12">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>捐血車/站</th>
-          <th>聯絡方式</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="row in bloods | filter: blood ">
-          <td>
-            {{row[0]}}<br />
-            {{row[1]}}
-          </td>
-          <td>
-            <a href="tel:{{row[2]}}">{{row[2]}}</a><br />
-            <a href="https://www.google.com/maps?q={{row[3]}}" target="_blank">{{row[3]}}</a><br />
-            <span class="label label-info">{{row[4]}}</span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row" ng-show="type=='blood'">
+      <div class="col-lg-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>捐血車/站</th>
+              <th>聯絡方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="row in bloods | filter: blood ">
+              <td>
+                {{row[0]}}<br />
+                {{row[1]}}
+              </td>
+              <td>
+                <a href="tel:{{row[2]}}">{{row[2]}}</a><br />
+                <a href="https://www.google.com/maps?q={{row[3]}}" target="_blank">{{row[3]}}</a><br />
+                <span class="label label-info nearby">{{row[4]}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
