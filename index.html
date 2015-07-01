@@ -68,6 +68,16 @@
         vertical-align: baseline;
         border-radius: .25em;
       }
+
+      p {
+          word-break: break-all;
+      }
+
+      .nearby {
+        display: inline-block;
+        white-space: normal;
+        text-align: left;
+      }
     </style>
     <link rel="stylesheet" href="css/all.css">
     <script>
@@ -198,14 +208,18 @@
         <span ng-if="map[people['收治單位']].phone" class="animate-if">
           電話：<a href="tel:{{map[people['收治單位']].phone}}" style="white-space: nowrap;" ng-click="open('people','醫院電話')">{{map[people['收治單位']].phone}}</a><br />
         </span>
-        <br />
         <span ng-if="hospital[people['收治單位']]" class="animate-if">
+          <br />
           社福中心: {{hospital[people['收治單位']]['社福中心']}} {{hospital[people['收治單位']]['主任']}}<br />
           電話: <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;" ng-click="open('people','社福電話')">{{hospital[people['收治單位']]['辦公室電話']}}</a>
-          <span ng-if="sun[people['縣市別']]" class="animate-if">
-            <br />
-            陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">{{sun[people['縣市別']]}}</a>
-          </span>
+        </span>
+        <span ng-if="sun[people['縣市別']]" class="animate-if">
+          <br />
+          陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">{{sun[people['縣市別']]}}</a>
+        </span>
+        <span ng-if="people['國籍']=='其他國家' || people['國籍']=='大陸地區'" class="animate-if">
+          <br />
+          香港灼傷互助會: <a href="tel:+852-62087525" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">+852-62087525</a>
         </span>
         <br />
         <br />
@@ -221,7 +235,7 @@
       <div class="col-lg-12">
         <div class="alert alert-warning" role="alert">
           - 應變中心24H服務專線<br />
-          &nbsp;&nbsp;<a href="tel:0229646715" target="_blank" ng-click="open('提醒','應變中心電話A')">02-29646715 <i class="glyphicon glyphicon-earphone"></i></a> 
+          &nbsp;&nbsp;<a href="tel:0229646715" target="_blank" ng-click="open('提醒','應變中心電話A')">02-29646715 <i class="glyphicon glyphicon-earphone"></i></a>
           <a href="tel:0289535599" target="_blank" ng-click="open('提醒','應變中心電話B')">02-89535599 <i class="glyphicon glyphicon-earphone"></i></a>
           <br />
           - 臺北市醫院就醫之傷者家屬(社會局社工科)<br />
@@ -258,14 +272,20 @@
                 <span ng-if="map[row['縣市別']+row['收治單位']].phone" class="animate-if">
                   <a href="tel:{{map[row['縣市別']+row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['縣市別']+row['收治單位']].phone}}</a>
                 </span>
-                <br />
                 <span ng-if="hospital[row['收治單位']]" class="animate-if">
+                  <br />
                   <span class="label label-info">{{hospital[row['收治單位']]['社福中心']}} 社福中心:</span>
-                  <a href="tel:{{hospital[row['收治單位']]['辦公室電話']}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','社福中心')">{{hospital[row['收治單位']]['辦公室電話']}}</a><br />
+                  <a href="tel:{{hospital[row['收治單位']]['辦公室電話']}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','社福中心')">{{hospital[row['收治單位']]['辦公室電話']}}</a>
                 </span>
                 <span>
+                  <br />
                   <span class="label label-info">陽光基金會:</span>
                   <a href="tel:{{sun[row['縣市別']]}}" style="white-space: nowrap;" ng-click="open('list','陽光基金會電話')">{{sun[row['縣市別']]}}</a>
+                </span>
+                <span ng-if="people['國籍']=='其他國家' || people['國籍']=='大陸地區'" class="animate-if">
+                  <br />
+                  <span class="label label-info">香港灼傷互助會:</span>
+                  <a href="tel:+852-62087525" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">+852-62087525</a>
                 </span>
               </td>
               <td>
@@ -309,7 +329,7 @@
       </div>
     </div>
     <div class="row" ng-show="type=='hotel'" ng-controller="HotelController">
-      <div class="col-lg-12">
+      <div class="col-xs-12 col-lg-12">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -325,8 +345,12 @@
                 <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a></>
               </td>
               <td>
-                <p ng-if="row['網址']"><a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a></p>
-                <p>靠近醫院：{{row['靠近醫院']}}</p>
+                <p ng-if="row['網址']">
+                    <a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a>
+                </p>
+                <p>
+                    靠近醫院：{{row['靠近醫院']}}
+                </p>
                 <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
               </td>
             </tr>
@@ -417,7 +441,7 @@
               <td>
                 <a href="tel:{{row[2]}}">{{row[2]}}</a><br />
                 <a href="https://www.google.com/maps?q={{row[3]}}" target="_blank">{{row[3]}}</a><br />
-                <span class="label label-info">{{row[4]}}</span>
+                <span class="label label-info nearby">{{row[4]}}</span>
               </td>
             </tr>
           </tbody>
