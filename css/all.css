@@ -33,6 +33,9 @@
 .icon-hotel:before {
 	content: "\e603";
 }
+.icon-donate:before {
+	content: "\e604";
+}
 #tab i{
 	margin-right: 15px;
 }
@@ -42,5 +45,125 @@
 	}
 	#tab i{
 		display: none
+	}
+}
+.donate h3{
+	font-family: STHeitiTC-Medium;
+  font-size: 24px;
+  color: #2EBD9B;
+  line-height: 25px;
+  position: relative;
+  overflow: hidden;
+}
+.donate h3 i{
+	margin-right: 12px;
+}
+.donate h3 span{
+	padding-right: 20px;
+	background-color: #fff;
+  position: relative;
+  z-index: 3;
+}
+.donate h3:after{
+	content: '';
+  height: 1px;
+  border-top: 1px solid #2EBD9B;
+  font-size: 0px;
+  line-height: 1;
+  width: 100%;
+  display: block;
+  display: block;
+  position: absolute;
+  top: 50%;
+}
+.btn-donate{
+	background: #EE85C0;
+	border-radius: 40px;
+	font-family: HelveticaNeue;
+	font-size: 14px;
+	color: #275C7C;
+	line-height: 20px;
+	color: #fff
+}
+.btn-donate:hover,.btn-donate:focus{
+	color: #fff
+}
+.trailer-1{
+	margin-bottom: 8px;
+}
+.trailer-4{
+	margin-bottom: 32px;
+}
+.donate-block{
+	margin-bottom: 30px;
+}
+
+.donate-block p{
+	font-family: HelveticaNeue;
+	font-size: 14px;
+	color: #4A4A4A;
+	line-height: 20px;
+	margin-bottom: 8px;
+}
+.donate-block p a{
+	color: #337AB7
+}
+.donate-block-save{
+	margin: 50px 0;
+}
+.donate-block-save .title{
+	/* 台北捐血中心：: */
+	font-family: STHeitiTC-Medium;
+	font-size: 23px;
+	color: #8A6D3B;
+	line-height: 20px;
+}
+.label-full,.label-medium,.label-empty{
+font-size: 14px;
+border-radius: 40px;
+color: #fff;
+padding: 8px 30px;
+margin: 0 10px;
+}
+
+.label-full{
+background: #2EBD9B;
+}
+.label-medium{
+background: #F7BC33;
+}
+.label-empty{
+background: #EF5361;
+}
+@media(max-width: 990px){
+	.donate-block{
+		margin-bottom: 0px;
+	}
+	.donate-block-save{
+		margin: 25px 0;
+	}
+	.label-full,.label-medium,.label-empty{
+		display: inline-block;
+		margin: 0 5px 0 0
+	}
+	.donate-block-save .title{
+		display: block;
+		margin-bottom: 10px;
+	}
+}
+@media(max-width:569px){
+	.label-full,.label-medium,.label-empty{
+		display: inline-block;
+		margin: 0 3px 10px 0;
+		padding: 8px 8px 8px 8px;
+	}
+	.donate-block-save span:last-child{
+		margin-right: 0;
+	}
+}
+@media(max-width:320px){
+	.label-full,.label-medium,.label-empty{
+		border-radius: 0;
+		padding: 8px 2px;
 	}
 }

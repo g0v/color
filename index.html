@@ -147,22 +147,18 @@
     </div>
   </div>
 </nav>
-<div class="row">
-  <div class="col-lg-12">
-    <div class="btn-group btn-group-justified" role="group" id="tab">
-      <div class="btn-group" role="group">
-        <a class="btn btn-default btn-first" ng-class="{'active': type=='people'}" href="#people" ng-click="type='people'"><i class="icon-find"></i>家屬尋人</a>
-      </div>
-      <div class="btn-group" role="group">
-        <a class="btn btn-default" ng-class="{'active': type=='hotel'}" href="#hotel" ng-click="type='hotel'"><i class="icon-hotel"></i>家屬住宿</a>
-      </div>
-      <div class="btn-group" role="group">
-        <a class="btn btn-default" ng-class="{'active': type=='hospital'}" href="#hospital" ng-click="type='hospital'"><i class="icon-hospital"></i>醫院概況</a>
-      </div>
-      <div class="btn-group" role="group">
-        <a class="btn btn-default" ng-class="{'active': type=='blood'}" href="#blood" ng-click="type='blood'"><i class="icon-blood"></i>捐款/捐血</a>
-      </div>
-    </div>
+<div class="btn-group btn-group-justified" role="group" id="tab">
+  <div class="btn-group" role="group">
+    <a class="btn btn-default btn-first" ng-class="{'active': type=='people'}" href="#people" ng-click="type='people'"><i class="icon-find"></i>家屬尋人</a>
+  </div>
+  <div class="btn-group" role="group">
+    <a class="btn btn-default" ng-class="{'active': type=='hotel'}" href="#hotel" ng-click="type='hotel'"><i class="icon-hotel"></i>家屬住宿</a>
+  </div>
+  <div class="btn-group" role="group">
+    <a class="btn btn-default" ng-class="{'active': type=='hospital'}" href="#hospital" ng-click="type='hospital'"><i class="icon-hospital"></i>醫院概況</a>
+  </div>
+  <div class="btn-group" role="group">
+    <a class="btn btn-default" ng-class="{'active': type=='blood'}" href="#blood" ng-click="type='blood'"><i class="icon-blood"></i>捐款/捐血</a>
   </div>
 </div>
 <div id="input-box" ng-hide="type=='hospital'">
@@ -399,27 +395,41 @@
     </div>
   </div>
   <div class="row" ng-show="type=='blood'">
-    <div class="col-lg-12">
-      <div class="alert alert-info" role="alert">
-        - <a href="http://www.sunshine.org.tw/donation/money2009.asp" target="_blank">陽光基金會（郵政劃撥帳號：05583335 ）</a> <br />
-        &nbsp;&nbsp;<a href="http://www.sunshine.org.tw/donation/money2009.asp" class="btn btn-primary" target="_blank">支援線上捐款</a><br />
-        - 新北市政府捐款帳戶：<br />
-        &nbsp;&nbsp;匯款單加註「指定八仙粉塵氣爆救助專案」<br />
-        &nbsp;&nbsp;戶名：新北市社會救濟會報專戶<br />
-        &nbsp;&nbsp;帳號：027038002803（台灣銀行板橋分行）
+    <div class="donate">
+      <div class="donate-block clearfix">
+        <div class="col-lg-5 col-md-5" role="alert">
+          <h3><span><i class="icon-donate"></i>捐款</span></h3>
+          <p>
+            - <a  href="http://www.sunshine.org.tw/donation/money2009.asp" target="_blank">陽光基金會（郵政劃撥帳號：05583335 ）</a>
+          </p>
+          <a href="http://www.sunshine.org.tw/donation/money2009.asp" class="btn btn-donate trailer-1" target="_blank">支援線上捐款</a>
+          <p>
+            - 新北市政府捐款帳戶：<br />
+            &nbsp;&nbsp;匯款單加註「指定八仙粉塵氣爆救助專案」<br />
+            &nbsp;&nbsp;戶名：新北市社會救濟會報專戶<br />
+            &nbsp;&nbsp;帳號：027038002803（台灣銀行板橋分行）
+          </p>
+          
+        </div>
+        <div class="donate-block col-lg-5  col-md-5 col-lg-push-2 col-md-push-2" role="alert">
+        <h3><span><i class="icon-blood"></i>捐血</span></h3>
+        <p>
+          - 捐血車/站 資料可能過舊，出發前建議電話確認<br />
+          - 血有保存期限問題，建議分散捐血時間<br />
+          <a href="http://www.blood.org.tw/Internet/main/blood_before/index.html" target="_blank">更多捐血須知，點此連結</a>
+        </p>
+        </div>
       </div>
-      <div class="alert alert-warning" role="alert">
-        - 捐血車/站 資料可能過舊，出發前建議電話確認<br />
-        - 血有保存期限問題，建議分散捐血時間<br />
-        <a href="http://www.blood.org.tw/Internet/main/blood_before/index.html" target="_blank">更多捐血須知，點此連結</a>
-      </div>
-      <div class="alert alert-warning" role="alert">
-        <div ng-repeat="row in bloodStatus.data">
-          {{row['name']}}:<br />
-          <span class="label" ng-class="{'label-success': row['StorageA']=='full', 'label-warning': row['StorageA']=='medium', 'label-danger': row['StorageA']=='empty'}">A型: {{row['StorageA'] | blood}}</span>&nbsp;
-          <span class="label" ng-class="{'label-success': row['StorageB']=='full', 'label-warning': row['StorageB']=='medium', 'label-danger': row['StorageB']=='empty'}">B型: {{row['StorageB'] | blood}}</span>&nbsp;
-          <span class="label" ng-class="{'label-success': row['StorageO']=='full', 'label-warning': row['StorageO']=='medium', 'label-danger': row['StorageO']=='empty'}">O型: {{row['StorageO'] | blood}}</span>&nbsp;
-          <span class="label" ng-class="{'label-success': row['StorageAB']=='full', 'label-warning': row['StorageAB']=='medium', 'label-danger': row['StorageAB']=='empty'}">AB型: {{row['StorageAB'] | blood}}</span>&nbsp;
+      
+
+      <div class="donate-block  col-lg-12 clearfix" role="alert">
+        <h3 ><span><i class="icon-blood"></i>各地血庫存量資訊</span></h3>
+        <div class="donate-block-save" ng-repeat="row in bloodStatus.data">
+          <span class="title">{{row['name']}}: </span>
+          <span class="label" ng-class="{'label-full': row['StorageA']=='full', 'label-medium': row['StorageA']=='medium', 'label-empty': row['StorageA']=='empty'}">A型: {{row['StorageA'] | blood}}</span>
+          <span class="label" ng-class="{'label-full': row['StorageB']=='full', 'label-medium': row['StorageB']=='medium', 'label-empty': row['StorageB']=='empty'}">B型: {{row['StorageB'] | blood}}</span>
+          <span class="label" ng-class="{'label-full': row['StorageO']=='full', 'label-medium': row['StorageO']=='medium', 'label-empty': row['StorageO']=='empty'}">O型: {{row['StorageO'] | blood}}</span>
+          <span class="label" ng-class="{'label-full': row['StorageAB']=='full', 'label-medium': row['StorageAB']=='medium', 'label-empty': row['StorageAB']=='empty'}">AB型: {{row['StorageAB'] | blood}}</span>
         </div>
         <span class="label label-default">最後更新: {{bloodStatus.time}}</span>
       </div>
