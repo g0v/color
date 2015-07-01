@@ -2,1141 +2,1175 @@
 
 <!DOCTYPE html>
 <html >
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
-    <title>八仙粉塵爆炸傷者開放資料查詢</title>
-    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-    <style>
-      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-        display: none !important;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+  <title>八仙粉塵爆炸傷者開放資料查詢</title>
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <style>
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+    }
 
-      .navbar {
-        background: #656D78;
-        border-radius: 0;
-        margin-bottom: 0;
-        border: none;
-      }
-      .navbar-default .navbar-brand,
-      .navbar-default .navbar-nav>li>a {
-        color: #FFFFFF;
-      }
-      #tab a {
-        padding: 23px 0px 23px 0px;
-        box-shadow: none;
-        background: #E6E9EE;
-        border: none;
-        cursor: pointer;
-        line-height: 21px;
-        font-size: 20px;
-        color: #656D78;
-        border-left: 3px solid #FFF;
-        border-radius: 0;
-      }
-      #tab a.btn-first {
-        border: none;
-      }
-      #tab a.active {
-        background: #2EBD9B;
-        color: #FFFFFF;
-      }
-      #input-box {
-        background: #2EBD9B;
-        padding-top: 49px;
-        padding-bottom: 39px;
-      }
-      #input-box input{
-        padding: 22px 24px 23px 24px;
-      }
-      #input-box .btn{
-        padding-top: 12px;
-        padding-bottom: 13px;
-      }
-      #input-box .form-group {
-        margin-bottom: 0px;
-      }
-      #input-box .label {
-        display: inline;
-        padding: 0;
-        font-size: 75%;
-        font-weight: 700;
-        line-height: 1;
-        color: #fff;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: baseline;
-        border-radius: .25em;
-      }
-    </style>
+    .navbar {
+      background: #656D78;
+      border-radius: 0;
+      margin-bottom: 0;
+      border: none;
+    }
+    .navbar-default .navbar-brand,
+    .navbar-default .navbar-nav>li>a {
+      color: #FFFFFF;
+    }
+    #tab a {
+      padding: 23px 0px 23px 0px;
+      box-shadow: none;
+      background: #E6E9EE;
+      border: none;
+      cursor: pointer;
+      line-height: 21px;
+      font-size: 20px;
+      color: #656D78;
+      border-left: 3px solid #FFF;
+      border-radius: 0;
+    }
+    #tab a.btn-first {
+      border: none;
+    }
+    #tab a.active {
+      background: #2EBD9B;
+      color: #FFFFFF;
+    }
+    #input-box {
+      background: #2EBD9B;
+      padding-top: 49px;
+      padding-bottom: 39px;
+    }
+    #input-box input{
+      padding: 22px 24px 23px 24px;
+    }
+    #input-box .btn{
+      padding-top: 12px;
+      padding-bottom: 13px;
+    }
+    #input-box .form-group {
+      margin-bottom: 0px;
+    }
+    #input-box .label {
+      display: inline;
+      padding: 0;
+      font-size: 75%;
+      font-weight: 700;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: .25em;
+    }
+  </style>
 
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-64601259-1', 'auto');
-      ga('send', 'pageview');
+    ga('create', 'UA-64601259-1', 'auto');
+    ga('send', 'pageview');
 
-    </script>
+  </script>
 
-    <script type="text/javascript">
-       var _mfq = _mfq || [];
-       (function() {
-           var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;
-           mf.src = "//cdn.mouseflow.com/projects/0ff72b6c-7719-4cbc-a8e2-62f0f1ce1d01.js";
-           document.getElementsByTagName("head")[0].appendChild(mf);
-       })();
-    </script>
+  <script type="text/javascript">
+    var _mfq = _mfq || [];
+    (function() {
+      var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;
+      mf.src = "//cdn.mouseflow.com/projects/0ff72b6c-7719-4cbc-a8e2-62f0f1ce1d01.js";
+      document.getElementsByTagName("head")[0].appendChild(mf);
+    })();
+  </script>
 
-    <!-- fork 陳小風 -->
+  <!-- fork 陳小風 -->
 
-  </head>
-  <body ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">
-            <span ng-show="type=='people' || type=='hospital'">八仙粉塵爆炸傷者查詢</span>
-            <span ng-show="type=='hotel'">傷者家屬住宿查詢</span>
-            <span ng-show="type=='blood'">捐血車/站查詢</span>
+</head>
+<body ng-cloak ng-app="app" ng-controller="MainController as MainCtrl">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <span ng-show="type=='people' || type=='hospital'">八仙粉塵爆炸傷者查詢</span>
+        <span ng-show="type=='hotel'">傷者家屬住宿查詢</span>
+        <span ng-show="type=='blood'">捐血車/站查詢</span>
+        <span ng-show="type=='statistics'">統計圖表</span>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="https://github.com/g0v/color/issues" target="_blank">
+            錯誤回報 New Issue
           </a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="https://github.com/g0v/color/issues" target="_blank">
-                錯誤回報 New Issue
-              </a>
-            </li>
-            <li>
-              <a ng-show="type=='people' || type=='hospital'" href="http://www.gov.taipei/ct.asp?xItem=108880666&ctNode=38161&mp=100001" target="_blank">資料來源: 臺北市府資訊局</a>
-              <a ng-show="type=='blood'" href="http://www.blood.org.tw" target="_blank">資料來源: 血液基金會</a>
-            </li>
-            <li>
-              <a href="http://creativecommons.tw/cc0" target="_blank">License: CC0</a>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">其他平台 <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="http://er.mohw.g0v.tw/#/dashboard/file/default.json" target="_blank">全國重度級急救責任醫院急診即時訊息</a></li>
-                <li><a href="https://www.google.com/maps/d/u/0/viewer?mid=zGq2VJ5NdtUs.kDYAcwSlWkN8" target="_blank">台灣捐血站/車地圖</a></li>
-                <li><a href="http://beta.hackfoldr.org/627pray" target="_blank">HackFoldr</a></li>
-              </ul>
-            </li>
+        </li>
+        <li>
+          <a ng-show="type=='people' || type=='hospital' || type=='statistics'" href="http://www.gov.taipei/ct.asp?xItem=108880666&ctNode=38161&mp=100001" target="_blank">資料來源: 臺北市府資訊局</a>
+          <a ng-show="type=='blood'" href="http://www.blood.org.tw" target="_blank">資料來源: 血液基金會</a>
+        </li>
+        <li>
+          <a href="http://creativecommons.tw/cc0" target="_blank">License: CC0</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">其他平台 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://er.mohw.g0v.tw/#/dashboard/file/default.json" target="_blank">全國重度級急救責任醫院急診即時訊息</a></li>
+            <li><a href="https://www.google.com/maps/d/u/0/viewer?mid=zGq2VJ5NdtUs.kDYAcwSlWkN8" target="_blank">台灣捐血站/車地圖</a></li>
+            <li><a href="http://beta.hackfoldr.org/627pray" target="_blank">HackFoldr</a></li>
           </ul>
-        </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="btn-group btn-group-justified" role="group" id="tab">
+      <div class="btn-group" role="group">
+        <a class="btn btn-default btn-first" ng-class="{'active': type=='people'}" href="#people" ng-click="type='people'">家屬尋人</a>
       </div>
-    </nav>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="btn-group btn-group-justified" role="group" id="tab">
-          <div class="btn-group" role="group">
-            <a class="btn btn-default btn-first" ng-class="{'active': type=='people'}" href="#people" ng-click="type='people'">家屬尋人</a>
-          </div>
-          <div class="btn-group" role="group">
-            <a class="btn btn-default" ng-class="{'active': type=='hotel'}" href="#hotel" ng-click="type='hotel'">家屬住宿</a>
-          </div>
-          <div class="btn-group" role="group">
-            <a class="btn btn-default" ng-class="{'active': type=='hospital'}" href="#hospital" ng-click="type='hospital'">醫院概況</a>
-          </div>
-          <div class="btn-group" role="group">
-            <a class="btn btn-default" ng-class="{'active': type=='blood'}" href="#blood" ng-click="type='blood'">捐款/捐血</a>
-          </div>
-        </div>
+      <div class="btn-group" role="group">
+        <a class="btn btn-default" ng-class="{'active': type=='hotel'}" href="#hotel" ng-click="type='hotel'">家屬住宿</a>
+      </div>
+      <div class="btn-group" role="group">
+        <a class="btn btn-default" ng-class="{'active': type=='hospital'}" href="#hospital" ng-click="type='hospital'">醫院概況</a>
+      </div>
+      <div class="btn-group" role="group">
+        <a class="btn btn-default" ng-class="{'active': type=='blood'}" href="#blood" ng-click="type='blood'">捐款/捐血</a>
+      </div>
+      <div class="btn-group" role="group">
+        <a class="btn btn-default" ng-class="{'active': type=='statistics'}" href="#statistics" ng-click="type='statistics'">統計圖表</a>
       </div>
     </div>
-    <div id="input-box" ng-hide="type=='hospital'">
-      <div class="container">
-        <div class="form-group">
-          <div class="input-group" ng-show="type=='people'">
-              <input type="text" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
+  </div>
+</div>
+  <div id="input-box" ng-hide="type=='hospital'">
+    <div class="container">
+      <div class="form-group">
+        <div class="input-group" ng-show="type=='people'">
+          <input type="text" class="form-control" ng-model="query" id="search" placeholder="請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）" ng-change="sent(query)" ng-keypress="enter($event, query)" />
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="query='其他國家'" ng-hide="query">Other Country</button>
                 <button class="btn btn-default" type="button" ng-click="query=''" ng-show="query">Clean</button>
               </span>
-          </div>
-          <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
-          <input type="text" ng-show="type=='hotel'" class="form-control" ng-model="hotelQuery" placeholder="請輸入病患醫院，尋找住宿地點" />
         </div>
-        <span class="label" ng-show="type=='people'">最後更新: {{ data.lastmodify  }}</span>
+        <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
+        <input type="text" ng-show="type=='hotel'" class="form-control" ng-model="hotelQuery" placeholder="請輸入病患醫院，尋找住宿地點" />
       </div>
+      <span class="label" ng-show="type=='people'">最後更新: {{ data.lastmodify  }}</span>
     </div>
-    <br />
-  <div class="container">
-    <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood' || type=='hotel'">
-      <div class="col-lg-12">
-        <h4>
-          <span ng-switch="people['即時動向']">
-            <span ng-switch-when="出院" class="label label-success">
-              即時動向: {{people['即時動向']}}
-            </span>
-            <span ng-switch-when="自動出院(AAD)" class="label label-success">
-              即時動向: {{people['即時動向']}}
-            </span>
-            <span ng-switch-default class="label label-primary">
-              即時動向: {{people['即時動向']}}
-            </span>
+</div>
+<br />
+<div class="container">
+  <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood' || type=='hotel' ||type =='statistics'">
+    <div class="col-lg-12">
+      <h4>
+        <span ng-switch="people['即時動向']">
+          <span ng-switch-when="出院" class="label label-success">
+            即時動向: {{people['即時動向']}}
           </span>
-        </h4>
-        編號: {{ people['編號'] }}<br />
-        個資: {{ people['姓名']}}
-        <span class="label label-default">{{ people['性別']}} {{ people['年齡']}}</span>
-        <span class="label label-default">{{ people['國籍']}}</span><br />
-        <br />
-        收治單位: <a class="btn btn-info btn-xs" href="https://www.google.com/maps?q={{ map[people['收治單位']].address || people['收治單位'] }}" target="_blank" ng-click="open('people','地圖')">{{people['縣市別']}} {{people['收治單位']}}<i class="glyphicon glyphicon-map-marker"></i></a><br />
-        <span ng-if="map[people['收治單位']].address">地址: {{map[people['收治單位']].address}}</span><br />
-        <span ng-if="map[people['收治單位']].phone" class="animate-if">
-          電話：<a href="tel:{{map[people['收治單位']].phone}}" style="white-space: nowrap;" ng-click="open('people','醫院電話')">{{map[people['收治單位']].phone}}</a><br />
-        </span>
-        <br />
-        <span ng-if="hospital[people['收治單位']]" class="animate-if">
-          社福中心: {{hospital[people['收治單位']]['社福中心']}} {{hospital[people['收治單位']]['主任']}}<br />
-          電話: <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;" ng-click="open('people','社福電話')">{{hospital[people['收治單位']]['辦公室電話']}}</a>
-          <span ng-if="sun[people['縣市別']]" class="animate-if">
-            <br />
-            陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">{{sun[people['縣市別']]}}</a>
+          <span ng-switch-when="自動出院(AAD)" class="label label-success">
+            即時動向: {{people['即時動向']}}
+          </span>
+          <span ng-switch-default class="label label-primary">
+            即時動向: {{people['即時動向']}}
           </span>
         </span>
-        <br />
-        <br />
-        <span class="label label-default">醫療檢傷: {{people['醫療檢傷']}}</span><br />
-        <span class="label label-default">救護檢傷: {{people['救護檢傷']}}</span><br />
-        <span class="label label-default">檢傷編號: {{people['檢傷編號']}}</span><br />
-        <span class="label label-default">轉診要求: {{people['轉診要求']}}</span><br />
-        <span class="label label-default">刪除註記: {{people['刪除註記']}}</span><br />
-      </div>
-    </div>
-
-    <div class="row" ng-show="type=='people' || type=='hospital'">
-      <div class="col-lg-12">
-        <div class="alert alert-warning" role="alert">
-          - 應變中心24H服務專線<br />
-          &nbsp;&nbsp;<a href="tel:0229646715" target="_blank" ng-click="open('提醒','應變中心電話A')">02-29646715 <i class="glyphicon glyphicon-earphone"></i></a> 
-          <a href="tel:0289535599" target="_blank" ng-click="open('提醒','應變中心電話B')">02-89535599 <i class="glyphicon glyphicon-earphone"></i></a>
+      </h4>
+      編號: {{ people['編號'] }}<br />
+      個資: {{ people['姓名']}}
+      <span class="label label-default">{{ people['性別']}} {{ people['年齡']}}</span>
+      <span class="label label-default">{{ people['國籍']}}</span><br />
+      <br />
+      收治單位: <a class="btn btn-info btn-xs" href="https://www.google.com/maps?q={{ map[people['收治單位']].address || people['收治單位'] }}" target="_blank" ng-click="open('people','地圖')">{{people['縣市別']}} {{people['收治單位']}}<i class="glyphicon glyphicon-map-marker"></i></a><br />
+      <span ng-if="map[people['收治單位']].address">地址: {{map[people['收治單位']].address}}</span><br />
+      <span ng-if="map[people['收治單位']].phone" class="animate-if">
+        電話：<a href="tel:{{map[people['收治單位']].phone}}" style="white-space: nowrap;" ng-click="open('people','醫院電話')">{{map[people['收治單位']].phone}}</a><br />
+      </span>
+      <br />
+      <span ng-if="hospital[people['收治單位']]" class="animate-if">
+        社福中心: {{hospital[people['收治單位']]['社福中心']}} {{hospital[people['收治單位']]['主任']}}<br />
+        電話: <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;" ng-click="open('people','社福電話')">{{hospital[people['收治單位']]['辦公室電話']}}</a>
+        <span ng-if="sun[people['縣市別']]" class="animate-if">
           <br />
-          - 臺北市醫院就醫之傷者家屬(社會局社工科)<br />
-          &nbsp;&nbsp;<a href="tel:0227206528" target="_blank" ng-click="open('提醒','社會局社工科')">02-27206528 <i class="glyphicon glyphicon-earphone"></i></a>
-          <br />
-          - 陽光基金會<br />
-          &nbsp;&nbsp;北區<a href="tel:0225078006" target="_blank" ng-click="open('提醒','陽光基金會北區')"> 02-25078006 <i class="glyphicon glyphicon-earphone"></i></a>
-          &nbsp;中區<a href="tel:0423582336" target="_blank" ng-click="open('提醒','陽光基金會中區')"> 04-23582336 <i class="glyphicon glyphicon-earphone"></i></a><br />
-          &nbsp;&nbsp;雲嘉<a href="tel:052280300" target="_blank" ng-click="open('提醒','陽光基金會雲嘉')"> 05-2280300 <i class="glyphicon glyphicon-earphone"></i></a>
-          &nbsp;南區<a href="tel:075587166" target="_blank" ng-click="open('提醒','陽光基金會南區')"> 07-5587166 <i class="glyphicon glyphicon-earphone"></i></a><br />
-          &nbsp;&nbsp;東區<a href="tel:038563213" target="_blank" ng-click="open('提醒','陽光基金會東區')"> 03-8563213 <i class="glyphicon glyphicon-earphone"></i></a>
-        </div>
-        <br />
-        <!-- <span class="label label-success">已出院: {{total['已出院']}}</span> -->
-        <span class="label label-warning">未出院: {{total['未出院']}}人</span>
-      </div>
+          陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">{{sun[people['縣市別']]}}</a>
+        </span>
+      </span>
+      <br />
+      <br />
+      <span class="label label-default">醫療檢傷: {{people['醫療檢傷']}}</span><br />
+      <span class="label label-default">救護檢傷: {{people['救護檢傷']}}</span><br />
+      <span class="label label-default">檢傷編號: {{people['檢傷編號']}}</span><br />
+      <span class="label label-default">轉診要求: {{people['轉診要求']}}</span><br />
+      <span class="label label-default">刪除註記: {{people['刪除註記']}}</span><br />
     </div>
-    <div class="row" ng-show="type=='people'">
-      <div class="col-lg-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>收治單位</th>
-              <th>個資</th>
-              <th>檢傷</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="row in data.data | advancefilter: query">
-              <td>
-                <a href="#{{row['編號']}}" ng-click="setType(row['編號'], row)" ng-click="open('list','編號')">{{ row['編號'] }}</a><br />
-                <span class="label label-default">{{row['縣市別']}}</span><br />
-                <a href="https://www.google.com/maps?q={{ map[row['縣市別']+row['收治單位']].address || row['收治單位'] }}" target="_blank" ng-click="open('list','地圖')">{{row['收治單位']}} <i class="glyphicon glyphicon-map-marker"></i></a>
-                <span ng-if="map[row['縣市別']+row['收治單位']].phone" class="animate-if">
-                  <a href="tel:{{map[row['縣市別']+row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['縣市別']+row['收治單位']].phone}}</a><br />
-                </span>
-                <span ng-if="hospital[row['收治單位']]" class="animate-if">
-                  <span class="label label-info">{{hospital[row['收治單位']]['社福中心']}} 社福中心:</span>
-                  <a href="tel:{{hospital[row['收治單位']]['辦公室電話']}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','社福中心')">{{hospital[row['收治單位']]['辦公室電話']}}</a><br />
-                </span>
-                <span>
-                  <span class="label label-info">陽光基金會:</span>
-                  <a href="tel:{{sun[row['縣市別']]}}" style="white-space: nowrap;" ng-click="open('list','陽光基金會電話')">{{sun[row['縣市別']]}}</a>
-                </span>
-              </td>
-              <td>
-                {{ row['姓名']}}
-                <hr />
-                <span class="label label-default">{{ row['性別']}} {{ row['年齡']}}</span><br />
-                <span class="label label-default">{{ row['國籍']}}</span>
-              </td>
-              <td>
-                <span class="label label-default">醫療檢傷: {{row['醫療檢傷']}}</span><br />
-                <span class="label label-default">救護檢傷: {{row['救護檢傷']}}</span><br />
-                <span class="label label-default">檢傷編號: {{row['檢傷編號']}}</span><br />
-                <span class="label label-default">轉診要求: {{row['轉診要求']}}</span><br />
-                <span class="label label-default">刪除註記: {{row['刪除註記']}}</span><br />
-                <h4>
-                  <span class="label label-default">即時動向:</span>
-                </h4>
-                <h4>
-                  <span ng-switch="row['即時動向']">
-                    <span ng-switch-when="出院" class="label label-success">
-                      {{row['即時動向']}}
-                    </span>
-                    <span ng-switch-when="自動出院(AAD)" class="label label-info">
-                      {{row['即時動向']}}
-                    </span>
-                    <span ng-switch-when="加護病房" class="label label-warning">
-                      {{row['即時動向']}}
-                    </span>
-                    <span ng-switch-when="死亡" class="label label-default">
-                      {{row['即時動向']}}
-                    </span>
-                    <span ng-switch-default class="label label-primary">
-                      {{row['即時動向']}}
-                    </span>
+  </div>
+  <div class="row" ng-show="type=='people' || type=='hospital' || type =='statistics'">
+    <div class="col-lg-12">
+      <div class="alert alert-warning" role="alert">
+        - 應變中心24H服務專線<br />
+        &nbsp;&nbsp;<a href="tel:0229646715" target="_blank" ng-click="open('提醒','應變中心電話A')">02-29646715 <i class="glyphicon glyphicon-earphone"></i></a>
+        <a href="tel:0289535599" target="_blank" ng-click="open('提醒','應變中心電話B')">02-89535599 <i class="glyphicon glyphicon-earphone"></i></a>
+        <br />
+        - 臺北市醫院就醫之傷者家屬(社會局社工科)<br />
+        &nbsp;&nbsp;<a href="tel:0227206528" target="_blank" ng-click="open('提醒','社會局社工科')">02-27206528 <i class="glyphicon glyphicon-earphone"></i></a>
+        <br />
+        - 陽光基金會<br />
+        &nbsp;&nbsp;北區<a href="tel:0225078006" target="_blank" ng-click="open('提醒','陽光基金會北區')"> 02-25078006 <i class="glyphicon glyphicon-earphone"></i></a>
+        &nbsp;中區<a href="tel:0423582336" target="_blank" ng-click="open('提醒','陽光基金會中區')"> 04-23582336 <i class="glyphicon glyphicon-earphone"></i></a><br />
+        &nbsp;&nbsp;雲嘉<a href="tel:052280300" target="_blank" ng-click="open('提醒','陽光基金會雲嘉')"> 05-2280300 <i class="glyphicon glyphicon-earphone"></i></a>
+        &nbsp;南區<a href="tel:075587166" target="_blank" ng-click="open('提醒','陽光基金會南區')"> 07-5587166 <i class="glyphicon glyphicon-earphone"></i></a><br />
+        &nbsp;&nbsp;東區<a href="tel:038563213" target="_blank" ng-click="open('提醒','陽光基金會東區')"> 03-8563213 <i class="glyphicon glyphicon-earphone"></i></a>
+      </div>
+      <br />
+      <!-- <span class="label label-success">已出院: {{total['已出院']}}</span> -->
+      <span class="label label-warning">未出院: {{total['未出院']}}人</span>
+    </div>
+  </div>
+  <div class="row" ng-show="type=='people'">
+    <div class="col-lg-12">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>收治單位</th>
+          <th>個資</th>
+          <th>檢傷</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in data.data | advancefilter: query">
+          <td>
+            <a href="#{{row['編號']}}" ng-click="setType(row['編號'], row)" ng-click="open('list','編號')">{{ row['編號'] }}</a><br />
+            <span class="label label-default">{{row['縣市別']}}</span><br />
+            <a href="https://www.google.com/maps?q={{ map[row['縣市別']+row['收治單位']].address || row['收治單位'] }}" target="_blank" ng-click="open('list','地圖')">{{row['收治單位']}} <i class="glyphicon glyphicon-map-marker"></i></a>
+              <span ng-if="map[row['縣市別']+row['收治單位']].phone" class="animate-if">
+                <a href="tel:{{map[row['縣市別']+row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['縣市別']+row['收治單位']].phone}}</a><br />
+              </span>
+              <span ng-if="hospital[row['收治單位']]" class="animate-if">
+                <span class="label label-info">{{hospital[row['收治單位']]['社福中心']}} 社福中心:</span>
+                <a href="tel:{{hospital[row['收治單位']]['辦公室電話']}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','社福中心')">{{hospital[row['收治單位']]['辦公室電話']}}</a><br />
+              </span>
+              <span>
+                <span class="label label-info">陽光基金會:</span>
+                <a href="tel:{{sun[row['縣市別']]}}" style="white-space: nowrap;" ng-click="open('list','陽光基金會電話')">{{sun[row['縣市別']]}}</a>
+              </span>
+          </td>
+          <td>
+            {{ row['姓名']}}
+            <hr />
+            <span class="label label-default">{{ row['性別']}} {{ row['年齡']}}</span><br />
+            <span class="label label-default">{{ row['國籍']}}</span>
+          </td>
+          <td>
+            <span class="label label-default">醫療檢傷: {{row['醫療檢傷']}}</span><br />
+            <span class="label label-default">救護檢傷: {{row['救護檢傷']}}</span><br />
+            <span class="label label-default">檢傷編號: {{row['檢傷編號']}}</span><br />
+            <span class="label label-default">轉診要求: {{row['轉診要求']}}</span><br />
+            <span class="label label-default">刪除註記: {{row['刪除註記']}}</span><br />
+            <h4>
+              <span class="label label-default">即時動向:</span>
+            </h4>
+            <h4>
+                <span ng-switch="row['即時動向']">
+                  <span ng-switch-when="出院" class="label label-success">
+                    {{row['即時動向']}}
                   </span>
-                </h4>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+                  <span ng-switch-when="自動出院(AAD)" class="label label-info">
+                    {{row['即時動向']}}
+                  </span>
+                  <span ng-switch-when="加護病房" class="label label-warning">
+                    {{row['即時動向']}}
+                  </span>
+                  <span ng-switch-when="死亡" class="label label-default">
+                    {{row['即時動向']}}
+                  </span>
+                  <span ng-switch-default class="label label-primary">
+                    {{row['即時動向']}}
+                  </span>
+                </span>
+            </h4>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="row" ng-show="type=='hotel'" ng-controller="HotelController">
-      <div class="col-lg-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>旅館</th>
-              <th>其他資訊</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="row in hotels | filter: hotelQuery">
-              <td>
-                {{row['旅館名稱']}}<br />
-                <a href="tel:{{row['連絡電話']}}" target="_blank">{{row['連絡電話']}}</a><br />
-                <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a></>
-              </td>
-              <td>
-                <p ng-if="row['網址']"><a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a></p>
-                <p>靠近醫院：{{row['靠近醫院']}}</p>
-                <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  </div>
+  <div class="row" ng-show="type=='hotel'" ng-controller="HotelController">
+    <div class="col-lg-12">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>旅館</th>
+          <th>其他資訊</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in hotels | filter: hotelQuery">
+          <td>
+            {{row['旅館名稱']}}<br />
+            <a href="tel:{{row['連絡電話']}}" target="_blank">{{row['連絡電話']}}</a><br />
+            <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a></>
+          </td>
+          <td>
+            <p ng-if="row['網址']"><a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a></p>
+            <p>靠近醫院：{{row['靠近醫院']}}</p>
+            <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="row" ng-show="type=='hospital'">
-      <div class="col-lg-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>醫院</th>
-              <th>統計</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="row in total['醫院']">
-              <td>{{row['name']}}</td>
-              <td>
-                <div>
-                  <span class="label label-danger">重傷: {{row['重傷']}}</span>&nbsp;
-                  <span class="label label-warning">中傷: {{row['中傷']}}</span>&nbsp;
-                  <span class="label label-info">輕傷: {{row['輕傷']}}</span>
-                </div>
-                <br />
-                <div class="progress">
-                  <div class="progress-bar progress-bar-danger" style="width: {{ row['重傷'] / total.max * 100 }}%">
-                  </div>
-                  <div class="progress-bar progress-bar-warning" style="width: {{ row['中傷'] / total.max * 100 }}%">
-                  </div>
-                  <div class="progress-bar progress-bar-info" style="width: {{ row['輕傷'] / total.max * 100 }}%">
-                  </div>
-                </div>
-                <div>
-                  <span class="label label-default">加護病房: {{row['加護病房']}}</span>&nbsp;
-                  <span class="label label-default">一般病房: {{row['一般病房']}}</span>&nbsp;
-                  <span class="label label-default">其它: {{row['其它']}}</span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  </div>
+  <div class="row" ng-show="type=='hospital'">
+    <div class="col-lg-12">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>醫院</th>
+          <th>統計</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in total['醫院']">
+          <td>{{row['name']}}</td>
+          <td>
+            <div>
+              <span class="label label-danger">重傷: {{row['重傷']}}</span>&nbsp;
+              <span class="label label-warning">中傷: {{row['中傷']}}</span>&nbsp;
+              <span class="label label-info">輕傷: {{row['輕傷']}}</span>
+            </div>
+            <br />
+            <div class="progress">
+              <div class="progress-bar progress-bar-danger" style="width: {{ row['重傷'] / total.max * 100 }}%">
+              </div>
+              <div class="progress-bar progress-bar-warning" style="width: {{ row['中傷'] / total.max * 100 }}%">
+              </div>
+              <div class="progress-bar progress-bar-info" style="width: {{ row['輕傷'] / total.max * 100 }}%">
+              </div>
+            </div>
+            <div>
+              <span class="label label-default">加護病房: {{row['加護病房']}}</span>&nbsp;
+              <span class="label label-default">一般病房: {{row['一般病房']}}</span>&nbsp;
+              <span class="label label-default">其它: {{row['其它']}}</span>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="row" ng-show="type=='blood'">
-      <div class="col-lg-12">
-        <div class="alert alert-info" role="alert">
-          - <a href="http://www.sunshine.org.tw/donation/money2009.asp" target="_blank">陽光基金會（郵政劃撥帳號：05583335 ）</a> <br />
-          &nbsp;&nbsp;<a href="http://www.sunshine.org.tw/donation/money2009.asp" class="btn btn-primary" target="_blank">支援線上捐款</a><br />
-          - 新北市政府捐款帳戶：<br />
-          &nbsp;&nbsp;匯款單加註「指定八仙粉塵氣爆救助專案」<br />
-          &nbsp;&nbsp;戶名：新北市社會救濟會報專戶<br />
-          &nbsp;&nbsp;帳號：027038002803（台灣銀行板橋分行）
+  </div>
+  <div class="row" ng-show="type=='blood'">
+    <div class="col-lg-12">
+      <div class="alert alert-info" role="alert">
+        - <a href="http://www.sunshine.org.tw/donation/money2009.asp" target="_blank">陽光基金會（郵政劃撥帳號：05583335 ）</a> <br />
+        &nbsp;&nbsp;<a href="http://www.sunshine.org.tw/donation/money2009.asp" class="btn btn-primary" target="_blank">支援線上捐款</a><br />
+        - 新北市政府捐款帳戶：<br />
+        &nbsp;&nbsp;匯款單加註「指定八仙粉塵氣爆救助專案」<br />
+        &nbsp;&nbsp;戶名：新北市社會救濟會報專戶<br />
+        &nbsp;&nbsp;帳號：027038002803（台灣銀行板橋分行）
+      </div>
+      <div class="alert alert-warning" role="alert">
+        - 捐血車/站 資料可能過舊，出發前建議電話確認<br />
+        - 血有保存期限問題，建議分散捐血時間<br />
+        <a href="http://www.blood.org.tw/Internet/main/blood_before/index.html" target="_blank">更多捐血須知，點此連結</a>
+      </div>
+      <div class="alert alert-warning" role="alert">
+        <div ng-repeat="row in bloodStatus.data">
+          {{row['name']}}:<br />
+          <span class="label" ng-class="{'label-success': row['StorageA']=='full', 'label-warning': row['StorageA']=='medium', 'label-danger': row['StorageA']=='empty'}">A型: {{row['StorageA'] | blood}}</span>&nbsp;
+          <span class="label" ng-class="{'label-success': row['StorageB']=='full', 'label-warning': row['StorageB']=='medium', 'label-danger': row['StorageB']=='empty'}">B型: {{row['StorageB'] | blood}}</span>&nbsp;
+          <span class="label" ng-class="{'label-success': row['StorageO']=='full', 'label-warning': row['StorageO']=='medium', 'label-danger': row['StorageO']=='empty'}">O型: {{row['StorageO'] | blood}}</span>&nbsp;
+          <span class="label" ng-class="{'label-success': row['StorageAB']=='full', 'label-warning': row['StorageAB']=='medium', 'label-danger': row['StorageAB']=='empty'}">AB型: {{row['StorageAB'] | blood}}</span>&nbsp;
         </div>
-        <div class="alert alert-warning" role="alert">
-          - 捐血車/站 資料可能過舊，出發前建議電話確認<br />
-          - 血有保存期限問題，建議分散捐血時間<br />
-          <a href="http://www.blood.org.tw/Internet/main/blood_before/index.html" target="_blank">更多捐血須知，點此連結</a>
-        </div>
-        <div class="alert alert-warning" role="alert">
-          <div ng-repeat="row in bloodStatus.data">
-            {{row['name']}}:<br />
-            <span class="label" ng-class="{'label-success': row['StorageA']=='full', 'label-warning': row['StorageA']=='medium', 'label-danger': row['StorageA']=='empty'}">A型: {{row['StorageA'] | blood}}</span>&nbsp;
-            <span class="label" ng-class="{'label-success': row['StorageB']=='full', 'label-warning': row['StorageB']=='medium', 'label-danger': row['StorageB']=='empty'}">B型: {{row['StorageB'] | blood}}</span>&nbsp;
-            <span class="label" ng-class="{'label-success': row['StorageO']=='full', 'label-warning': row['StorageO']=='medium', 'label-danger': row['StorageO']=='empty'}">O型: {{row['StorageO'] | blood}}</span>&nbsp;
-            <span class="label" ng-class="{'label-success': row['StorageAB']=='full', 'label-warning': row['StorageAB']=='medium', 'label-danger': row['StorageAB']=='empty'}">AB型: {{row['StorageAB'] | blood}}</span>&nbsp;
-          </div>
-          <span class="label label-default">最後更新: {{bloodStatus.time}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="row" ng-show="type=='blood'">
-      <div class="col-lg-12">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>捐血車/站</th>
-              <th>聯絡方式</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="row in bloods | filter: blood ">
-              <td>
-                {{row[0]}}<br />
-                {{row[1]}}
-              </td>
-              <td>
-                <a href="tel:{{row[2]}}">{{row[2]}}</a><br />
-                <a href="https://www.google.com/maps?q={{row[3]}}" target="_blank">{{row[3]}}</a><br />
-                <span class="label label-info">{{row[4]}}</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <span class="label label-default">最後更新: {{bloodStatus.time}}</span>
       </div>
     </div>
   </div>
+  <div class="row" ng-show="type=='blood'">
+    <div class="col-lg-12">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>捐血車/站</th>
+          <th>聯絡方式</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in bloods | filter: blood ">
+          <td>
+            {{row[0]}}<br />
+            {{row[1]}}
+          </td>
+          <td>
+            <a href="tel:{{row[2]}}">{{row[2]}}</a><br />
+            <a href="https://www.google.com/maps?q={{row[3]}}" target="_blank">{{row[3]}}</a><br />
+            <span class="label label-info">{{row[4]}}</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
-  <script src="//cdn.rawgit.com/lorenzofox3/Smart-Table/master/dist/smart-table.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.js"></script>
+  <div class="row" ng-show="type=='statistics'" ng-controller="StatisticsController">
+    <div class="col-lg-12">
+      <h1>傷者康復狀況統計</h1>
+      <canvas id="pie" class="chart chart-pie" data="statisticsdata" labels="statisticslabels" options="statisticsoptions"></canvas>
+    </div>
+  </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+<script src="//cdn.rawgit.com/lorenzofox3/Smart-Table/master/dist/smart-table.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="angular-chart.min.js"></script>
 <script>
-angular
-.module('app', [])
-.filter('advancefilter', [
-  '$filter',
-  function($filter) {
-    return function(data, text) {
-      var textArr;
-      if (/^\w+$/.test(text)) {
-        textArr = [text];
-      } else if ((text || "").indexOf(" ") > -1) {
-        textArr = (text || "").split(' ');
-      } else {
-        textArr = (text || "").split('');
-        if (text && text.length > 1) {
-          textArr.splice(1,1);
-        }
-      }
+  angular
+      .module('app', ['chart.js'])
+      .filter('advancefilter', [
+        '$filter',
+        function($filter) {
+          return function(data, text) {
+            var textArr;
+            if (/^\w+$/.test(text)) {
+              textArr = [text];
+            } else if ((text || "").indexOf(" ") > -1) {
+              textArr = (text || "").split(' ');
+            } else {
+              textArr = (text || "").split('');
+              if (text && text.length > 1) {
+                textArr.splice(1,1);
+              }
+            }
 
-      angular.forEach(textArr, function(test){
-          if (test) {
-            data = data.filter(function(item) {
-              return item.keyword.search(test) > -1;
+            angular.forEach(textArr, function(test){
+              if (test) {
+                data = data.filter(function(item) {
+                  return item.keyword.search(test) > -1;
+                });
+              }
             });
-          }
-      });
-      return data;
-    };
-  }
-])
-.filter('blood', [
-  '$filter',
-  function($filter) {
-    return function(data, text) {
-      if (data == 'full') {
-        return '正常';
-      } else if (data == 'medium') {
-        return '偏低';
-      } else if (data == 'empty') {
-        return '急缺';
-      } else {
-        return '異常';
-      }
-    };
-  }
-])
-.controller('MainController',
-  function ($http, $scope) {
-
-    $scope.people = {};
-
-    $scope.sent = function(query) {
-      ga('send', 'event', 'input', 'search', query);
-    };
-
-    $scope.enter = function(e, query) {
-      if (e.which == 13) {
-        ga('send', 'event', 'input', 'enter', query);
-      }
-    };
-
-    $scope.open = function(group, name) {
-      ga('send', 'event', 'open', group, name);
-    };
-
-    $scope.setType = function(id, people) {
-      $scope.type = id;
-      $scope.people = people;
-    };
-
-    $scope.data = {
-      data: []
-    };
-
-    $scope.type = 'people';
-
-    $scope.total = {
-      '已出院': 0,
-      '未出院': 0,
-      '重傷': 0,
-      '中傷': 0,
-      '輕傷': 0,
-      '加護病房': 0,
-      '一般病房': 0,
-      '醫院': {},
-      'max': 0
-    };
-
-    if (location.hash) {
-      $scope.type = location.hash.slice(1);
-    }
-
-    $scope.bloodStatus = {
-      time: ' ',
-      data: []
-    };
-
-    $http.get('//g0v.github.io/blood/blood.json').success(function (data) {
-      var _d = new Date(data.time);
-      $scope.bloodStatus.time = moment(_d).fromNow();
-      for(var key in data) {
-        if (key.search('捐血中心') > -1) {
-          $scope.bloodStatus.data.push(data[key]);
+            return data;
+          };
         }
-      }
-    });
+      ])
+      .filter('blood', [
+        '$filter',
+        function($filter) {
+          return function(data, text) {
+            if (data == 'full') {
+              return '正常';
+            } else if (data == 'medium') {
+              return '偏低';
+            } else if (data == 'empty') {
+              return '急缺';
+            } else {
+              return '異常';
+            }
+          };
+        }
+      ])
+      .controller('MainController',
+      function ($http, $scope) {
 
-    $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
-      $scope.data = data;
+        $scope.people = {};
 
-      $scope.data.data = $scope.data.data.filter(function(item) {
-        return !!item['編號'];
-      });
+        $scope.sent = function(query) {
+          ga('send', 'event', 'input', 'search', query);
+        };
 
-      $scope.data.data.forEach(function(item) {
-        item.keyword = [
-          item['編號'],
-          item['縣市別'],
-          item['收治單位'],
-          item['姓名'],
-          item['性別'],
-          item['年齡'],
-          item['國籍'],
-          item['醫療檢傷'],
-          item['救護檢傷'],
-          item['檢傷編號'],
-          item['轉診要求'],
-          item['刪除註記'],
-          item['即時動向']
-        ].join(';');
+        $scope.enter = function(e, query) {
+          if (e.which == 13) {
+            ga('send', 'event', 'input', 'enter', query);
+          }
+        };
 
-        if ($scope.type == item['編號']) {
-          $scope.people = item;
+        $scope.open = function(group, name) {
+          ga('send', 'event', 'open', group, name);
+        };
+
+        $scope.setType = function(id, people) {
+          $scope.type = id;
+          $scope.people = people;
+        };
+
+        $scope.data = {
+          data: []
+        };
+
+        $scope.type = 'people';
+
+        $scope.total = {
+          '已出院': 0,
+          '未出院': 0,
+          '重傷': 0,
+          '中傷': 0,
+          '輕傷': 0,
+          '加護病房': 0,
+          '一般病房': 0,
+          '醫院': {},
+          'max': 0
+        };
+
+        if (location.hash) {
+          $scope.type = location.hash.slice(1);
         }
 
-        if (/(出院|死亡)/gi.test(item['即時動向'])) {
-          $scope.total['已出院'] += 1;
-        } else {
-          $scope.total['未出院'] += 1;
+        $scope.bloodStatus = {
+          time: ' ',
+          data: []
+        };
 
-          if (!$scope.total['醫院'][item['收治單位']]) {
-            $scope.total['醫院'][item['收治單位']] = {
-              'name': item['收治單位'],
-              '重傷': 0,
-              '中傷': 0,
-              '輕傷': 0,
-              '加護病房': 0,
-              '一般病房': 0,
-              '其它': 0
-            };
+        $http.get('//g0v.github.io/blood/blood.json').success(function (data) {
+          var _d = new Date(data.time);
+          $scope.bloodStatus.time = moment(_d).fromNow();
+          for(var key in data) {
+            if (key.search('捐血中心') > -1) {
+              $scope.bloodStatus.data.push(data[key]);
+            }
           }
+        });
 
-          var hosp = $scope.total['醫院'][item['收治單位']];
+        $http.get('//tonyq.org/kptaipei/api-20150628.php').success(function (data) {
+          $scope.data = data;
 
-          if (item['救護檢傷'].trim() == '重傷') {
-            $scope.total['重傷'] += 1;
-            hosp['重傷'] += 1;
-          } else if (item['救護檢傷'].trim() == '中傷') {
-            $scope.total['中傷'] += 1;
-            hosp['中傷'] += 1;
-          } else if (item['救護檢傷'].trim() == '輕傷') {
-            $scope.total['輕傷'] += 1;
-            hosp['輕傷'] += 1;
+          $scope.data.data = $scope.data.data.filter(function(item) {
+            return !!item['編號'];
+          });
+
+          $scope.statisticslabels = ['出院', '加護病房', '一般病房', '死亡', '其他'];
+          $scope.statisticsdata = [0,0,0,0,0];
+
+
+          $scope.data.data.forEach(function(item) {
+            item.keyword = [
+              item['編號'],
+              item['縣市別'],
+              item['收治單位'],
+              item['姓名'],
+              item['性別'],
+              item['年齡'],
+              item['國籍'],
+              item['醫療檢傷'],
+              item['救護檢傷'],
+              item['檢傷編號'],
+              item['轉診要求'],
+              item['刪除註記'],
+              item['即時動向']
+            ].join(';');
+
+            if ($scope.type == item['編號']) {
+              $scope.people = item;
+            }
+
+            if (/(出院)/gi.test(item['即時動向'])) {
+              $scope.total['已出院'] += 1;
+              $scope.statisticsdata[0] += 1;
+            } else if (/(死亡)/gi.test(item['即時動向'])) {
+              $scope.total['已出院'] += 1;
+              $scope.statisticsdata[3] += 1;
+            } else {
+              $scope.total['未出院'] += 1;
+              if (/(加護病房)/gi.test(item['即時動向'])) {
+                $scope.statisticsdata[1] += 1;
+              } else if (/(一般病房)/gi.test(item['即時動向'])) {
+                $scope.statisticsdata[2] += 1;
+              } else {
+                $scope.statisticsdata[4] += 1;
+              }
+
+              if (!$scope.total['醫院'][item['收治單位']]) {
+                $scope.total['醫院'][item['收治單位']] = {
+                  'name': item['收治單位'],
+                  '重傷': 0,
+                  '中傷': 0,
+                  '輕傷': 0,
+                  '加護病房': 0,
+                  '一般病房': 0,
+                  '其它': 0
+                };
+              }
+
+              var hosp = $scope.total['醫院'][item['收治單位']];
+
+              if (item['救護檢傷'].trim() == '重傷') {
+                $scope.total['重傷'] += 1;
+                hosp['重傷'] += 1;
+              } else if (item['救護檢傷'].trim() == '中傷') {
+                $scope.total['中傷'] += 1;
+                hosp['中傷'] += 1;
+              } else if (item['救護檢傷'].trim() == '輕傷') {
+                $scope.total['輕傷'] += 1;
+                hosp['輕傷'] += 1;
+              }
+
+              if (item['即時動向'].trim() == '加護病房') {
+                $scope.total['加護病房'] += 1;
+                hosp['加護病房'] += 1;
+              } else if (item['即時動向'].trim() == '一般病房') {
+                $scope.total['一般病房'] += 1;
+                hosp['一般病房'] += 1;
+              } else if (item['即時動向'].trim() == '其它') {
+                $scope.total['其它'] += 1;
+                hosp['其它'] += 1;
+              }
+
+              var tmp = hosp['重傷'] + hosp['中傷'] + hosp['輕傷'];
+              if ($scope.total.max < tmp) {
+                $scope.total.max = tmp;
+              }
+            }
+          });
+
+          var temp = [];
+          var sortKey = ['重傷', '中傷', '輕傷'];
+
+          for (var key in $scope.total['醫院']) {
+            temp.push($scope.total['醫院'][key]);
           }
+          temp = temp.sort(function(a, b) {
+            for (var i = 0; i < sortKey.length; i++) {
+              if (a[sortKey[i]] > b[sortKey[i]]) {
+                return -1;
+              } else if (a[sortKey[i]] < b[sortKey[i]]) {
+                return 1;
+              }
+            }
 
-          if (item['即時動向'].trim() == '加護病房') {
-            $scope.total['加護病房'] += 1;
-            hosp['加護病房'] += 1;
-          } else if (item['即時動向'].trim() == '一般病房') {
-            $scope.total['一般病房'] += 1;
-            hosp['一般病房'] += 1;
-          } else if (item['即時動向'].trim() == '其它') {
-            $scope.total['其它'] += 1;
-            hosp['其它'] += 1;
-          }
+            return 0;
+          });
 
-          var tmp = hosp['重傷'] + hosp['中傷'] + hosp['輕傷'];
-          if ($scope.total.max < tmp) {
-            $scope.total.max = tmp;
+          $scope.total['醫院'] = temp;
+        });
+
+        $scope.map = {
+          '台北市聯醫仁愛': {
+            'phone': '02-27093600',
+            'address': '台北市大安區仁愛路四段10號'
+          },
+          '台北市聯醫中興': {
+            'phone': '02-25523234',
+            'address': '台北市鄭州路145號'
+          },
+          '台北市聯醫忠孝': {
+            'phone': '02-27861288',
+            'address': '台北市南港區同德路87號'
+          },
+          '台北市聯醫陽明': {
+            'phone': '02-28353456',
+            'address': '台北市雨聲街105號'
+          },
+          '台北市臺大醫院': {
+            'phone': '02-23123456',
+            'address': '台北市中正區中山南路7號'
+          },
+          '台北市松山三總': {
+            'phone': '02-27642151',
+            'address': '台北市松山區健康路131號'
+          },
+          '台北市內湖三總': {
+            'phone': '02-87923311',
+            'address': '台北市內湖區成功路二段325號'
+          },
+          '台北市臺北榮總': {
+            'phone': '02-28712121',
+            'address': '台北市北投區石牌路二段201號'
+          },
+          '台北市臺北國泰': {
+            'phone': '02-27082121',
+            'address': '台北市仁愛路四段280號'
+          },
+          '台北市臺北馬偕': {
+            'phone': '02-25433535',
+            'address': '台北市中山區中山北路二段92號'
+          },
+          '台北市新光醫院': {
+            'phone': '02-28332211',
+            'address': '台北市士林區文昌路95號'
+          },
+          '台北市振興醫院': {
+            'phone': '02-28264400',
+            'address': '台北市北投區振興街45號'
+          },
+          '新北市淡水馬偕': {
+            'phone': '02-25433535',
+            'address': '新北市淡水區民生路45號'
+          },
+          '桃園市聖保祿醫': {
+            'phone': '03-3773300',
+            'address': '桃園市桃園區建新街123號'
+          },
+          '台北市中國附醫': {
+            'phone': '02-27919696',
+            'address': '台北市內湖區內湖路二段360號'
+          },
+          '台北市中國': {
+            'phone': '02-27919696',
+            'address': '台北市內湖區內湖路二段360號'
+          },
+          '台北市北醫附醫': {
+            'phone': '02-27372181',
+            'address': '台北市信義區吳興街252號'
+          },
+          '台北市萬芳醫院': {
+            'phone': '02-29307930',
+            'address': '台北市文山區興隆路三段111號'
+          },
+          '台北市中山醫院': {
+            'phone': '02-27081166',
+            'address': '台北市大安區仁愛路四段112巷11號'
+          },
+          '雄市燕義大醫院': {
+            'phone': '07-6150011',
+            'address': '雄市燕巢區義大路1號'
+          },
+          '基隆市基隆長庚': {
+            'phone': '02-24313131',
+            'address': '基隆市安樂區麥金路222號'
+          },
+          '新竹市新竹馬偕': {
+            'phone': '03-6119595',
+            'address': '新竹市東區光復路二段690號'
+          },
+          '新北巿衛部台北': {
+            'phone': '02-22765566',
+            'address': '新北巿新莊區思源路127號'
+          },
+          '新北市板橋市醫': {
+            'phone': '02-22575151',
+            'address': '新北市板橋區英士路198號'
+          },
+          '新北市三重市醫': {
+            'phone': '02-29829111',
+            'address': '新北市三重區新北大道一段3號'
+          },
+          '新北市亞東醫院': {
+            'phone': '02-89667000',
+            'address': '新北市板橋區南雅南路二段21號'
+          },
+          '新北市慈濟台北': {
+            'phone': '02-66289779',
+            'address': '新北市新店區建國路289號'
+          },
+          '新北市恩主': {
+            'phone': '02-26723456',
+            'address': '新北市三峽區復興路399號'
+          },
+          '新北市國泰汐止': {
+            'phone': '02-26482121',
+            'address': '新北市汐止區建成路59巷2號'
+          },
+          '新北市耕莘醫院': {
+            'phone': '02-22193391',
+            'address': '新北市新店區中正路362號'
+          },
+          '新北市雙和醫院': {
+            'phone': '02-22490088',
+            'address': '新北市中和區中正路291號'
+          },
+          '新北市板橋中興': {
+            'phone': '02-29590707',
+            'address': '新北市板橋區忠孝路15號'
+          },
+          '新北市新泰': {
+            'phone': '02-29962121',
+            'address': '新北市新莊區新泰路157號'
+          },
+          '桃園市桃園醫院': {
+            'phone': '03-3699721',
+            'address': '桃園市園區中山路1492號'
+          },
+          '桃園縣桃園總醫': {
+            'phone': '03-4799595',
+            'address': '桃園縣龍潭鄉中興路168號'
+          },
+          '桃園市林口長庚': {
+            'phone': '03-3281200',
+            'address': '桃園市龜山區復興街5號'
+          },
+          '桃園市敏盛': {
+            'phone': '03-3179599',
+            'address': '桃園市桃園區經國路168號'
+          },
+          '桃園市壢新': {
+            'phone': '03-4941234',
+            'address': '桃園市平鎮區廣泰路77號'
+          },
+          '台北市台北長庚': {
+            'phone': '02-27135211',
+            'address': '台北市敦化北路199號'
+          },
+          '桃園市聖保祿醫院': {
+            'phone': '03-3613141',
+            'address': '桃園市桃園區建新街123號'
+          },
+          '台中市臺中醫院': {
+            'phone': '04-22294411',
+            'address': '台中市西區三民路一段199號'
+          },
+          '台中市台中榮總': {
+            'phone': '04-23592525',
+            'address': '台中市西屯區台灣大道四段1650號'
+          },
+          '台中市童綜合': {
+            'phone': '04-26581919',
+            'address': '台中市梧棲區臺灣大道八段699號'
+          },
+          '台南市成大': {
+            'phone': '06-2353535',
+            'address': '台南市北區勝利路138號'
+          },
+          '台南市永康奇美': {
+            'phone': '06-2812811',
+            'address': '台南市永康區中華路901號'
+          },
+          '高雄市國軍左營': {
+            'phone': '07-5817121',
+            'address': '高雄市左營區軍校路553號'
+          },
+          '高雄市高雄長庚': {
+            'phone': '07-7317123高',
+            'address': '雄市鳥松區大埤路123號'
+          },
+          '新竹市台大新竹': {
+            'phone': '03-5326151',
+            'address': '新竹市北區經國路一段442巷25號'
+          },
+          '嘉義市嘉基': {
+            'phone': '05-2765041',
+            'address': '嘉義市東區忠孝路539號'
+          },
+          '新北市恩主公': {
+            'phone': '02-26723456',
+            'address': '新北市三峽區復興路399號'
+          },
+          '新北市耕莘永和': {
+            'phone': '02-29286060',
+            'address': '新北市永和區中興街80號'
+          },
+          '桃園市桃園總醫院': {
+            'phone': '03-4799595',
+            'address': '桃園市龍潭區中興路168號'
+          },
+          '彰化縣彰基': {
+            'phone': '04-7238595',
+            'address': '彰化縣彰化市南校街135號'
+          },
+          '彰化縣秀傳': {
+            'phone': '04-7256166',
+            'address': '彰化縣彰化市中山路一段542號'
+          },
+          '嘉義縣嘉義長庚': {
+            'phone': '05-3621000',
+            'address': '嘉義縣朴子市嘉朴路西段6號'
+          },
+          '台中市中國': {
+            'phone': '04-22053366',
+            'address': '台中市北區學士路91號'
           }
-        }
+        };
+
+        $scope.getHospital = function(name) {
+          var hospital = $scope.hospital[name];
+          alert(
+              '社福中心: ' + hospital['社福中心'] + '\n' +
+              '辦公室電話: ' + hospital['辦公室電話'] + '\n' +
+              '主任: ' + hospital['主任']
+          );
+        };
+
+        $scope.hospital = {
+          '臺大醫院': {
+            "社福中心": "中正",
+            "辦公室電話": "02-23962340",
+            "主任": "林巧翊主任"
+          },
+          '聯醫中興': {
+            "社福中心": "大同",
+            "辦公室電話": "02-25974280",
+            "主任": "李恩琪"
+          },
+          '臺北馬偕': {
+            "社福中心": "中山",
+            "辦公室電話": "02-25156223",
+            "主任": "蔡淑婉主任"
+          },
+          '松山三總': {
+            "社福中心": "松山",
+            "辦公室電話": "02-27565018",
+            "主任": "黃婉貞"
+          },
+          '聯醫仁愛': {
+            "社福中心": "大安",
+            "辦公室電話": "02-27000960",
+            "主任": "張必宜"
+          },
+          '臺北國泰': {
+            "社福中心": "大安",
+            "辦公室電話": "02-27000960",
+            "主任": "張必宜"
+          },
+          '北醫附醫': {
+            "社福中心": "信義",
+            "辦公室電話": "02-27616515",
+            "主任": "蔡雅芬"
+          },
+          '新光醫院': {
+            "社福中心": "士林",
+            "辦公室電話": "02-28350247",
+            "主任": "許嘉倪"
+          },
+          '聯醫陽明': {
+            "社福中心": "士林",
+            "辦公室電話": "02-28350247",
+            "主任": "許嘉倪"
+          },
+          '臺北榮總': {
+            "社福中心": "北投",
+            "辦公室電話": "02-28942640",
+            "主任": "謝麗華"
+          },
+          '振興醫院': {
+            "社福中心": "北投",
+            "辦公室電話": "02-28942640",
+            "主任": "謝麗華"
+          },
+          '內湖三總': {
+            "社福中心": "內湖",
+            "辦公室電話": "02-27928701",
+            "主任": "翁淑卿"
+          },
+          '聯醫忠孝': {
+            "社福中心": "南港",
+            "辦公室電話": "02-27831407",
+            "主任": "蔡妙娟"
+          },
+          '萬芳醫院': {
+            "社福中心": "文山",
+            "辦公室電話": "02-29323587",
+            "主任": "魏英珠"
+          }
+        };
+
+        $scope.bloods = [
+          [
+            '台北捐血中心',
+            '每日08:00-17:00',
+            '02-28971600',
+            '台北市北投區立德路123號',
+            '捷運忠義站、和信醫院旁'
+          ],
+          [
+            '基隆捐血站',
+            '每日08:00-18:00(週一延長至19:00)',
+            '02-24278500',
+            '基隆市信一路14號1樓'
+          ],
+          [
+            '板橋捐血站',
+            '每日08:00-18:00(週一延長至19:00)',
+            '02-29524117',
+            '新北市板橋市中山路一段50巷36號2樓之4',
+            '府中站2號出口往中路方向步行約10分鐘'
+          ],
+          [
+            '關渡捐血室',
+            '每日08:00-17:00',
+            '02-28971600#6141',
+            '台北市立德路123號',
+            '捷運忠義站和信醫院旁'
+          ],
+          [
+            '南海捐血室',
+            '每日08:00-17:30',
+            '02-23511601',
+            '台北市南海路1號3樓',
+            '捷運中正紀念堂站1號出口南門市場對面'
+          ],
+          [
+            '市府捐血室',
+            '每日09:00-17:00(週日不作業)',
+            '02-27208889#3383',
+            '台北市政府西大門內左側',
+            '捷運市政府站2號出口'
+          ],
+          [
+            '長春捐血室',
+            '每日09:00-18:00(週日不作業)',
+            '02-27314801',
+            '台北市復興北路69號5樓',
+            '捷運南京東路站'
+          ],
+          [
+            '汐止捐血室',
+            '每日09:00-17:00(週二、六不作業)',
+            '02-26428013',
+            '新北市汐止市新台五路一段234號6樓之1'
+          ],
+          [
+            '新店捐血室',
+            '每日09:00-17:00(週一延長至19:00,週日不作業)',
+            '02-29128499',
+            '新北市新店區民族路167號',
+            '捷運七張站下車，轉乘耕莘醫院接駁車至捐血室或捷運大坪林站1號出口耕莘醫院停車場斜對面'
+          ],
+          [
+            '三重捐血室',
+            '每日09:00-17:00(週一不作業)',
+            '02-29862780',
+            '新北市三重市重新路三段81號3樓'
+          ],
+          [
+            '捷運捐血室',
+            '每日10:00-18:00(週一不作業)',
+            '02-23706880',
+            '捷運台北車站B1七號出口誠品書店旁'
+          ],
+          [
+            '台北車站捐血點',
+            '每日09:30-17:30',
+            '02-23143221',
+            '台北火車站大廳西北角'
+          ],
+          [
+            '台大號捐血車',
+            '每日09:00-17:00',
+            '02-23644952',
+            '台北市新生南路台灣大學側門口',
+            '捷運公館站3號出口'
+          ],
+          [
+            '公園號捐血車',
+            '每日09:00-18:00',
+            '02-23811268',
+            '二二八和平公園襄陽路假山旁',
+            '捷運臺大醫院站4號出口'
+          ],
+          [
+            '忠孝號捐血車',
+            '每日11:00-19:00(週一不作業)',
+            '02-27512351',
+            '台北市大安路一段瑠公公園旁',
+            '捷運忠孝復興站4號出口往東區地下街14號出口瑠公公園旁'
+          ],
+          [
+            '峨嵋號捐血車',
+            '每日13:00-21:00',
+            '02-23751189',
+            '台北市峨嵋街立體停車場旁',
+            '捷運西門站6號出口'
+          ],
+          [
+            '新莊號捐血車',
+            '每日10:00-18:00(週五不作業)',
+            '02-89941488',
+            '新北市新莊市中華路一段+復興路一段交叉口',
+            '新莊運動公園旁、新莊站1號出口'
+          ],
+          [
+            '捷運捐血室',
+            '每日10:00-18:00(週三休息)',
+            '02-23706880',
+            '台北車站',
+            '台北車站B1M7出口,誠品書店旁步行5分鐘'
+          ],
+          [
+            '新光站前號捐血庫',
+            '每日11:00-19:00',
+            '0961-236683',
+            '台北市忠孝西路一段66號新光摩天大樓廣場前'
+          ],
+          [
+            '新店捐血室',
+            '每日09:00-17:00',
+            '02-22188867',
+            '新北市民權路95號6樓之2'
+          ],
+          [
+            '中和號捐血庫',
+            '每日09:00-17:00(週六、日休息)',
+            '02-29299437',
+            '新北市中安街圖書館旁823公園內',
+            '永安市場站步行約5分鐘'
+          ],
+          [
+            '土城號捐血車',
+            '每日09:00-17:00(週六、日休息)',
+            '02-82625140',
+            '新北市裕民路171巷裕民廣場內',
+            '海山站3號出口往裕民路方向步行約10分鐘'
+          ]
+        ];
+
+        $scope.sun = {
+          '新北市': '02-25078006',
+          '台北市': '02-25078006',
+          '臺北市': '02-25078006',
+          '桃園市': '02-25078006',
+          '台中市': '04-23582336',
+          '臺中市': '04-23582336',
+          '台南市': '07-5587166',
+          '臺南市': '07-5587166',
+          '高雄市': '07-5587166',
+          '基隆市': '02-25078006',
+          '新竹市': '02-25078006',
+          '嘉義市': '05-2280300',
+          '新竹縣': '02-25078006',
+          '苗栗縣': '04-23582336',
+          '彰化縣': '04-23582336',
+          '南投縣': '04-23582336',
+          '雲林縣': '05-2280300',
+          '嘉義縣': '05-2280300',
+          '屏東縣': '07-5587166',
+          '宜蘭縣': '03-8563213',
+          '花蓮縣': '03-8563213',
+          '台東縣': '03-8563213',
+          '臺東縣': '03-8563213'
+        };
+
+        $('#search').focus();
+      })
+      .controller('HotelController',
+      function ($http, $scope) {
+        $scope.hotels = [];
+        $scope.lastmodify = [];
+
+        $http.get('//harry2690.github.io/psof/hotels.json')
+            .success(function (result) {
+              $scope.lastmodify = result.lastmodify;
+              $scope.hotels = result.data;
+            });
+
+        $scope.showInfo = function(info) {
+          alert('說明：' + info);
+        };
+      })
+      .controller('StatisticsController',
+      function ($http, $scope) {
+        $scope.statisticsoptions =  {
+          responsive: true,
+          animateRotate : false
+        };
       });
 
-      var temp = [];
-      var sortKey = ['重傷', '中傷', '輕傷'];
-
-      for (var key in $scope.total['醫院']) {
-        temp.push($scope.total['醫院'][key]);
-      }
-      temp = temp.sort(function(a, b) {
-        for (var i = 0; i < sortKey.length; i++) {
-          if (a[sortKey[i]] > b[sortKey[i]]) {
-            return -1;
-          } else if (a[sortKey[i]] < b[sortKey[i]]) {
-            return 1;
-          }
-        }
-
-        return 0;
-      });
-
-      $scope.total['醫院'] = temp;
-    });
-
-    $scope.map = {
-      '台北市聯醫仁愛': {
-        'phone': '02-27093600',
-        'address': '台北市大安區仁愛路四段10號'
-      },
-      '台北市聯醫中興': {
-        'phone': '02-25523234',
-        'address': '台北市鄭州路145號'
-      },
-      '台北市聯醫忠孝': {
-        'phone': '02-27861288',
-        'address': '台北市南港區同德路87號'
-      },
-      '台北市聯醫陽明': {
-        'phone': '02-28353456',
-        'address': '台北市雨聲街105號'
-      },
-      '台北市臺大醫院': {
-        'phone': '02-23123456',
-        'address': '台北市中正區中山南路7號'
-      },
-      '台北市松山三總': {
-        'phone': '02-27642151',
-        'address': '台北市松山區健康路131號'
-      },
-      '台北市內湖三總': {
-        'phone': '02-87923311',
-        'address': '台北市內湖區成功路二段325號'
-      },
-      '台北市臺北榮總': {
-        'phone': '02-28712121',
-        'address': '台北市北投區石牌路二段201號'
-      },
-      '台北市臺北國泰': {
-        'phone': '02-27082121',
-        'address': '台北市仁愛路四段280號'
-      },
-      '台北市臺北馬偕': {
-        'phone': '02-25433535',
-        'address': '台北市中山區中山北路二段92號'
-      },
-      '台北市新光醫院': {
-        'phone': '02-28332211',
-        'address': '台北市士林區文昌路95號'
-      },
-      '台北市振興醫院': {
-        'phone': '02-28264400',
-        'address': '台北市北投區振興街45號'
-      },
-      '新北市淡水馬偕': {
-        'phone': '02-25433535',
-        'address': '新北市淡水區民生路45號'
-      },
-      '桃園市聖保祿醫': {
-        'phone': '03-3773300',
-        'address': '桃園市桃園區建新街123號'
-      },
-      '台北市中國附醫': {
-        'phone': '02-27919696',
-        'address': '台北市內湖區內湖路二段360號'
-      },
-      '台北市中國': {
-        'phone': '02-27919696',
-        'address': '台北市內湖區內湖路二段360號'
-      },
-      '台北市北醫附醫': {
-        'phone': '02-27372181',
-        'address': '台北市信義區吳興街252號'
-      },
-      '台北市萬芳醫院': {
-        'phone': '02-29307930',
-        'address': '台北市文山區興隆路三段111號'
-      },
-      '台北市中山醫院': {
-        'phone': '02-27081166',
-        'address': '台北市大安區仁愛路四段112巷11號'
-      },
-      '雄市燕義大醫院': {
-        'phone': '07-6150011',
-        'address': '雄市燕巢區義大路1號'
-      },
-      '基隆市基隆長庚': {
-        'phone': '02-24313131',
-        'address': '基隆市安樂區麥金路222號'
-      },
-      '新竹市新竹馬偕': {
-        'phone': '03-6119595',
-        'address': '新竹市東區光復路二段690號'
-      },
-      '新北巿衛部台北': {
-        'phone': '02-22765566',
-        'address': '新北巿新莊區思源路127號'
-      },
-      '新北市板橋市醫': {
-        'phone': '02-22575151',
-        'address': '新北市板橋區英士路198號'
-      },
-      '新北市三重市醫': {
-        'phone': '02-29829111',
-        'address': '新北市三重區新北大道一段3號'
-      },
-      '新北市亞東醫院': {
-        'phone': '02-89667000',
-        'address': '新北市板橋區南雅南路二段21號'
-      },
-      '新北市慈濟台北': {
-        'phone': '02-66289779',
-        'address': '新北市新店區建國路289號'
-      },
-      '新北市恩主': {
-        'phone': '02-26723456',
-        'address': '新北市三峽區復興路399號'
-      },
-      '新北市國泰汐止': {
-        'phone': '02-26482121',
-        'address': '新北市汐止區建成路59巷2號'
-      },
-      '新北市耕莘醫院': {
-        'phone': '02-22193391',
-        'address': '新北市新店區中正路362號'
-      },
-      '新北市雙和醫院': {
-        'phone': '02-22490088',
-        'address': '新北市中和區中正路291號'
-      },
-      '新北市板橋中興': {
-        'phone': '02-29590707',
-        'address': '新北市板橋區忠孝路15號'
-      },
-      '新北市新泰': {
-        'phone': '02-29962121',
-        'address': '新北市新莊區新泰路157號'
-      },
-      '桃園市桃園醫院': {
-        'phone': '03-3699721',
-        'address': '桃園市園區中山路1492號'
-      },
-      '桃園縣桃園總醫': {
-        'phone': '03-4799595',
-        'address': '桃園縣龍潭鄉中興路168號'
-      },
-      '桃園市林口長庚': {
-        'phone': '03-3281200',
-        'address': '桃園市龜山區復興街5號'
-      },
-      '桃園市敏盛': {
-        'phone': '03-3179599',
-        'address': '桃園市桃園區經國路168號'
-      },
-      '桃園市壢新': {
-        'phone': '03-4941234',
-        'address': '桃園市平鎮區廣泰路77號'
-      },
-      '台北市台北長庚': {
-        'phone': '02-27135211',
-        'address': '台北市敦化北路199號'
-      },
-      '桃園市聖保祿醫院': {
-        'phone': '03-3613141',
-        'address': '桃園市桃園區建新街123號'
-      },
-      '台中市臺中醫院': {
-        'phone': '04-22294411',
-        'address': '台中市西區三民路一段199號'
-      },
-      '台中市台中榮總': {
-        'phone': '04-23592525',
-        'address': '台中市西屯區台灣大道四段1650號'
-      },
-      '台中市童綜合': {
-        'phone': '04-26581919',
-        'address': '台中市梧棲區臺灣大道八段699號'
-      },
-      '台南市成大': {
-        'phone': '06-2353535',
-        'address': '台南市北區勝利路138號'
-      },
-      '台南市永康奇美': {
-        'phone': '06-2812811',
-        'address': '台南市永康區中華路901號'
-      },
-      '高雄市國軍左營': {
-        'phone': '07-5817121',
-        'address': '高雄市左營區軍校路553號'
-      },
-      '高雄市高雄長庚': {
-        'phone': '07-7317123高',
-        'address': '雄市鳥松區大埤路123號'
-      },
-      '新竹市台大新竹': {
-        'phone': '03-5326151',
-        'address': '新竹市北區經國路一段442巷25號'
-      },
-      '嘉義市嘉基': {
-        'phone': '05-2765041',
-        'address': '嘉義市東區忠孝路539號'
-      },
-      '新北市恩主公': {
-        'phone': '02-26723456',
-        'address': '新北市三峽區復興路399號'
-      },
-      '新北市耕莘永和': {
-        'phone': '02-29286060',
-        'address': '新北市永和區中興街80號'
-      },
-      '桃園市桃園總醫院': {
-        'phone': '03-4799595',
-        'address': '桃園市龍潭區中興路168號'
-      },
-      '彰化縣彰基': {
-        'phone': '04-7238595',
-        'address': '彰化縣彰化市南校街135號'
-      },
-      '彰化縣秀傳': {
-        'phone': '04-7256166',
-        'address': '彰化縣彰化市中山路一段542號'
-      },
-      '嘉義縣嘉義長庚': {
-        'phone': '05-3621000',
-        'address': '嘉義縣朴子市嘉朴路西段6號'
-      },
-      '台中市中國': {
-        'phone': '04-22053366',
-        'address': '台中市北區學士路91號'
-      }
-    };
-
-    $scope.getHospital = function(name) {
-      var hospital = $scope.hospital[name];
-      alert(
-        '社福中心: ' + hospital['社福中心'] + '\n' +
-        '辦公室電話: ' + hospital['辦公室電話'] + '\n' +
-        '主任: ' + hospital['主任']
-      );
-    };
-
-    $scope.hospital = {
-      '臺大醫院': {
-          "社福中心": "中正",
-          "辦公室電話": "02-23962340",
-          "主任": "林巧翊主任"
-      },
-      '聯醫中興': {
-          "社福中心": "大同",
-          "辦公室電話": "02-25974280",
-          "主任": "李恩琪"
-      },
-      '臺北馬偕': {
-          "社福中心": "中山",
-          "辦公室電話": "02-25156223",
-          "主任": "蔡淑婉主任"
-      },
-      '松山三總': {
-          "社福中心": "松山",
-          "辦公室電話": "02-27565018",
-          "主任": "黃婉貞"
-      },
-      '聯醫仁愛': {
-          "社福中心": "大安",
-          "辦公室電話": "02-27000960",
-          "主任": "張必宜"
-      },
-      '臺北國泰': {
-          "社福中心": "大安",
-          "辦公室電話": "02-27000960",
-          "主任": "張必宜"
-      },
-      '北醫附醫': {
-          "社福中心": "信義",
-          "辦公室電話": "02-27616515",
-          "主任": "蔡雅芬"
-      },
-      '新光醫院': {
-          "社福中心": "士林",
-          "辦公室電話": "02-28350247",
-          "主任": "許嘉倪"
-      },
-      '聯醫陽明': {
-          "社福中心": "士林",
-          "辦公室電話": "02-28350247",
-          "主任": "許嘉倪"
-      },
-      '臺北榮總': {
-          "社福中心": "北投",
-          "辦公室電話": "02-28942640",
-          "主任": "謝麗華"
-      },
-      '振興醫院': {
-          "社福中心": "北投",
-          "辦公室電話": "02-28942640",
-          "主任": "謝麗華"
-      },
-      '內湖三總': {
-          "社福中心": "內湖",
-          "辦公室電話": "02-27928701",
-          "主任": "翁淑卿"
-      },
-      '聯醫忠孝': {
-          "社福中心": "南港",
-          "辦公室電話": "02-27831407",
-          "主任": "蔡妙娟"
-      },
-      '萬芳醫院': {
-          "社福中心": "文山",
-          "辦公室電話": "02-29323587",
-          "主任": "魏英珠"
-      }
-    };
-
-    $scope.bloods = [
-      [
-        '台北捐血中心',
-        '每日08:00-17:00',
-        '02-28971600',
-        '台北市北投區立德路123號',
-        '捷運忠義站、和信醫院旁'
-      ],
-      [
-        '基隆捐血站',
-        '每日08:00-18:00(週一延長至19:00)',
-        '02-24278500',
-        '基隆市信一路14號1樓'
-      ],
-      [
-        '板橋捐血站',
-        '每日08:00-18:00(週一延長至19:00)',
-        '02-29524117',
-        '新北市板橋市中山路一段50巷36號2樓之4',
-        '府中站2號出口往中路方向步行約10分鐘'
-      ],
-      [
-        '關渡捐血室',
-        '每日08:00-17:00',
-        '02-28971600#6141',
-        '台北市立德路123號',
-        '捷運忠義站和信醫院旁'
-      ],
-      [
-        '南海捐血室',
-        '每日08:00-17:30',
-        '02-23511601',
-        '台北市南海路1號3樓',
-        '捷運中正紀念堂站1號出口南門市場對面'
-      ],
-      [
-        '市府捐血室',
-        '每日09:00-17:00(週日不作業)',
-        '02-27208889#3383',
-        '台北市政府西大門內左側',
-        '捷運市政府站2號出口'
-      ],
-      [
-        '長春捐血室',
-        '每日09:00-18:00(週日不作業)',
-        '02-27314801',
-        '台北市復興北路69號5樓',
-        '捷運南京東路站'
-      ],
-      [
-        '汐止捐血室',
-        '每日09:00-17:00(週二、六不作業)',
-        '02-26428013',
-        '新北市汐止市新台五路一段234號6樓之1'
-      ],
-      [
-        '新店捐血室',
-        '每日09:00-17:00(週一延長至19:00,週日不作業)',
-        '02-29128499',
-        '新北市新店區民族路167號',
-        '捷運七張站下車，轉乘耕莘醫院接駁車至捐血室或捷運大坪林站1號出口耕莘醫院停車場斜對面'
-      ],
-      [
-        '三重捐血室',
-        '每日09:00-17:00(週一不作業)',
-        '02-29862780',
-        '新北市三重市重新路三段81號3樓'
-      ],
-      [
-        '捷運捐血室',
-        '每日10:00-18:00(週一不作業)',
-        '02-23706880',
-        '捷運台北車站B1七號出口誠品書店旁'
-      ],
-      [
-        '台北車站捐血點',
-        '每日09:30-17:30',
-        '02-23143221',
-        '台北火車站大廳西北角'
-      ],
-      [
-        '台大號捐血車',
-        '每日09:00-17:00',
-        '02-23644952',
-        '台北市新生南路台灣大學側門口',
-        '捷運公館站3號出口'
-      ],
-      [
-        '公園號捐血車',
-        '每日09:00-18:00',
-        '02-23811268',
-        '二二八和平公園襄陽路假山旁',
-        '捷運臺大醫院站4號出口'
-      ],
-      [
-        '忠孝號捐血車',
-        '每日11:00-19:00(週一不作業)',
-        '02-27512351',
-        '台北市大安路一段瑠公公園旁',
-        '捷運忠孝復興站4號出口往東區地下街14號出口瑠公公園旁'
-      ],
-      [
-        '峨嵋號捐血車',
-        '每日13:00-21:00',
-        '02-23751189',
-        '台北市峨嵋街立體停車場旁',
-        '捷運西門站6號出口'
-      ],
-      [
-        '新莊號捐血車',
-        '每日10:00-18:00(週五不作業)',
-        '02-89941488',
-        '新北市新莊市中華路一段+復興路一段交叉口',
-        '新莊運動公園旁、新莊站1號出口'
-      ],
-      [
-        '捷運捐血室',
-        '每日10:00-18:00(週三休息)',
-        '02-23706880',
-        '台北車站',
-        '台北車站B1M7出口,誠品書店旁步行5分鐘'
-      ],
-      [
-        '新光站前號捐血庫',
-        '每日11:00-19:00',
-        '0961-236683',
-        '台北市忠孝西路一段66號新光摩天大樓廣場前'
-      ],
-      [
-        '新店捐血室',
-        '每日09:00-17:00',
-        '02-22188867',
-        '新北市民權路95號6樓之2'
-      ],
-      [
-        '中和號捐血庫',
-        '每日09:00-17:00(週六、日休息)',
-        '02-29299437',
-        '新北市中安街圖書館旁823公園內',
-        '永安市場站步行約5分鐘'
-      ],
-      [
-        '土城號捐血車',
-        '每日09:00-17:00(週六、日休息)',
-        '02-82625140',
-        '新北市裕民路171巷裕民廣場內',
-        '海山站3號出口往裕民路方向步行約10分鐘'
-      ]
-    ];
-
-    $scope.sun = {
-      '新北市': '02-25078006',
-      '台北市': '02-25078006',
-      '臺北市': '02-25078006',
-      '桃園市': '02-25078006',
-      '台中市': '04-23582336',
-      '臺中市': '04-23582336',
-      '台南市': '07-5587166',
-      '臺南市': '07-5587166',
-      '高雄市': '07-5587166',
-      '基隆市': '02-25078006',
-      '新竹市': '02-25078006',
-      '嘉義市': '05-2280300',
-      '新竹縣': '02-25078006',
-      '苗栗縣': '04-23582336',
-      '彰化縣': '04-23582336',
-      '南投縣': '04-23582336',
-      '雲林縣': '05-2280300',
-      '嘉義縣': '05-2280300',
-      '屏東縣': '07-5587166',
-      '宜蘭縣': '03-8563213',
-      '花蓮縣': '03-8563213',
-      '台東縣': '03-8563213',
-      '臺東縣': '03-8563213'
-    };
-
-    $('#search').focus();
-})
-.controller('HotelController',
-  function ($http, $scope) {
-    $scope.hotels = [];
-    $scope.lastmodify = [];
-
-    $http.get('//harry2690.github.io/psof/hotels.json')
-    .success(function (result) {
-      $scope.lastmodify = result.lastmodify;
-      $scope.hotels = result.data;
-    });
-
-    $scope.showInfo = function(info) {
-      alert('說明：' + info);
-    };
-});
-      //@ sourceURL=pen.js
+  //@ sourceURL=pen.js
 </script>
-  </body>
+</body>
 </html>
