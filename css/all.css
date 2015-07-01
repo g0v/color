@@ -41,6 +41,79 @@
 		font-size: 16px;
 	}
 	#tab i{
-		display: none
+		display: none;
 	}
+
+	.blood .volume {
+		padding: 3px !important;
+	}
+}
+
+.blood h1 {
+	color: #2EBD9B;
+	font-size: 24px;
+	line-height: 37px;
+}
+
+.blood h1 span {
+	background-color: white;
+	padding-right: 15px;
+}
+
+.blood h1 img {
+	vertical-align: middle;
+	margin-bottom: 2px;
+}
+
+.blood .header-line {
+	margin-top: -30px;
+	border-color: #2EBD9B;
+}
+
+.blood .content {
+	margin-top: 30px;
+	line-height: 22px;
+}
+
+.online-donate-button {
+	background-color: #EC87C0;
+	border-radius: 20px;
+	padding: 10px 25px 10px 25px;
+	line-height: 45px;
+	color: white;
+}
+
+.online-donate-button:hover {
+	text-decoration: none;
+	color: white;
+	background-color: #D770AD;
+}
+
+.blood .storage .content {
+	line-height: 32px;
+}
+
+.blood .storage-center {
+	color: #8A6D3B;
+	font-size: 16px;
+	padding-right: 20px;
+}
+
+.blood .volume {
+	border-radius: 20px;
+	padding: 8px 25px 8px 25px;
+	line-height: 45px;
+	color: white;
+}
+
+.blood .volume.full {
+	background-color: #2EBD9B;
+}
+
+.blood .volume.medium {
+	background-color: #F7BC33;
+}
+
+.blood .volume.empty {
+	background-color: #EF5361;
 }
