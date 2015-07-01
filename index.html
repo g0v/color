@@ -374,7 +374,7 @@
                 <div>
                   <span class="label label-danger">重傷: {{row['重傷']}}</span>&nbsp;
                   <span class="label label-warning">中傷: {{row['中傷']}}</span>&nbsp;
-                  <span class="label label-info">輕傷: {{row['輕傷']}}</span>
+                  <span class="label label-success">輕傷: {{row['輕傷']}}</span>
                 </div>
                 <br />
                 <div class="progress">
@@ -382,7 +382,7 @@
                   </div>
                   <div class="progress-bar progress-bar-warning" style="width: {{ row['中傷'] / total.max * 100 }}%">
                   </div>
-                  <div class="progress-bar progress-bar-info" style="width: {{ row['輕傷'] / total.max * 100 }}%">
+                  <div class="progress-bar progress-bar-success" style="width: {{ row['輕傷'] / total.max * 100 }}%">
                   </div>
                 </div>
                 <div>
