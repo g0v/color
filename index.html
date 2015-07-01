@@ -256,8 +256,9 @@
                 <span class="label label-default">{{row['縣市別']}}</span><br />
                 <a href="https://www.google.com/maps?q={{ map[row['縣市別']+row['收治單位']].address || row['收治單位'] }}" target="_blank" ng-click="open('list','地圖')">{{row['收治單位']}} <i class="glyphicon glyphicon-map-marker"></i></a>
                 <span ng-if="map[row['縣市別']+row['收治單位']].phone" class="animate-if">
-                  <a href="tel:{{map[row['縣市別']+row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['縣市別']+row['收治單位']].phone}}</a><br />
+                  <a href="tel:{{map[row['縣市別']+row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['縣市別']+row['收治單位']].phone}}</a>
                 </span>
+                <br />
                 <span ng-if="hospital[row['收治單位']]" class="animate-if">
                   <span class="label label-info">{{hospital[row['收治單位']]['社福中心']}} 社福中心:</span>
                   <a href="tel:{{hospital[row['收治單位']]['辦公室電話']}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','社福中心')">{{hospital[row['收治單位']]['辦公室電話']}}</a><br />
