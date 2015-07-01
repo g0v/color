@@ -72,6 +72,12 @@
       p {
           word-break: break-all;
       }
+
+      .nearby {
+        display: inline-block;
+        white-space: normal;
+        text-align: left;
+      }
     </style>
 
     <script>
@@ -425,7 +431,7 @@
               <td>
                 <a href="tel:{{row[2]}}">{{row[2]}}</a><br />
                 <a href="https://www.google.com/maps?q={{row[3]}}" target="_blank">{{row[3]}}</a><br />
-                <span class="label label-info">{{row[4]}}</span>
+                <span class="label label-info nearby">{{row[4]}}</span>
               </td>
             </tr>
           </tbody>
