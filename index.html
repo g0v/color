@@ -78,6 +78,14 @@
         white-space: normal;
         text-align: left;
       }
+
+      .progress {
+        margin-top: 4px;
+      }
+
+      .progress-bar-def {
+        background-color: #bbb;
+      }
     </style>
     <link rel="stylesheet" href="css/all.css">
     <script>
@@ -250,9 +258,9 @@
         </div>
         <br />
         <!-- <span class="label label-success">已出院: {{total['已出院']}}</span> -->
-        <span class="label label-warning">未出院: {{total['未出院']}}人</span>
       </div>
     </div>
+
     <div class="row" ng-show="type=='people'">
       <div class="col-lg-12">
         <table class="table table-striped">
@@ -360,6 +368,41 @@
     </div>
     <div class="row" ng-show="type=='hospital'">
       <div class="col-lg-12">
+        <div>
+          <span class="label label-default">未出院: {{total['未出院']}}人</span>&nbsp;
+          <span class="label label-danger">重傷: {{total['重傷']}}</span>&nbsp;
+          <span class="label label-warning">中傷: {{total['中傷']}}</span>&nbsp;
+          <span class="label label-success">輕傷: {{total['輕傷']}}</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger" style="width: {{ total['重傷'] / data.data.length * 100 }}%">
+          </div>
+          <div class="progress-bar progress-bar-warning" style="width: {{ total['中傷'] / data.data.length * 100 }}%">
+          </div>
+          <div class="progress-bar progress-bar-success" style="width: {{ total['輕傷'] / data.data.length * 100 }}%">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div>
+          <span class="label label-default">加護病房: {{total['加護病房']}}人</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-def" style="width: {{ total['加護病房'] / data.data.length * 100 }}%">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div>
+          <span class="label label-default">一般病房: {{total['一般病房']}}人</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-def" style="width: {{ total['一般病房'] / data.data.length * 100 }}%">
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="col-lg-12">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -376,7 +419,6 @@
                   <span class="label label-warning">中傷: {{row['中傷']}}</span>&nbsp;
                   <span class="label label-success">輕傷: {{row['輕傷']}}</span>
                 </div>
-                <br />
                 <div class="progress">
                   <div class="progress-bar progress-bar-danger" style="width: {{ row['重傷'] / total.max * 100 }}%">
                   </div>
