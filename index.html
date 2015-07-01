@@ -239,7 +239,26 @@
       </div>
     </div>
 
-    <div class="row" ng-show="type=='people' || type=='hospital'">
+    <div class="row" ng-show="type=='hospital'">
+      <div class="col-lg-12">
+        <div class="alert alert-warning" role="alert">
+          - 應變中心24H服務專線<br />
+          &nbsp;&nbsp;<a href="tel:0229646715" target="_blank" ng-click="open('提醒','應變中心電話A')">02-29646715 <i class="glyphicon glyphicon-earphone"></i></a>
+          <a href="tel:0289535599" target="_blank" ng-click="open('提醒','應變中心電話B')">02-89535599 <i class="glyphicon glyphicon-earphone"></i></a>
+          <br />
+          - 陽光基金會<br />
+          &nbsp;&nbsp;北區<a href="tel:0225078006" target="_blank" ng-click="open('提醒','陽光基金會北區')"> 02-25078006 <i class="glyphicon glyphicon-earphone"></i></a>
+          &nbsp;中區<a href="tel:0423582336" target="_blank" ng-click="open('提醒','陽光基金會中區')"> 04-23582336 <i class="glyphicon glyphicon-earphone"></i></a><br />
+          &nbsp;&nbsp;雲嘉<a href="tel:052280300" target="_blank" ng-click="open('提醒','陽光基金會雲嘉')"> 05-2280300 <i class="glyphicon glyphicon-earphone"></i></a>
+          &nbsp;南區<a href="tel:075587166" target="_blank" ng-click="open('提醒','陽光基金會南區')"> 07-5587166 <i class="glyphicon glyphicon-earphone"></i></a><br />
+          &nbsp;&nbsp;東區<a href="tel:038563213" target="_blank" ng-click="open('提醒','陽光基金會東區')"> 03-8563213 <i class="glyphicon glyphicon-earphone"></i></a>
+        </div>
+        <br />
+        <!-- <span class="label label-success">已出院: {{total['已出院']}}</span> -->
+      </div>
+    </div>
+
+    <div class="row" ng-show="type=='people' && !query">
       <div class="col-lg-12">
         <div class="alert alert-warning" role="alert">
           - 應變中心24H服務專線<br />
@@ -257,11 +276,14 @@
           &nbsp;&nbsp;東區<a href="tel:038563213" target="_blank" ng-click="open('提醒','陽光基金會東區')"> 03-8563213 <i class="glyphicon glyphicon-earphone"></i></a>
         </div>
         <br />
+        <div class="alert alert-info" role="alert">
+          請輸入搜尋的條件（ex. 姓名、檢傷、收治單位）
+        </div>
         <!-- <span class="label label-success">已出院: {{total['已出院']}}</span> -->
       </div>
     </div>
 
-    <div class="row" ng-show="type=='people'">
+    <div class="row" ng-show="type=='people' && query">
       <div class="col-lg-12">
         <table class="table table-striped">
           <thead>
@@ -503,6 +525,10 @@ angular
   '$filter',
   function($filter) {
     return function(data, text) {
+      if (!text) {
+        return [];
+      }
+
       var textArr;
       if (/^\w+$/.test(text)) {
         textArr = [text];
@@ -522,6 +548,7 @@ angular
             });
           }
       });
+
       return data;
     };
   }
