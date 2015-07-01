@@ -68,6 +68,16 @@
         vertical-align: baseline;
         border-radius: .25em;
       }
+
+      p {
+          word-break: break-all;
+      }
+
+      .nearby {
+        display: inline-block;
+        white-space: normal;
+        text-align: left;
+      }
     </style>
 
     <script>
@@ -225,7 +235,7 @@
       <div class="col-lg-12">
         <div class="alert alert-warning" role="alert">
           - 應變中心24H服務專線<br />
-          &nbsp;&nbsp;<a href="tel:0229646715" target="_blank" ng-click="open('提醒','應變中心電話A')">02-29646715 <i class="glyphicon glyphicon-earphone"></i></a> 
+          &nbsp;&nbsp;<a href="tel:0229646715" target="_blank" ng-click="open('提醒','應變中心電話A')">02-29646715 <i class="glyphicon glyphicon-earphone"></i></a>
           <a href="tel:0289535599" target="_blank" ng-click="open('提醒','應變中心電話B')">02-89535599 <i class="glyphicon glyphicon-earphone"></i></a>
           <br />
           - 臺北市醫院就醫之傷者家屬(社會局社工科)<br />
@@ -319,7 +329,7 @@
       </div>
     </div>
     <div class="row" ng-show="type=='hotel'" ng-controller="HotelController">
-      <div class="col-lg-12">
+      <div class="col-xs-12 col-lg-12">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -335,8 +345,12 @@
                 <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a></>
               </td>
               <td>
-                <p ng-if="row['網址']"><a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a></p>
-                <p>靠近醫院：{{row['靠近醫院']}}</p>
+                <p ng-if="row['網址']">
+                    <a ng-href="http://{{row['網址']}}" target="_blank">{{row['網址']}}</a>
+                </p>
+                <p>
+                    靠近醫院：{{row['靠近醫院']}}
+                </p>
                 <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
               </td>
             </tr>
@@ -427,7 +441,7 @@
               <td>
                 <a href="tel:{{row[2]}}">{{row[2]}}</a><br />
                 <a href="https://www.google.com/maps?q={{row[3]}}" target="_blank">{{row[3]}}</a><br />
-                <span class="label label-info">{{row[4]}}</span>
+                <span class="label label-info nearby">{{row[4]}}</span>
               </td>
             </tr>
           </tbody>
