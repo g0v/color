@@ -86,6 +86,11 @@
       .progress-bar-def {
         background-color: #bbb;
       }
+
+      .label-angel {
+        background: #7DB1E0;
+        color: #FDFDFD;
+      }
     </style>
     <link rel="stylesheet" href="css/all.css">
     <script>
@@ -344,7 +349,7 @@
                     <span ng-switch-when="加護病房" class="label label-warning">
                       {{row['即時動向']}}
                     </span>
-                    <span ng-switch-when="死亡" class="label label-default">
+                    <span ng-switch-when="死亡" class="label label-default label-angel">
                       {{row['即時動向']}}
                     </span>
                     <span ng-switch-default class="label label-primary">
