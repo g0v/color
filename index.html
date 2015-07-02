@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
     <title>八仙粉塵爆炸傷者開放資料查詢</title>
-    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'> 
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
     <style>
       [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
         display: none !important;
@@ -298,6 +298,10 @@
                 <span ng-if="map[row['縣市別']+row['收治單位']].phone" class="animate-if">
                   <a href="tel:{{map[row['縣市別']+row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['縣市別']+row['收治單位']].phone}}</a>
                 </span>
+                <span ng-if="findNearHotel(row['收治單位']).length > 0">
+                  <br />
+                  <button type="button" class="btn btn-primary btn-xs"  ng-click="showNearHotel(row['收治單位'])">家屬免費住宿</button>
+                </span>
                 <span ng-if="hospital[row['收治單位']]" class="animate-if">
                   <br />
                   <span class="label label-info">{{hospital[row['收治單位']]['社福中心']}} 社福中心:</span>
@@ -354,7 +358,7 @@
         </table>
       </div>
     </div>
-    <div class="row" ng-show="type=='hotel'" ng-controller="HotelController">
+    <div class="row" ng-show="type=='hotel'">
       <div class="col-xs-12 col-lg-12">
         <table class="table table-striped">
           <thead>
@@ -377,7 +381,7 @@
                 <p class="help-block">
                     靠近醫院：{{row['靠近醫院']}}
                 </p>
-                <button type="button" class="btn btn-info btn-xs" ng-click="showInfo(row['說明'])">其他說明</button>
+                <button type="button" class="btn btn-info btn-xs" ng-click="showHotelInfo(row['說明'])">其他說明</button>
               </td>
             </tr>
           </tbody>
@@ -713,6 +717,34 @@ angular
           }
         }
       });
+
+      $http.get('//harry2690.github.io/psof/hotels.json')
+      .success(function (result) {
+        $scope.hotels = result.data;
+      });
+
+      $scope.showHotelInfo = function(info) {
+        alert('說明：' + info);
+      };
+
+      $scope.findNearHotel = function(hospitalKeywords) {
+        hospitalKeywords = hospitalKeywords
+          .replace(/聯醫/g, "")
+          .replace(/臺北國泰/g, '國泰')
+          .replace(/臺/g, "台");
+
+        return $scope.hotels.filter(function(item) {
+          return item['靠近醫院'].replace(/臺/g, "台").indexOf(hospitalKeywords) != -1;
+        });
+      };
+
+      $scope.showNearHotel = function(hospitalKeywords) {
+        $scope.hotelQuery = hospitalKeywords
+          .replace(/聯醫/g, "")
+          .replace(/臺北國泰/g, '國泰')
+          .replace(/臺/g, "台");
+        $scope.type = 'hotel';
+      };
 
       var temp = [];
       var sortKey = ['重傷', '中傷', '輕傷'];
@@ -1221,22 +1253,8 @@ angular
     };
 
     $('#search').focus();
-})
-.controller('HotelController',
-  function ($http, $scope) {
-    $scope.hotels = [];
-    $scope.lastmodify = [];
-
-    $http.get('//harry2690.github.io/psof/hotels.json')
-    .success(function (result) {
-      $scope.lastmodify = result.lastmodify;
-      $scope.hotels = result.data;
-    });
-
-    $scope.showInfo = function(info) {
-      alert('說明：' + info);
-    };
 });
+
       //@ sourceURL=pen.js
 </script>
   </body>
