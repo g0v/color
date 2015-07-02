@@ -732,7 +732,10 @@ angular
       };
 
       $scope.findNearHotel = function(hospitalKeywords) {
-        hospitalKeywords = hospitalKeywords.replace(/聯醫/g, "").replace(/臺/g, "台");
+        hospitalKeywords = hospitalKeywords
+          .replace(/聯醫/g, "")
+          .replace(/臺北國泰/g, '國泰')
+          .replace(/臺/g, "台");
 
         return $scope.hotels.filter(function(item) {
           return item['靠近醫院'].replace(/臺/g, "台").indexOf(hospitalKeywords) != -1;
@@ -740,7 +743,10 @@ angular
       };
 
       $scope.showNearHotel = function(hospitalKeywords) {
-        $scope.hotelQuery = hospitalKeywords.replace(/聯醫/g, "").replace(/臺/g, "台");
+        $scope.hotelQuery = hospitalKeywords
+          .replace(/聯醫/g, "")
+          .replace(/臺北國泰/g, '國泰')
+          .replace(/臺/g, "台");
         $scope.type = 'hotel';
       };
 
