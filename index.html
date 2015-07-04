@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html >
   <head>
@@ -174,7 +172,7 @@
         <a class="btn btn-default" ng-class="{'active': type=='blood'}" href="#blood" ng-click="type='blood'"><i class="icon-blood"></i>捐款/捐血</a>
       </div>
     </div>
-    <div id="input-box" ng-hide="type=='hospital'">
+    <div id="input-box" ng-show="type=='people' || type=='blood' || type=='hotel'">
       <div class="container">
         <div class="form-group">
           <div class="input-group" ng-show="type=='people'">
@@ -212,31 +210,46 @@
         <span class="label label-default">{{ people['性別']}} {{ people['年齡']}}</span>
         <span class="label label-default">{{ people['國籍']}}</span><br />
         <br />
-        收治單位: <a class="btn btn-info btn-xs" href="https://www.google.com/maps?q={{ map[people['收治單位']].address || people['收治單位'] }}" target="_blank" ng-click="open('people','地圖')">{{people['縣市別']}} {{people['收治單位']}}<i class="glyphicon glyphicon-map-marker"></i></a><br />
-        <span ng-if="map[people['收治單位']].address">地址: {{map[people['收治單位']].address}}</span><br />
-        <span ng-if="map[people['收治單位']].phone" class="animate-if">
-          電話：<a href="tel:{{map[people['收治單位']].phone}}" style="white-space: nowrap;" ng-click="open('people','醫院電話')">{{map[people['收治單位']].phone}}</a><br />
-        </span>
-        <span ng-if="hospital[people['收治單位']]" class="animate-if">
-          <br />
-          社福中心: {{hospital[people['收治單位']]['社福中心']}} {{hospital[people['收治單位']]['主任']}}<br />
-          電話: <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;" ng-click="open('people','社福電話')">{{hospital[people['收治單位']]['辦公室電話']}}</a>
-        </span>
-        <span ng-if="sun[people['縣市別']]" class="animate-if">
-          <br />
-          陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">{{sun[people['縣市別']]}}</a>
-        </span>
-        <span ng-if="people['國籍']=='其他國家' || people['國籍']=='大陸地區'" class="animate-if">
-          <br />
-          香港灼傷互助會: <a href="tel:+852-62087525" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">+852-62087525</a>
-        </span>
+        收治單位: <a class="btn btn-info btn-xs" href="https://www.google.com/maps?q={{ map[people['縣市別']+people['收治單位']].address || people['收治單位'] }}" target="_blank" ng-click="open('people','地圖')">{{people['縣市別']}} {{people['收治單位']}}<i class="glyphicon glyphicon-map-marker"></i></a>
         <br />
-        <br />
+        <span ng-if="map[people['縣市別']+people['收治單位']].address">
+          地址: {{map[people['縣市別']+people['收治單位']].address}}
+          <br />
+        </span>
+        <span ng-if="map[people['縣市別']+people['收治單位']].phone" class="animate-if">
+          電話: <a href="tel:{{map[people['縣市別']+people['收治單位']].phone}}" style="white-space: nowrap;" ng-click="open('people','醫院電話')">{{map[people['縣市別']+people['收治單位']].phone}}<i class="glyphicon glyphicon-earphone"></i></a><br />
+        </span>
         <span class="label label-default">醫療檢傷: {{people['醫療檢傷']}}</span><br />
         <span class="label label-default">救護檢傷: {{people['救護檢傷']}}</span><br />
         <span class="label label-default">檢傷編號: {{people['檢傷編號']}}</span><br />
         <span class="label label-default">轉診要求: {{people['轉診要求']}}</span><br />
         <span class="label label-default">刪除註記: {{people['刪除註記']}}</span><br />
+        <span ng-if="hospital[people['收治單位']]" class="animate-if">
+          <br />
+          社福中心: {{hospital[people['收治單位']]['社福中心']}} <a href="tel:{{hospital[people['收治單位']]['辦公室電話']}}" style="white-space: nowrap;" ng-click="open('people','社福電話')">{{hospital[people['收治單位']]['辦公室電話']}}<i class="glyphicon glyphicon-earphone"></i></a>
+        </span>
+        <span ng-if="sun[people['縣市別']]" class="animate-if">
+          <br />
+          陽光基金會: <a href="tel:{{sun[people['縣市別']]}}" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">{{sun[people['縣市別']]}}<i class="glyphicon glyphicon-earphone"></i></a>
+        </span>
+        <span ng-if="people['國籍']=='其他國家' || people['國籍']=='大陸地區'" class="animate-if">
+          <br />
+          香港灼傷互助會: <a href="tel:+852-62087525" style="white-space: nowrap;" ng-click="open('people','陽光基金會電話')">+852-62087525<i class="glyphicon glyphicon-earphone"></i></a>
+        </span>
+        <div ng-repeat="row in hotels | hotelFilter: people['縣市別'] + people['收治單位']">
+          <br />
+          <span class="label label-success label-xs">家屬免費旅館</span>
+          <a ng-href="http://{{row['網址']}}" target="_blank" ng-if="row['網址']">{{row['旅館名稱']}}</a>
+          <span ng-if="!row['網址']">{{row['旅館名稱']}}</span>
+          <br />
+          電話: <a href="tel:{{row['連絡電話']}}" target="_blank">{{row['連絡電話']}}<i class="glyphicon glyphicon-earphone"></i></a>
+          <br />
+          地址: <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a>
+          <br />
+          <button type="button" class="btn btn-info btn-xs" ng-click="showHotelInfo(row)">其他說明</button>
+        </div>
+        <br />
+        <br />
       </div>
     </div>
 
@@ -297,15 +310,15 @@
           <tbody>
             <tr ng-repeat="row in data.data | advancefilter: query">
               <td>
-                <a href="#{{row['編號']}}" ng-click="setType(row['編號'], row)" ng-click="open('list','編號')">{{ row['編號'] }}</a><br />
+                <a href="#{{row['編號']}}" ng-click="setType(row['編號'], row);open('list','編號')">{{ row['編號'] }}</a><br />
                 <span class="label label-default">{{row['縣市別']}}</span><br />
                 <a href="https://www.google.com/maps?q={{ map[row['縣市別']+row['收治單位']].address || row['收治單位'] }}" target="_blank" ng-click="open('list','地圖')">{{row['收治單位']}} <i class="glyphicon glyphicon-map-marker"></i></a>
                 <span ng-if="map[row['縣市別']+row['收治單位']].phone" class="animate-if">
                   <a href="tel:{{map[row['縣市別']+row['收治單位']].phone}}" target="_blank" style="white-space: nowrap;" ng-click="open('list','醫院電話')">{{map[row['縣市別']+row['收治單位']].phone}}</a>
                 </span>
-                <span ng-if="findNearHotel(row['收治單位']).length > 0">
+                <span ng-if="findNearHotel(row['縣市別']+row['收治單位']).length > 0">
                   <br />
-                  <button type="button" class="btn btn-primary btn-xs"  ng-click="showNearHotel(row['收治單位'])">家屬免費住宿</button>
+                  <a class="btn btn-primary" href="#{{row['編號']}}" ng-click="setType(row['編號'], row)">家屬免費住宿</a>
                 </span>
                 <span ng-if="hospital[row['收治單位']]" class="animate-if">
                   <br />
@@ -386,7 +399,7 @@
                 <p class="help-block">
                     靠近醫院：{{row['靠近醫院']}}
                 </p>
-                <button type="button" class="btn btn-info btn-xs" ng-click="showHotelInfo(row['說明'])">其他說明</button>
+                <button type="button" class="btn btn-info btn-xs" ng-click="showHotelInfo(row)">其他說明</button>
               </td>
             </tr>
           </tbody>
@@ -586,6 +599,16 @@ angular
     };
   }
 ])
+.filter('hotelFilter', [
+  '$filter',
+  function($filter) {
+    return function(data, text) {
+      return data.filter(function(item) {
+        return item['靠近醫院'].search(text) > -1;
+      });
+    };
+  }
+])
 .controller('MainController',
   function ($http, $scope) {
 
@@ -723,32 +746,19 @@ angular
         }
       });
 
-      $http.get('//harry2690.github.io/psof/hotels.json')
+      $http.get('./hotels.json')
       .success(function (result) {
         $scope.hotels = result.data;
       });
 
       $scope.showHotelInfo = function(info) {
-        alert('說明：' + info);
+        alert('靠近醫院：' + info['靠近醫院'] + '\n說明：' + info['說明']);
       };
 
       $scope.findNearHotel = function(hospitalKeywords) {
-        hospitalKeywords = hospitalKeywords
-          .replace(/聯醫/g, "")
-          .replace(/臺北國泰/g, '國泰')
-          .replace(/臺/g, "台");
-
         return $scope.hotels.filter(function(item) {
-          return item['靠近醫院'].replace(/臺/g, "台").indexOf(hospitalKeywords) != -1;
+          return item['靠近醫院'].search(hospitalKeywords) > -1;
         });
-      };
-
-      $scope.showNearHotel = function(hospitalKeywords) {
-        $scope.hotelQuery = hospitalKeywords
-          .replace(/聯醫/g, "")
-          .replace(/臺北國泰/g, '國泰')
-          .replace(/臺/g, "台");
-        $scope.type = 'hotel';
       };
 
       var temp = [];
@@ -997,15 +1007,6 @@ angular
         'phone': '04-22053366',
         'address': '台中市北區學士路91號'
       }
-    };
-
-    $scope.getHospital = function(name) {
-      var hospital = $scope.hospital[name];
-      alert(
-        '社福中心: ' + hospital['社福中心'] + '\n' +
-        '辦公室電話: ' + hospital['辦公室電話'] + '\n' +
-        '主任: ' + hospital['主任']
-      );
     };
 
     $scope.hospital = {
