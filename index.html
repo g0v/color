@@ -127,7 +127,7 @@
           </button>
           <a class="navbar-brand" href="#">
             <span ng-show="type=='people' || type=='hospital'">八仙粉塵爆炸傷者查詢</span>
-            <span ng-show="type=='hotel'">傷者家屬住宿查詢</span>
+            <span ng-show="type=='care'">傷者家屬住宿查詢</span>
             <span ng-show="type=='blood'">捐血車/站查詢</span>
           </a>
         </div>
@@ -163,7 +163,7 @@
         <a class="btn btn-default btn-first" ng-class="{'active': type=='people'}" href="#people" ng-click="type='people'"><i class="icon-find"></i>家屬尋人</a>
       </div>
       <div class="btn-group" role="group">
-        <a class="btn btn-default" ng-class="{'active': type=='hotel'}" href="#hotel" ng-click="type='hotel'"><i class="icon-hotel"></i>家屬住宿</a>
+        <a class="btn btn-default" ng-class="{'active': type=='care'}" href="#care" ng-click="type='care'"><i class="icon-hotel"></i>出院照護</a>
       </div>
       <div class="btn-group" role="group">
         <a class="btn btn-default" ng-class="{'active': type=='hospital'}" href="#hospital" ng-click="type='hospital'"><i class="icon-hospital"></i>醫院概況</a>
@@ -172,7 +172,7 @@
         <a class="btn btn-default" ng-class="{'active': type=='blood'}" href="#blood" ng-click="type='blood'"><i class="icon-blood"></i>捐款/捐血</a>
       </div>
     </div>
-    <div id="input-box" ng-show="type=='people' || type=='blood' || type=='hotel'">
+    <div id="input-box" ng-show="type=='people' || type=='blood' || type=='care'">
       <div class="container">
         <div class="form-group">
           <div class="input-group" ng-show="type=='people'">
@@ -183,14 +183,14 @@
               </span>
           </div>
           <input type="text" ng-show="type=='blood'" class="form-control" ng-model="blood" placeholder="請輸入搜尋的捐血車/站" />
-          <input type="text" ng-show="type=='hotel'" class="form-control" ng-model="hotelQuery" placeholder="請輸入病患醫院，尋找住宿地點" />
+          <input type="text" ng-show="type=='care'" class="form-control" ng-model="careQuery" placeholder="請輸入附近地點或縣市" />
         </div>
         <span class="label" ng-show="type=='people'">最後更新: {{ data.lastmodify  }}</span>
       </div>
     </div>
     <br />
   <div class="container">
-    <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood' || type=='hotel'">
+    <div class="row" ng-hide="type=='people' || type=='hospital' || type=='blood' || type=='care'">
       <div class="col-lg-12">
         <h4>
           <span ng-switch="people['即時動向']">
@@ -376,30 +376,29 @@
         </table>
       </div>
     </div>
-    <div class="row" ng-show="type=='hotel'">
+    <div class="row" ng-show="type=='care'">
       <div class="col-xs-12 col-lg-12">
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>旅館</th>
-              <th>其他資訊</th>
+              <th>服務項目</th>
+              <th>聯絡資訊</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="row in hotels | filter: hotelQuery">
+            <tr ng-repeat="row in care | filter: careQuery">
               <td>
-                <p>
-                <a ng-href="http://{{row['網址']}}" target="_blank" ng-if="row['網址']">{{row['旅館名稱']}}</a>
-                <span ng-if="!row['網址']">{{row['旅館名稱']}}</span>
-                </p>
-                <a href="tel:{{row['連絡電話']}}" target="_blank">{{row['連絡電話']}}</a><br />
+                <span class="label label-primary">換藥</span>
+                <span class="label label-default">{{row['縣市']}}</span>
+                <br />
+                {{row['名稱']}}
               </td>
               <td>
-                <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}</a>
-                <p class="help-block">
-                    靠近醫院：{{row['靠近醫院']}}
-                </p>
-                <button type="button" class="btn btn-info btn-xs" ng-click="showHotelInfo(row)">其他說明</button>
+                <a href="tel:{{phone}}" target="_blank" ng-repeat="phone in row['電話']">
+                  {{phone}}<i class="glyphicon glyphicon-earphone"></i>
+                  <br />
+                </a>
+                <a href="https://www.google.com/maps?q={{row['地址']}}" target="_blank">{{row['地址']}}<i class="glyphicon glyphicon-map-marker"></i></a>
               </td>
             </tr>
           </tbody>
@@ -744,6 +743,10 @@ angular
             $scope.total.max = tmp;
           }
         }
+      });
+
+      $http.get('./care.json').success(function (result) {
+        $scope.care = result.data;
       });
 
       $http.get('./hotels.json')
