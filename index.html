@@ -651,7 +651,7 @@ angular
       data: []
     };
 
-    $http.get('//g0v.github.io/blood/blood.json').success(function (data) {
+    $http.get('https://a3pttu2gu0.execute-api.us-east-1.amazonaws.com/dev/get').success(function (data) {
       var _d = new Date(data.time);
       $scope.bloodStatus.time = moment(_d).fromNow();
       for(var key in data) {
